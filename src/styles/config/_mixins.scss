@@ -1,0 +1,70 @@
+// Media Query Mixin (Mobile First)
+@mixin respond($breakpoint) {
+  @if $breakpoint == xs { @media only screen and (min-width: $bp-xs) { @content; } }
+  @if $breakpoint == sm { @media only screen and (min-width: $bp-sm) { @content; } }
+  @if $breakpoint == md { @media only screen and (min-width: $bp-md) { @content; } }
+  @if $breakpoint == lg { @media only screen and (min-width: $bp-lg) { @content; } }
+  @if $breakpoint == xl { @media only screen and (min-width: $bp-xl) { @content; } }
+  @if $breakpoint == xxl { @media only screen and (min-width: $bp-xxl) { @content; } }
+}
+
+// Flexbox Mixins
+@mixin flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin flex-col-center {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+// Button Style Mixin (basic, specific styles in _button.scss)
+@mixin button-base {
+  padding: $spacing-s $spacing-m;
+  border-radius: $border-radius-small;
+  font-size: $font-size-base;
+  font-weight: $font-weight-medium;
+  cursor: pointer;
+  border: none;
+  transition: all $transition-speed-normal $transition-ease;
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+}
+
+// Shadow Mixin
+@mixin shadow($level: medium) {
+  @if $level == light {
+    box-shadow: $shadow-light;
+  } @else if $level == medium {
+    box-shadow: $shadow-medium;
+  } @else if $level == dark {
+    box-shadow: $shadow-dark;
+  }
+}
+
+// --- Custom Scrollbar Mixin (NEW) ---
+@mixin custom-scrollbar {
+  &::-webkit-scrollbar {
+    width: 0.8rem; // Very thin
+    height: 0.8rem; // For horizontal scrollbars
+  }
+  &::-webkit-scrollbar-track {
+    background: transparent; // Or a very light background
+    border: 0.1rem solid $color-border-default; // Black border
+    border-radius: $border-radius-small;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: $color-active-state; // Light green color
+    border: 0.1rem solid $color-border-default; // Black border
+    border-radius: $border-radius-small;
+    &:hover {
+      background: darken($color-active-state, 10%); // Slightly darker on hover
+    }
+  }
+}

@@ -1,0 +1,35 @@
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%; // Sets 1rem to 10px (e.g., 1.6rem = 16px)
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: $font-family-body; // Default body font
+  font-size: $font-size-base;
+  line-height: $line-height-base;
+  color: $color-text-body;
+  background-color: $color-background-landing; // Default background for landing pages
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+  // Apply custom scrollbar to body
+  @include custom-scrollbar;
+}
+
+// Basic element styles
+a {
+  text-decoration: none;
+  color: $color-primary; // Using a default primary color for links
+}
+
+ul {
+  list-style: none;
+}

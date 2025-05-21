@@ -1,0 +1,34 @@
+@import '../config/variables';
+@import '../config/mixins';
+
+.loader-progress-bar {
+  width: 100%;
+  height: $spacing-xs; // 8px height
+  background-color: $color-gray-light; // Background for the track
+  border: 0.1rem solid $color-border-default; // 1px black border
+  border-radius: $border-radius-small;
+  overflow: hidden; // Ensures the bar stays within bounds
+  position: relative; // For absolute positioning of the bar
+
+  &__bar {
+    display: block;
+    height: 100%;
+    background-color: $color-active-state; // CDEDA2 color
+    width: 0%; // Initial width
+    transition: width $transition-speed-normal $transition-ease; // Smooth transition for width
+
+    // Basic animation for continuous movement if needed
+    animation: progress-indeterminate 1.5s infinite linear;
+  }
+}
+
+@keyframes progress-indeterminate {
+  0% {
+    left: -100%;
+    width: 100%;
+  }
+  100% {
+    left: 100%;
+    width: 100%;
+  }
+}

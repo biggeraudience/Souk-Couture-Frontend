@@ -1,0 +1,44 @@
+h1, h2, h3, h4, h5, h6 {
+  font-family: $font-family-heading; // Outfit for headings
+  color: $color-text-heading;
+  line-height: $line-height-heading;
+  margin-bottom: $spacing-s;
+}
+
+h1 { font-size: $font-size-h1; }
+h2 { font-size: $font-size-h2; }
+h3 { font-size: $font-size-h3; }
+h4 { font-size: $font-size-h4; }
+h5 { font-size: $font-size-h5; }
+h6 { font-size: $font-size-h6; }
+
+p {
+  font-family: $font-family-body; // Overpass Mono for paragraphs
+  margin-bottom: $spacing-s;
+  &:last-child { margin-bottom: 0; }
+}
+
+// Specific styles for product names, errors, etc.
+.text-product-name, .text-error-message {
+  font-family: $font-family-body; // Ensure Overpass Mono
+}
+
+.text-logo {
+  font-family: $font-family-logo; // Oxanium for logo
+  font-weight: $font-weight-bold;
+  // Add specific size/color for logo here as needed
+}
+
+small {
+  font-size: $font-size-small;
+  color: $color-text-light;
+}
+
+// Standard text utility classes (keep these)
+.text-center { text-align: center; }
+.text-left { text-align: left; }
+.text-right { text-align: right; }
+.text-muted { color: $color-gray-medium; } // Using a neutral gray
+.text-primary { color: $color-primary; }
+.text-success { color: $color-success; }
+.text-error { color: $color-error; }

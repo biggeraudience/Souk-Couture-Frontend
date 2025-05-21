@@ -1,0 +1,114 @@
+// --- BREAKPOINTS ---
+$bp-xs: 320px; // Extra Small devices (e.g., small phones)
+$bp-sm: 576px; // Small devices (e.g., phones)
+$bp-md: 768px; // Medium devices (e.g., tablets)
+$bp-lg: 992px; // Large devices (e.g., desktops)
+$bp-xl: 1200px; // Extra Large devices (e.g., large desktops)
+$bp-xxl: 1400px; // Double Extra Large (e.g., wide screens)
+
+// --- COLORS ---
+// Brand Specific
+$color-background-primary: #FFFFF0;
+$color-background-landing: #FFFFFF;
+$color-hero-background: #FE5829;
+
+// Primary Color (NEW ADDITION - This was missing!)
+$color-primary: #007bff; // Or choose a specific primary color for your brand if you have one.
+                         // For now, I'll use a standard blue. You can change this.
+
+$color-border-default: #000000;
+$color-accent-hover-emphasis: #F03500;
+
+
+// State Management Colors
+$color-active-state: #CDEDA2; // Light green for selected/active states (e.g., bookmark checked, active button)
+
+// Button Colors
+$color-button-inactive-bg: #262626; // Dark grey for inactive buttons
+$color-button-inactive-text: #FFFFFF; // White text/icons for inactive buttons
+$color-button-default-bg: #000000; // Black default for buttons
+$color-button-default-text: #FFFFFF; // White text/icons for default buttons
+
+// Text Colors
+$color-black: #000000; // Explicitly define black for other uses
+$color-white: #FFFFFF; // Explicitly define white for other uses
+
+// Grey Palette (NEW ADDITION)
+$color-gray-lightest: #F8F8F8;
+$color-gray-light: #E0E0E0;
+$color-gray-medium: #A0A0A0;
+$color-gray-dark: #505050; // The color value for $color-text-body
+
+
+$color-text-body: $color-gray-dark; // <--- THIS IS THE FIX!
+$color-text-heading: $color-black;
+$color-text-dark: #000000; // <--- THIS IS WHERE IT'S DEFINED
+$color-text-light: $color-gray-medium; // Used in _typography.scss for small text
+
+// Status Colors (standard)
+$color-success: #28a745;
+$color-error: #dc3545;
+$color-warning: #ffc107;
+
+// --- TYPOGRAPHY ---
+// Font Families
+$font-family-heading: 'Outfit', sans-serif; // For buttons, headings, subheadings
+$font-family-body: 'Overpass Mono', monospace; // For content, product names, errors
+$font-family-logo: 'Oxanium', cursive; // For website logo label "Souk Couture"
+
+// Base Font Size (setting 1rem to 10px for easier calculation)
+$font-size-base: 1.6rem; // Default for body text (16px)
+
+// Heading Sizes
+$font-size-h1: 4.8rem;
+$font-size-h2: 3.6rem;
+$font-size-h3: 2.8rem;
+$font-size-h4: 2.2rem;
+$font-size-h5: 1.8rem;
+$font-size-h6: 1.6rem;
+
+// Other Text Sizes
+$font-size-small: 1.4rem;
+$font-size-large: 1.8rem;
+
+// Line Heights
+$line-height-base: 1.6;
+$line-height-heading: 1.2;
+
+// Font Weights
+$font-weight-light: 300;
+$font-weight-regular: 400;
+$font-weight-medium: 500;
+$font-weight-bold: 700;
+
+// --- SPACING (based on an 8px grid) ---
+$spacing-xxs: 0.4rem; // 4px
+$spacing-xs: 0.8rem;  // 8px
+$spacing-s: 1.6rem;   // 16px
+$spacing-m: 2.4rem;   // 24px
+$spacing-l: 3.2rem;   // 32px
+$spacing-xl: 4.8rem;  // 48px
+$spacing-xxl: 6.4rem; // 64px
+
+// --- BORDERS & SHADOWS ---
+$border-radius-small: 0.4rem;
+$border-radius-medium: 0.8rem;
+$border-radius-large: 1.2rem;
+$border-radius-round: 50%;
+
+$shadow-light: 0 0.5rem 1rem rgba(0, 0, 0, 0.075);
+$shadow-medium: 0 1rem 2rem rgba(0, 0, 0, 0.15);
+$shadow-dark: 0 1.5rem 3rem rgba(0, 0, 0, 0.2);
+
+// --- TRANSITIONS ---
+$transition-speed-fast: 0.15s;
+$transition-speed-normal: 0.3s;
+$transition-speed-slow: 0.5s;
+$transition-ease: ease-in-out;
+
+// --- Z-INDEX ---
+$z-index-low: 10;
+$z-index-medium: 100;
+$z-index-high: 1000;
+$z-index-modal: 2000;
+$z-index-loader: 3000;

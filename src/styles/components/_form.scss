@@ -1,0 +1,51 @@
+@import '../config/variables';
+@import '../config/mixins';
+
+.form-group {
+  margin-bottom: $spacing-m;
+}
+
+.form-label {
+  display: block;
+  font-family: $font-family-heading; // Outfit
+  font-size: $font-size-small;
+  color: $color-text-dark;
+  margin-bottom: $spacing-xxs;
+}
+
+.form-input,
+.form-textarea,
+.form-select {
+  width: 100%;
+  padding: $spacing-xs $spacing-s;
+  font-family: $font-family-body; // Overpass Mono
+  font-size: $font-size-base;
+  color: $color-text-dark;
+  background-color: $color-white;
+  border: 0.1rem solid $color-border-default; // Black border
+  border-radius: $border-radius-small;
+  transition: border-color $transition-speed-fast ease-in-out, box-shadow $transition-speed-fast ease-in-out;
+
+  &:focus {
+    border-color: $color-accent-hover-emphasis; // F03500 on focus
+    outline: none;
+    box-shadow: 0 0 0 $spacing-xxs rgba($color-accent-hover-emphasis, 0.25); // Subtle glow
+  }
+
+  &::placeholder {
+    color: $color-gray-medium;
+    font-family: $font-family-body;
+  }
+}
+
+.form-textarea {
+  min-height: 8rem;
+  resize: vertical;
+}
+
+.form-error-message {
+  font-family: $font-family-body; // Overpass Mono
+  font-size: $font-size-small;
+  color: $color-error;
+  margin-top: $spacing-xxs;
+}

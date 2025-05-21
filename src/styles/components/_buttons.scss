@@ -1,0 +1,44 @@
+@import '../config/variables';
+@import '../config/mixins';
+
+.btn {
+  @include button-base; // Base styles from mixin
+  background-color: $color-button-default-bg; // Default black background
+  color: $color-button-default-text; // Default white text/icons
+  border: 0.1rem solid $color-border-default; // Black border
+
+  &:hover:not(:disabled) {
+    background-color: lighten($color-button-default-bg, 10%); // Slightly lighter black on hover
+    border-color: $color-accent-hover-emphasis; // F03500 border on hover
+  }
+
+  // Active state (e.g., when selected)
+  &--active {
+    background-color: $color-active-state; // CDEDA2 background
+    color: $color-text-dark; // Black text/icons
+    border-color: $color-border-default; // Black border
+    &:hover:not(:disabled) {
+      background-color: darken($color-active-state, 10%);
+      border-color: $color-accent-hover-emphasis; // F03500 border on hover
+    }
+  }
+
+  // Inactive state (e.g., when disabled or explicitly inactive)
+  &--inactive {
+    background-color: $color-button-inactive-bg; // 262626 background
+    color: $color-button-inactive-text; // White text/icons
+    border-color: $color-border-default; // Black border
+    cursor: not-allowed;
+    opacity: 1; // Override default disabled opacity if needed
+  }
+
+  // General sizes (reusing from _variables)
+  &--small {
+    padding: $spacing-xs $spacing-s;
+    font-size: $font-size-small;
+  }
+  &--large {
+    padding: $spacing-m $spacing-l;
+    font-size: $font-size-large;
+  }
+}

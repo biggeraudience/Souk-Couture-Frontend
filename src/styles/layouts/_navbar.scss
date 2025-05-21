@@ -1,0 +1,216 @@
+@import '../config/variables';
+@import '../config/mixins';
+
+.navbar {
+  width: 100%;
+  height: 12rem;
+  background-color: $color-active-state;
+  border-bottom: 0.1rem solid $color-border-default;
+  display: grid;
+  grid-template-columns: 1.5fr 4fr 1.5fr;
+  column-gap: 0.1rem;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: $z-index-high;
+  font-family: $font-family-heading;
+  overflow: hidden;
+
+  @include respond(lg) {
+    height: 10rem;
+    grid-template-columns: 1.2fr 4fr 1.2fr;
+  }
+
+  @include respond(md) {
+    height: 9rem;
+    grid-template-columns: 1fr 3fr 1fr;
+  }
+
+  @include respond(sm) {
+    height: 8rem;
+    grid-template-columns: 1fr 2.5fr 1fr;
+  }
+
+  &__section {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: $spacing-xs;
+    box-sizing: border-box;
+  }
+
+  &__left {
+    // No specific styles needed here
+  }
+
+  &__hamburger-icon {
+    font-size: 1rem;
+    color: $color-text-dark;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    @include respond(lg) {
+      font-size: 2.8rem;
+    }
+    @include respond(md) {
+      font-size: 2.5rem;
+    }
+    @include respond(sm) {
+      font-size: 2.2rem;
+    }
+    @media only screen and (max-width: $bp-sm) {
+      font-size: 2rem;
+    }
+
+    &:hover {
+      color: $color-accent-hover-emphasis;
+    }
+
+    svg {
+      width: 100%;
+      height: 100%;
+      fill: currentColor;
+    }
+  }
+
+  &__middle {
+    border-left: 0.1rem solid $color-border-default;
+    padding: $spacing-xs $spacing-m;
+
+    @include respond(md) {
+      padding: $spacing-xxs $spacing-s;
+    }
+    @include respond(sm) {
+      padding: $spacing-xxs $spacing-xs;
+    }
+  }
+
+  &__logo {
+    font-family: $font-family-logo;
+    font-size: $font-size-h1;
+    font-weight: $font-weight-bold;
+    color: $color-text-dark;
+    text-transform: uppercase;
+    text-align: center;
+    margin-bottom: $spacing-s;
+
+    @include respond(lg) {
+      font-size: $font-size-h2;
+    }
+    @include respond(md) {
+      font-size: $font-size-h3;
+      margin-bottom: $spacing-xs;
+    }
+    @include respond(sm) {
+      font-size: $font-size-base;
+      margin-bottom: $spacing-xxs;
+    }
+    @media only screen and (max-width: $bp-sm) {
+      font-size: $font-size-small;
+    }
+  }
+
+  &__search-container {
+    width: 80%;
+    max-width: 30rem;
+
+    @include respond(md) {
+      width: 90%;
+    }
+    @include respond(sm) {
+      width: 95%;
+      max-width: 20rem;
+    }
+
+    .form-input {
+      background-color: $color-background-primary;
+      border: 0.1rem solid $color-border-default;
+      padding: $spacing-xs $spacing-s;
+      color: $color-text-dark;
+      height: auto;
+      min-height: 3rem;
+
+      @include respond(md) {
+        padding: $spacing-xxs $spacing-s;
+      }
+      @include respond(sm) {
+        padding: $spacing-xxs;
+        min-height: 2.5rem;
+      }
+
+      &::placeholder {
+        color: $color-gray-medium;
+        font-family: $font-family-body;
+      }
+      &:focus {
+        border-color: $color-accent-hover-emphasis;
+        box-shadow: 0 0 0 $spacing-xxs rgba($color-accent-hover-emphasis, 0.25);
+      }
+    }
+  }
+
+  // --- Right Section (Icons) ---
+  &__right {
+    border-left: 0.1rem solid $color-border-default;
+    flex-direction: row;
+    justify-content: space-around;
+    gap: $spacing-xs;
+    flex-wrap: nowrap;
+
+    @include respond(md) {
+      gap: $spacing-xs;
+    }
+    @include respond(sm) {
+      gap: $spacing-xxs;
+    }
+    @media only screen and (max-width: $bp-sm) {
+      gap: $spacing-xxs / 2;
+    }
+  }
+
+  &__icon {
+    // --- INCREASED SIZE FOR LARGE SCREENS ---
+    width: 4rem; // Increased from 3.5rem to 4rem
+    height: 4rem; // Increased from 3.5rem to 4rem
+    color: $color-text-dark;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 2rem;
+    min-height: 2rem;
+
+    @include respond(lg) {
+      // --- INCREASED SIZE FOR LG BREAKPOINT ---
+      width: 3.6rem; // Increased from 3.2rem to 3.6rem
+      height: 3.6rem; // Increased from 3.2rem to 3.6rem
+    }
+    @include respond(md) {
+      width: 3rem;
+      height: 3rem;
+    }
+    @include respond(sm) {
+      width: 2.5rem;
+      height: 2.5rem;
+    }
+    @media only screen and (max-width: $bp-sm) {
+      width: 2.2rem;
+      height: 2.2rem;
+    }
+
+    &:hover {
+      color: $color-accent-hover-emphasis;
+    }
+
+    svg {
+      width: 100%;
+      height: 100%;
+      fill: currentColor;
+    }
+  }
+}

@@ -1,0 +1,28 @@
+// src/styles/layouts/_footer.scss
+@import '../config/variables';
+@import '../config/mixins'; // <--- ADD THIS LINE
+
+.footer {
+  width: 100%;
+  padding: $spacing-m $spacing-l;
+  background-color: $color-black;
+  color: $color-text-light;
+  text-align: center;
+  box-sizing: border-box;
+
+  // You might want to adjust padding for smaller screens
+  @include respond(md) {
+    padding: $spacing-s $spacing-m;
+  }
+
+  @include respond(sm) {
+    padding: $spacing-xs $spacing-s;
+  }
+
+  &__text {
+    font-family: $font-family-body;
+    font-size: $font-size-small;
+    line-height: $line-height-base;
+    margin: 0;
+  }
+}
