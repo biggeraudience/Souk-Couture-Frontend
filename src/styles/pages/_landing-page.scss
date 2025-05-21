@@ -2,108 +2,51 @@
 @import '../config/variables';
 @import '../config/mixins';
 
+// Define your navbar and footer heights here if they are fixed,
+// or get them from your variables if defined elsewhere.
+// Example:
+$navbar-height-default: 12rem; // Adjust this based on your actual navbar height
+$navbar-height-lg: 10rem;
+$navbar-height-md: 9rem;
+$navbar-height-sm: 8rem;
+
+$footer-height: 10rem; // <-- IMPORTANT: Adjust this based on your actual footer height!
+
 .landing-page {
   width: 100vw;
-  margin-top: 12rem;
-
-  @include respond(lg) {
-    margin-top: 10rem;
-  }
-
-  @include respond(md) {
-    margin-top: 9rem;
-  }
-
-  @include respond(sm) {
-    margin-top: 8rem;
-  }
+  // REMOVED: margin-top: 12rem; // No longer needed as content starts below navbar
+  // REMOVED: @include respond(lg/md/sm) margin-top
 
   display: grid;
-  grid-template-rows: auto 1fr;
+  // Now, the single row of .landing-page will be the gender-section
+  grid-template-rows: 1fr; // Allow gender-section to take all available height
   grid-template-columns: 1fr;
 }
 
-.hero-section-main {
-  grid-row: 1 / 2;
-  width: 100%;
-  background-color: rgba($color-black, 0.7);
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-blend-mode: overlay;
-
-  color: $color-text-light;
-  text-align: center;
-  box-sizing: border-box;
-
-  height: 55rem;
-  padding: $spacing-m $spacing-l;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-
-  @include respond(lg) {
-    height: 45rem;
-    padding: $spacing-s $spacing-m;
-  }
-  @include respond(md) {
-    height: 38rem;
-    padding: $spacing-xs $spacing-s;
-  }
-  @include respond(sm) {
-    height: 45rem;
-    padding: $spacing-xxs;
-  }
-
-  .hero-text {
-    font-family: $font-family-body;
-    font-size: $font-size-base;
-    line-height: $line-height-base;
-    margin-bottom: $spacing-m;
-    max-width: 90rem;
-
-    @include respond(lg) {
-      font-size: 1.8rem;
-      margin-bottom: $spacing-s;
-      max-width: 80rem;
-    }
-    @include respond(md) {
-      font-size: 1.6rem;
-      margin-bottom: $spacing-s;
-      max-width: 70rem;
-    }
-    @include respond(sm) {
-      font-size: 1.2rem;
-      line-height: 1.6rem;
-      margin-bottom: $spacing-xxs;
-      max-width: 95%;
-      text-align: center;
-    }
-    @media only screen and (max-width: 400px) {
-      font-size: 1rem;
-      line-height: 1.4rem;
-      margin-bottom: 0.5rem;
-    }
-  }
-
-  .button {
-    @include respond(sm) {
-      padding: 0.5rem 1rem;
-      font-size: 1.2rem;
-    }
-  }
-}
+// REMOVED: .hero-section-main entire block is gone
 
 .gender-section {
-  grid-row: 2 / 3;
+  // grid-row: 2 / 3; // No longer needed as it's now the primary content
   width: 100%;
   display: grid;
   grid-template-columns: 1fr 1fr; // Keeps the 2-column grid for all sizes by default
   grid-template-rows: auto;
   gap: 0;
 
-  // REMOVED: @include respond(sm) { grid-template-columns: 1fr; } // Removed to maintain grid
+  // IMPORTANT: Calculate min-height based on actual navbar and footer heights
+  min-height: calc(100vh - (#{$navbar-height-default} + #{$footer-height}));
+
+  @include respond(lg) {
+    min-height: calc(100vh - (#{$navbar-height-lg} + #{$footer-height}));
+  }
+
+  @include respond(md) {
+    min-height: calc(100vh - (#{$navbar-height-md} + #{$footer-height}));
+  }
+
+  @include respond(sm) {
+    min-height: calc(100vh - (#{$navbar-height-sm} + #{$footer-height}));
+  }
 
   .gender-box {
     position: relative;
@@ -111,15 +54,14 @@
     border: 0.1rem solid $color-border-default;
 
     width: 100%;
-    min-height: 35rem; // Default min-height
+    min-height: 35rem; // Default min-height (for larger screens)
 
     display: flex;
     justify-content: center;
     align-items: center;
 
     &:first-child {
-      border-right: 0.1rem solid $color-border-default; // Retained for 2-column layout
-      // REMOVED: @include respond(sm) { border-right: none; border-bottom: 0.1rem solid $color-border-default; }
+      border-right: 0.1rem solid $color-border-default;
     }
 
     @include respond(sm) {
