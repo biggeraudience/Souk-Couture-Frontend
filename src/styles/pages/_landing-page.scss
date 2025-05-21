@@ -5,21 +5,17 @@
 .landing-page {
   width: 100vw;
   margin-top: 12rem;
-  min-height: calc(100vh - 12rem);
 
   @include respond(lg) {
     margin-top: 10rem;
-    min-height: calc(100vh - 10rem);
   }
 
   @include respond(md) {
     margin-top: 9rem;
-    min-height: calc(100vh - 9rem);
   }
 
   @include respond(sm) {
     margin-top: 8rem;
-    min-height: calc(100vh - 8rem);
   }
 
   display: grid;
@@ -40,8 +36,7 @@
   text-align: center;
   box-sizing: border-box;
 
-  // --- ADJUSTED HEIGHTS ---
-  height: 55rem; // Increased from 40rem
+  height: 55rem;
   padding: $spacing-m $spacing-l;
   display: flex;
   flex-direction: column;
@@ -49,15 +44,15 @@
   align-items: center;
 
   @include respond(lg) {
-    height: 45rem; // Increased from 35rem
+    height: 45rem;
     padding: $spacing-s $spacing-m;
   }
   @include respond(md) {
-    height: 38rem; // Increased from 30rem
+    height: 38rem;
     padding: $spacing-xs $spacing-s;
   }
   @include respond(sm) {
-    height: 30rem; // Significantly increased from 12rem to accommodate content
+    height: 45rem;
     padding: $spacing-xxs;
   }
 
@@ -104,9 +99,11 @@
   grid-row: 2 / 3;
   width: 100%;
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1fr; // Keeps the 2-column grid for all sizes by default
   grid-template-rows: auto;
   gap: 0;
+
+  // REMOVED: @include respond(sm) { grid-template-columns: 1fr; } // Removed to maintain grid
 
   .gender-box {
     position: relative;
@@ -114,14 +111,19 @@
     border: 0.1rem solid $color-border-default;
 
     width: 100%;
-    min-height: 35rem;
+    min-height: 35rem; // Default min-height
 
     display: flex;
     justify-content: center;
     align-items: center;
 
     &:first-child {
-      border-right: 0.1rem solid $color-border-default;
+      border-right: 0.1rem solid $color-border-default; // Retained for 2-column layout
+      // REMOVED: @include respond(sm) { border-right: none; border-bottom: 0.1rem solid $color-border-default; }
+    }
+
+    @include respond(sm) {
+      min-height: 40rem; // Keeps gender boxes tall on small screens in a grid
     }
 
     .gender-img {
