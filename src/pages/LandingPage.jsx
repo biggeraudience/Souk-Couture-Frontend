@@ -5,8 +5,7 @@ import Navbar from "../components/layout/Navbar";
 import Button from "../components/common/Button";
 import "../styles/pages/_landing-page.scss";
 
-// --- IMPORT YOUR IMAGES HERE ---
-import heroBg from '../assets/hero-bg.webp'; // For the hero background image
+// --- REMOVED: import heroBg from '../assets/hero-bg.webp'; ---
 import menCollectionImg from '../assets/7000779701_01.jpg'; // For the men's collection image
 import womenCollectionImg from '../assets/22-04-20Sofinas-32_fa9c76c4-384f-4fc0-9895-a7ff99a936db_1024x1024.webp'; // For the women's collection image
 
@@ -22,8 +21,8 @@ const LandingPage = () => {
         {/* The hero-overlay now acts as the main hero section */}
         <section
           className="hero-section-main"
-          // --- Apply background-image via inline style using the imported variable ---
-          style={{ backgroundImage: `url(${heroBg})` }}
+          // --- REMOVED: style={{ backgroundImage: `url(${heroBg})` }} ---
+          // The background-color from SCSS will now be the solid background.
         >
           <p className="hero-text">
             <strong>Welcome to Haya</strong>, where fashion is more than just clothing – it's a canvas for self‑expression and a celebration of individuality. We curate collections for both men and women who see their wardrobe as an extension of their unique stories and aspirations. Explore our thoughtfully selected pieces, from everyday essentials to statement styles, designed to empower you to look and feel your best, effortlessly. Your journey to defining your image starts here.
@@ -40,7 +39,6 @@ const LandingPage = () => {
         <section className="gender-section">
           <div className="gender-box men-box">
             <img
-              // --- Use the imported image variable here ---
               src={menCollectionImg}
               alt="Men's Collection"
               className="gender-img"
@@ -59,7 +57,6 @@ const LandingPage = () => {
 
           <div className="gender-box women-box">
             <img
-              // --- Use the imported image variable here ---
               src={womenCollectionImg}
               alt="Women's Collection"
               className="gender-img"
