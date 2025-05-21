@@ -1,7 +1,7 @@
 // src/styles/main.scss
 
-// Google Fonts Imports
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700&family=Overpass+Mono:wght@300;400;500;700&family=Oxanium:wght@400;700&display=swap');
+// Google Fonts Imports (MUST BE THE ABSOLUTE FIRST LINE)
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&family=Overpass+Mono:wght@300;400;500;700&family=Oxanium:wght@400;700&display=swap');
 
 // 1. Configuration (Variables & Mixins FIRST)
 @import 'config/variables';
@@ -21,8 +21,8 @@
 // 4. Layouts (e.g., Header, Footer, Navbar)
 // @import 'layouts/header';
 // @import 'layouts/footer';
-@import 'layouts/navbar'; // <--- NEW IMPORT for your Navbar
+@import 'layouts/navbar';
 
 // 5. Pages (Specific page styles)
-@import 'pages/landing-page'; // <--- NEW IMPORT for your landing page
+@import 'pages/landing-page';
 // Add other page imports as you create them
