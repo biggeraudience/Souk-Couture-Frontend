@@ -1,12 +1,11 @@
+// src/styles/pages/_landing-page.scss
 @import '../config/variables';
 @import '../config/mixins';
 
 .landing-page {
   width: 100vw;
-  // This margin-top now accurately reflects the Navbar's height,
-  // ensuring the main content starts right below it.
   margin-top: 12rem;
-  min-height: calc(100vh - 12rem); // Ensures the page is at least full viewport height
+  min-height: calc(100vh - 12rem);
 
   @include respond(lg) {
     margin-top: 10rem;
@@ -24,48 +23,43 @@
   }
 
   display: grid;
-  // Hero section takes a fixed height, gender section takes the rest (1fr)
-  grid-template-rows: auto 1fr; // 'auto' for hero (which will now have a fixed height via its own styles)
+  grid-template-rows: auto 1fr;
   grid-template-columns: 1fr;
 }
 
-// Renamed from .hero-overlay to reflect its new role as the primary hero container
 .hero-section-main {
-  grid-row: 1 / 2; // Still the first grid row
-  width: 100%; // Ensure it touches the sides of the screen
-  background-color: rgba($color-black, 0.7); // Apply overlay background color
-  background-image: url('/src/assets/hero-bg.webp'); // Apply hero background image
+  grid-row: 1 / 2;
+  width: 100%;
+  background-color: rgba($color-black, 0.7); // Keep background-color for the overlay effect
+  // --- REMOVED background-image: url('/src/assets/hero-bg.webp'); ---
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  background-blend-mode: overlay; // Blends the background image with the background-color
+  background-blend-mode: overlay; // Keep background-blend-mode to blend with the inline image
 
   color: $color-text-light;
   text-align: center;
-  box-sizing: border-box; // Ensure padding is included in height calculation
+  box-sizing: border-box;
 
-  // --- Fixed Height and Padding ---
-  height: 40rem; // Default fixed height for larger screens
-  padding: $spacing-l $spacing-xl; // Generous padding for text and button from edges
+  height: 40rem;
+  padding: $spacing-m $spacing-l;
   display: flex;
   flex-direction: column;
-  justify-content: center; // Center content vertically
-  align-items: center; // Center content horizontally
-  overflow: hidden; // Prevent internal scrolling on larger screens, only for mobile
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
 
-  // Responsive fixed heights and padding
   @include respond(lg) {
-    height: 35rem; // Adjust for large laptops
-    padding: $spacing-m $spacing-l;
-  }
-  @include respond(md) {
-    height: 30rem; // Adjust for tablets
+    height: 35rem;
     padding: $spacing-s $spacing-m;
   }
+  @include respond(md) {
+    height: 30rem;
+    padding: $spacing-xs $spacing-s;
+  }
   @include respond(sm) {
-    height: 25rem !important; // Adjust for mobile
-    padding: $spacing-xs; // Smaller padding for mobile
-    // Allow internal scrolling on small screens if content overflows
+    height: 12rem;
+    padding: $spacing-xxs;
     overflow-y: auto;
   }
 
@@ -73,8 +67,8 @@
     font-family: $font-family-body;
     font-size: $font-size-base;
     line-height: $line-height-base;
-    margin-bottom: $spacing-m; // Space before the button
-    max-width: 90rem; // Limit text width to prevent excessively long lines
+    margin-bottom: $spacing-m;
+    max-width: 90rem;
 
     @include respond(lg) {
       font-size: 1.8rem;
@@ -87,21 +81,24 @@
       max-width: 70rem;
     }
     @include respond(sm) {
-      font-size: 1.4rem;
-      line-height: 1.8rem;
-      margin-bottom: $spacing-xs;
-      max-width: 90%; // Allow text to take more width on mobile
-    }
-    @media only screen and (max-width: $bp-sm) {
       font-size: 1.2rem;
       line-height: 1.6rem;
       margin-bottom: $spacing-xxs;
+      max-width: 95%;
+      text-align: center;
+    }
+    @media only screen and (max-width: 400px) {
+      font-size: 1rem;
+      line-height: 1.4rem;
+      margin-bottom: 0.5rem;
     }
   }
 
-  // Styles for the Button within the hero-section-main
   .button {
-    // Add any specific styling for the hero button if needed
+    @include respond(sm) {
+        padding: 0.5rem 1rem;
+        font-size: 1.2rem;
+    }
   }
 }
 
@@ -110,27 +107,22 @@
   width: 100%;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: auto; // Let gender boxes define their height
+  grid-template-rows: auto;
   gap: 0;
 
   .gender-box {
     position: relative;
     overflow: hidden;
-    // Remove border-top/bottom/left/right if you want no borders.
-    // If you want separation, ensure these lines are correct:
-    border: 0.1rem solid $color-border-default; // This gives all sides a border
+    border: 0.1rem solid $color-border-default;
 
     width: 100%;
-    // min-height to ensure boxes are visible.
-    // The image's object-fit: cover will ensure it fills this.
-    min-height: 30rem; // Set a minimum height for gender boxes
+    min-height: 35rem;
 
     display: flex;
     justify-content: center;
     align-items: center;
 
     &:first-child {
-      // This creates the vertical line between the two boxes
       border-right: 0.1rem solid $color-border-default;
     }
 
