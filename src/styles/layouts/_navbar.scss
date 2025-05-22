@@ -1,3 +1,4 @@
+// src/styles/layouts/_navbar.scss
 @import '../config/variables';
 @import '../config/mixins';
 
@@ -47,24 +48,34 @@
   }
 
   &__hamburger-icon {
-    font-size: 1rem;
+    font-size: 1rem; // Base size for the SVG height/width (not directly used for SVG size now)
     color: $color-text-dark;
     cursor: pointer;
     display: flex;
     justify-content: center;
     align-items: center;
 
+    // --- INCREASED ICON SIZES ---
+    // Start with a larger default size
+    height: 4rem; // Increased from 3rem
+    width: 4rem; // Increased from 3rem
+
     @include respond(lg) {
-      font-size: 2.8rem;
+      height: 3.8rem; // Slightly smaller for lg, but still bigger than original
+      width: 3.8rem;
     }
     @include respond(md) {
-      font-size: 2.5rem;
+      height: 3.5rem; // Adjust as needed
+      width: 3.5rem;
     }
     @include respond(sm) {
-      font-size: 2.2rem;
+      height: 3.2rem; // Adjust as needed
+      width: 3.2rem;
     }
+    // This media query is for max-width: $bp-sm, which is usually smaller than sm
     @media only screen and (max-width: $bp-sm) {
-      font-size: 2rem;
+      height: 3rem; // Keep them reasonably sized on very small screens
+      width: 3rem;
     }
 
     &:hover {
@@ -158,49 +169,40 @@
   &__right {
     border-left: 0.1rem solid $color-border-default;
     flex-direction: row;
-    justify-content: space-around;
-    gap: $spacing-xs;
+    justify-content: center;
+    align-items: center;
+    gap: 0;
     flex-wrap: nowrap;
-
-    @include respond(md) {
-      gap: $spacing-xs;
-    }
-    @include respond(sm) {
-      gap: $spacing-xxs;
-    }
-    @media only screen and (max-width: $bp-sm) {
-      gap: $spacing-xxs / 2;
-    }
   }
 
   &__icon {
-    // --- INCREASED SIZE FOR LARGE SCREENS ---
-    width: 4rem; // Increased from 3.5rem to 4rem
-    height: 4rem; // Increased from 3.5rem to 4rem
+    // These styles will now apply to the shopping bag icon.
+    // Ensure these match the hamburger icon's dimensions for consistency.
+    height: 4rem; // Increased from 3rem
+    width: 4rem; // Increased from 3rem
     color: $color-text-dark;
     cursor: pointer;
     display: flex;
     justify-content: center;
     align-items: center;
-    min-width: 2rem;
-    min-height: 2rem;
+    min-width: unset;
+    min-height: unset;
 
     @include respond(lg) {
-      // --- INCREASED SIZE FOR LG BREAKPOINT ---
-      width: 3.6rem; // Increased from 3.2rem to 3.6rem
-      height: 3.6rem; // Increased from 3.2rem to 3.6rem
+      height: 3.8rem; // Match hamburger icon
+      width: 3.8rem; // Match hamburger icon
     }
     @include respond(md) {
-      width: 3rem;
-      height: 3rem;
+      height: 3.5rem; // Match hamburger icon
+      width: 3.5rem; // Match hamburger icon
     }
     @include respond(sm) {
-      width: 2.5rem;
-      height: 2.5rem;
+      height: 3.2rem; // Match hamburger icon
+      width: 3.2rem; // Match hamburger icon
     }
     @media only screen and (max-width: $bp-sm) {
-      width: 2.2rem;
-      height: 2.2rem;
+      height: 3rem; // Match hamburger icon
+      width: 3rem; // Match hamburger icon
     }
 
     &:hover {

@@ -1,4 +1,5 @@
 // src/components/layout/LandingPage.jsx
+
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import Navbar from "../components/layout/Navbar";
@@ -17,12 +18,16 @@ const LandingPage = () => {
       alt: "Men's Collection",
       route: "/menslandingpage",
       label: "Men",
+      // Concise and compelling content for Men
+      overlayText: "Discover timeless style and modern essentials for the contemporary man.",
     },
     {
       img: womenCollectionImg,
       alt: "Women's Collection",
       route: "/womenslandingpage",
       label: "Women",
+      // Concise and compelling content for Women
+      overlayText: "Explore chic designs and trending fashion that celebrates every woman.",
     },
   ];
 
@@ -31,14 +36,14 @@ const LandingPage = () => {
       <Navbar />
       <main className="landing-page">
         <section className="gender-section">
-          {genders.map(({ img, alt, route, label }, idx) => (
+          {genders.map(({ img, alt, route, label, overlayText }, idx) => ( // Destructure overlayText
             <div key={idx} className={`gender-box ${label.toLowerCase()}-box`}>
               <img src={img} alt={alt} className="gender-img" />
 
               <div className="overlay-container">
                 <div className="gender-content">
                   <p className="gender-overlay-text">
-                    Placeholder text for {label.toLowerCase()}’s collection
+                    {overlayText} {/* Use the new overlayText */}
                   </p>
                 </div>
                 <div className="gender-button">
