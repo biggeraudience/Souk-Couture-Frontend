@@ -1,6 +1,6 @@
 // src/styles/layouts/_footer.scss
 @import '../config/variables';
-@import '../config/mixins'; // <--- ADD THIS LINE
+@import '../config/mixins';
 
 .footer {
   width: 100%;
@@ -10,14 +10,31 @@
   text-align: center;
   box-sizing: border-box;
 
-  // You might want to adjust padding for smaller screens
+  // --- MANUAL FOOTER HEIGHTS (as previously set) ---
+  height: 10rem; // Default height for larger screens (adjust as desired)
+
+  @include respond(lg) {
+    height: 10rem;
+  }
+
   @include respond(md) {
+    height: 6rem;
     padding: $spacing-s $spacing-m;
   }
 
   @include respond(sm) {
+    height: 8rem;
     padding: $spacing-xs $spacing-s;
   }
+  // -----------------------------------------------------
+
+  // --- PERMANENT SOLUTION: FIXED POSITIONING ---
+  position: fixed; // This makes it stick to the viewport
+  bottom: 0;       // Positions it at the bottom of the viewport
+  left: 0;         // Positions it at the left edge
+  right: 0;        // Positions it at the right edge
+  z-index: 1000;   // Ensures it sits above other content
+  // ---------------------------------------------
 
   &__text {
     font-family: $font-family-body;

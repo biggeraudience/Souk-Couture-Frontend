@@ -4,48 +4,47 @@
 
 // Define your navbar and footer heights here if they are fixed,
 // or get them from your variables if defined elsewhere.
-// Example:
-$navbar-height-default: 12rem; // Adjust this based on your actual navbar height
+// These are still good to define if other components rely on them for spacing.
+// --- UPDATED VALUES BASED ON YOUR MEASUREMENTS ---
+$navbar-height-default: 12rem;
 $navbar-height-lg: 10rem;
-$navbar-height-md: 9rem;
-$navbar-height-sm: 8rem;
+$navbar-height-md: 5.725rem;
+$navbar-height-sm: 7.5rem;
 
-$footer-height: 10rem; // <-- IMPORTANT: Adjust this based on your actual footer height!
+// --- New responsive footer height variables ---
+// IMPORTANT: THESE MUST MATCH THE 'height' PROPERTIES IN YOUR _footer.scss FILE
+$footer-height-default: 10rem; // Assumes default/lg footer height is 10rem
+$footer-height-md: 6rem;       // Match the height in _footer.scss for md
+$footer-height-sm: 8rem;       // <--- FIX: This must be 8rem to match _footer.scss
 
 .landing-page {
   width: 100vw;
-  // REMOVED: margin-top: 12rem; // No longer needed as content starts below navbar
-  // REMOVED: @include respond(lg/md/sm) margin-top
-
   display: grid;
-  // Now, the single row of .landing-page will be the gender-section
-  grid-template-rows: 1fr; // Allow gender-section to take all available height
+  grid-template-rows: 1fr;
   grid-template-columns: 1fr;
 }
 
-// REMOVED: .hero-section-main entire block is gone
-
 .gender-section {
-  // grid-row: 2 / 3; // No longer needed as it's now the primary content
   width: 100%;
   display: grid;
-  grid-template-columns: 1fr 1fr; // Keeps the 2-column grid for all sizes by default
+  grid-template-columns: 1fr 1fr;
   grid-template-rows: auto;
   gap: 0;
 
-  // IMPORTANT: Calculate min-height based on actual navbar and footer heights
-  min-height: calc(100vh - (#{$navbar-height-default} + #{$footer-height}));
+  // IMPORTANT: The calc functions will now use the new responsive footer heights.
+  // We'll use the specific footer height variable for each breakpoint.
+  min-height: calc(100vh - (#{$navbar-height-default} + #{$footer-height-default}));
 
   @include respond(lg) {
-    min-height: calc(100vh - (#{$navbar-height-lg} + #{$footer-height}));
+    min-height: calc(100vh - (#{$navbar-height-lg} + #{$footer-height-default}));
   }
 
   @include respond(md) {
-    min-height: calc(100vh - (#{$navbar-height-md} + #{$footer-height}));
+    min-height: calc(100vh - (#{$navbar-height-md} + #{$footer-height-md}));
   }
 
   @include respond(sm) {
-    min-height: calc(100vh - (#{$navbar-height-sm} + #{$footer-height}));
+    min-height: calc(100vh - (#{$navbar-height-sm} + #{$footer-height-sm}));
   }
 
   .gender-box {
@@ -54,7 +53,7 @@ $footer-height: 10rem; // <-- IMPORTANT: Adjust this based on your actual footer
     border: 0.1rem solid $color-border-default;
 
     width: 100%;
-    min-height: 35rem; // Default min-height (for larger screens)
+    min-height: 35rem; // Default min-height for gender boxes
 
     display: flex;
     justify-content: center;
