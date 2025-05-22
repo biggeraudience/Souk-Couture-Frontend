@@ -2,20 +2,14 @@
 @import '../config/variables';
 @import '../config/mixins';
 
-// Define your navbar and footer heights here if they are fixed,
-// or get them from your variables if defined elsewhere.
-// These are still good to define if other components rely on them for spacing.
-// --- UPDATED VALUES BASED ON YOUR MEASUREMENTS ---
 $navbar-height-default: 12rem;
-$navbar-height-lg: 10rem;
-$navbar-height-md: 5.725rem;
-$navbar-height-sm: 7.5rem;
+$navbar-height-lg:      10rem;
+$navbar-height-md:       5.725rem;
+$navbar-height-sm:       7.5rem;
 
-// --- New responsive footer height variables ---
-// IMPORTANT: THESE MUST MATCH THE 'height' PROPERTIES IN YOUR _footer.scss FILE
-$footer-height-default: 10rem; // Assumes default/lg footer height is 10rem
-$footer-height-md: 6rem;       // Match the height in _footer.scss for md
-$footer-height-sm: 8rem;       // <--- FIX: This must be 8rem to match _footer.scss
+$footer-height-default: 10rem;
+$footer-height-md:       6rem;
+$footer-height-sm:       8rem;
 
 .landing-page {
   width: 100vw;
@@ -28,33 +22,25 @@ $footer-height-sm: 8rem;       // <--- FIX: This must be 8rem to match _footer.s
   width: 100%;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: auto;
   gap: 0;
-
-  // IMPORTANT: The calc functions will now use the new responsive footer heights.
-  // We'll use the specific footer height variable for each breakpoint.
-  min-height: calc(100vh - (#{$navbar-height-default} + #{$footer-height-default}));
+  min-height: calc(100vh - #{$navbar-height-default});
 
   @include respond(lg) {
-    min-height: calc(100vh - (#{$navbar-height-lg} + #{$footer-height-default}));
+    min-height: calc(100vh - #{$navbar-height-lg});
   }
-
   @include respond(md) {
-    min-height: calc(100vh - (#{$navbar-height-md} + #{$footer-height-md}));
+    min-height: calc(100vh - #{$navbar-height-md});
   }
-
   @include respond(sm) {
-    min-height: calc(100vh - (#{$navbar-height-sm} + #{$footer-height-sm}));
+    min-height: calc(100vh - #{$navbar-height-sm});
   }
 
   .gender-box {
     position: relative;
     overflow: hidden;
     border: 0.1rem solid $color-border-default;
-
     width: 100%;
-    min-height: 35rem; // Default min-height for gender boxes
-
+    min-height: 35rem;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -62,9 +48,8 @@ $footer-height-sm: 8rem;       // <--- FIX: This must be 8rem to match _footer.s
     &:first-child {
       border-right: 0.1rem solid $color-border-default;
     }
-
     @include respond(sm) {
-      min-height: 40rem; // Keeps gender boxes tall on small screens in a grid
+      min-height: 40rem;
     }
 
     .gender-img {
@@ -74,12 +59,20 @@ $footer-height-sm: 8rem;       // <--- FIX: This must be 8rem to match _footer.s
       display: block;
     }
 
-    .gender-content {
+    // New wrapper to center both overlay and button
+    .overlay-container {
       position: absolute;
-      bottom: $spacing-m;
+      top: 50%;
       left: 50%;
-      transform: translateX(-50%);
+      transform: translate(-50%, -50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2px;                // exactly 2px between overlay and button
       z-index: $z-index-medium;
+    }
+
+    .gender-content {
       background-color: rgba($color-black, 0.6);
       border: 0.1rem solid $color-border-default;
       padding: $spacing-s;
@@ -87,16 +80,16 @@ $footer-height-sm: 8rem;       // <--- FIX: This must be 8rem to match _footer.s
       text-align: center;
       max-width: 80%;
       border-radius: $border-radius-small;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: $spacing-s;
 
       .gender-overlay-text {
         font-family: $font-family-body;
         font-size: $font-size-small;
-        margin-bottom: 0;
+        margin: 0;
       }
+    }
+
+    .gender-button {
+      // inherits centering from .overlay-container
     }
   }
 }

@@ -1,4 +1,3 @@
-// src/components/layout/Footer.jsx
 import React from 'react';
 import '../../styles/layouts/_footer.scss'; // We'll create this SCSS file
 

@@ -24,30 +24,29 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
-  // --- Flexbox setup for full height (still relevant for body's height) ---
   display: flex;
   flex-direction: column;
   min-height: 100vh;
 }
 
-// Make sure your <main> element (or the primary content wrapper) grows to fill space
 main {
   flex-grow: 1; // Allows main to push content down if it's longer than viewport
   // --- UPDATED PADDING TO ACCOUNT FOR FIXED NAVBAR AND FIXED FOOTER ---
+  // Ensure these variables match the actual heights in _navbar.scss and _footer.scss
   padding-top: $navbar-height-default;
-  padding-bottom: $footer-height-default; // <--- ADDED: Default padding for fixed footer
+  padding-bottom: $footer-height-default;
 
   @include respond(lg) {
     padding-top: $navbar-height-lg;
-    padding-bottom: $footer-height-default; // Assumes LG footer height is same as default
+    padding-bottom: $footer-height-default; // Match LG footer height (which is default)
   }
   @include respond(md) {
     padding-top: $navbar-height-md;
-    padding-bottom: $footer-height-md; // <--- ADDED: Padding for fixed footer on MD
+    padding-bottom: $footer-height-md; // Match MD footer height
   }
   @include respond(sm) {
     padding-top: $navbar-height-sm;
-    padding-bottom: $footer-height-sm; // <--- ADDED: Padding for fixed footer on SM
+    padding-bottom: $footer-height-sm; // Match SM footer height
   }
 }
 
