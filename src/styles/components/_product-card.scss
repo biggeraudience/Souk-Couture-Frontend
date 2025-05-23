@@ -9,100 +9,112 @@
   overflow: hidden; // Ensures content stays within bounds
   display: flex;
   flex-direction: column;
+  max-height: 30rem;
   position: relative; // For absolute positioning of bookmark icon
 
-  // Product Image Section
+  // Product Image Section (unchanged from previous fix)
   &__image-container {
     width: 100%;
-    height: 60%; // Image height about 60% of product card
-    padding: $spacing-xs; // 2px padding from edges of product card (0.2rem)
-    border: 0.1rem solid $color-border-default; // 0.3px black border (0.1rem)
-    border-bottom: none; // No border at the bottom, information starts 2px below
-    box-sizing: border-box; // Include padding/border in height calculation
-    display: flex; // To center image if smaller
+    height: 55%;
+    box-sizing: border-box;
+    display: flex;
     justify-content: center;
     align-items: center;
+    overflow: hidden;
 
     img {
-      max-width: 100%;
+      width: 100%;
       max-height: 100%;
-      object-fit: contain; // Ensures image fits without cropping
+      object-fit: cover;
+      display: block;
     }
   }
 
   // Product Information Section
   &__info {
-    flex-grow: 1; // Allows info section to take remaining height
-    padding: $spacing-s; // Consistent padding inside info box
-    padding-top: $spacing-xxs; // 2px below image (0.2rem)
-    border: 0.1rem solid transparent; // Invisible border (for consistency)
+    flex-grow: 1;
+    padding: $spacing-s;
+    padding-top: $spacing-xxs;
+    border: 0.1rem solid transparent;
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
-    justify-content: space-between; // Space out content vertically
-    height: 40%; // Remaining 40% of card height
-    overflow: hidden; // Crucial: Ensures content doesn't grow beyond bounds
+    justify-content: space-between;
+    height: 50%;
+    overflow: hidden;
   }
 
   &__header {
-    @include flex-center; // Center product name and bookmark horizontally
-    justify-content: space-between; // Push bookmark to right
+    @include flex-center;
+    justify-content: space-between;
     width: 100%;
-    margin-bottom: $spacing-xxs; // Small margin below header
-    position: relative; // For bookmark icon positioning
+    margin-bottom: $spacing-xxs;
+    position: relative;
   }
 
   &__name {
-    font-family: $font-family-body; // Overpass Mono
+    font-family: $font-family-body;
     font-weight: $font-weight-medium;
     font-size: $font-size-base;
     color: $color-text-dark;
-    text-align: center; // Center top of the information container
-    flex-grow: 1; // Allow name to take available space
-    white-space: nowrap; // Prevent wrapping
-    overflow: hidden; // Hide overflow
-    text-overflow: ellipsis; // Show ellipsis for overflow
-    margin-right: $spacing-xs; // Space from bookmark
+    text-align: center;
+    flex-grow: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-right: $spacing-xs;
   }
 
   &__bookmark-btn {
     background: none;
     border: none;
     cursor: pointer;
-    color: $color-gray-medium; // Default color for icon
-    font-size: $font-size-large; // Example size for icon
-    transition: color $transition-speed-fast $transition-ease;
+    font-size: 0; // Hide any default text content
+    padding: 0; // Remove default button padding
+    line-height: 1; // Ensure SVG renders correctly
 
-    &:hover {
-      color: $color-accent-hover-emphasis; // F03500 on hover
+    .bookmark-icon { // Target the SVG directly
+      width: 2.4rem; // Example size for the SVG (24px)
+      height: 2.4rem; // Example size for the SVG (24px)
+      transition: fill $transition-speed-fast $transition-ease; // Transition the fill color
     }
 
-    &--active {
-      color: $color-active-state; // CDEDA2 when active
+    // Default (unbookmarked) state color for the SVG
+    .bookmark-icon {
+      fill: #000000; // Black for default
+    }
+
+    &:hover .bookmark-icon {
+      fill: $color-accent-hover-emphasis; // Assuming this is F03500 from your variables
+    }
+
+    // Active (bookmarked) state color for the SVG
+    &--active .bookmark-icon {
+      fill: #FE5829; // The desired color for selected state
     }
   }
 
   &__price {
-    font-family: $font-family-body; // Overpass Mono
+    font-family: $font-family-body;
     font-size: $font-size-large;
     font-weight: $font-weight-bold;
     color: $color-text-dark;
-    margin-bottom: $spacing-s; // Margin below price
+    margin-bottom: $spacing-s;
     text-align: center;
   }
 
   &__actions {
     @include flex-center;
-    gap: $spacing-xs; // Space between buttons
+    gap: $spacing-xs;
     width: 100%;
-    margin-top: auto; // Push to bottom if info content is short
+    margin-top: auto;
   }
 
   // Buttons inside product card
   .btn {
-    flex: 1; // Make buttons take equal width
-    padding: $spacing-xs $spacing-s; // Smaller padding for card buttons
+    flex: 1;
+    padding: $spacing-xs $spacing-s;
     font-size: $font-size-small;
-    white-space: nowrap; // Prevent button text from wrapping
+    white-space: nowrap;
   }
 }

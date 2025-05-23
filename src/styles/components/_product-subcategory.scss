@@ -1,0 +1,106 @@
+@import '../config/variables';
+@import '../config/mixins';
+
+.product-subcategory {
+  padding: $spacing-l;
+  background-color: $color-background-landing;
+  text-align: center;
+
+  @include respond(md) { padding: $spacing-m; }
+  @include respond(sm) { padding: $spacing-s; }
+
+  &__title {
+    font-family: $font-family-heading;
+    font-size: $font-size-h3;
+    color: $color-text-dark;
+    margin-bottom: $spacing-xl;
+    @include respond(md) { font-size: $font-size-h4; margin-bottom: $spacing-l; }
+    @include respond(sm) { font-size: $font-size-h5; margin-bottom: $spacing-m; }
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-l;
+    max-width: 90rem;
+    margin: 0 auto;
+    @include respond(md) { gap: $spacing-m; }
+    @include respond(sm) { gap: $spacing-s; }
+  }
+
+  &__item {
+    display: flex;
+    flex-direction: column;          // Stack image, text, button vertically
+    align-items: center;             // Center all children
+    background-color: $color-background-primary;
+    border: 0.1rem solid $color-border-default;
+    border-radius: $border-radius-medium;
+    @include shadow(light);
+    padding: $spacing-s;
+    transition: all $transition-speed-fast $transition-ease;
+    text-align: center;
+
+    @include respond(md) { padding: $spacing-xs; }
+
+    &:hover {
+      transform: translateY(-0.3rem);
+      box-shadow: $shadow-medium;
+    }
+  }
+
+  &__image-wrapper {
+    width: 15rem;   // fixed container
+    height: 15rem;
+    border: 0.1rem solid $color-border-default;
+    border-radius: $border-radius-small;
+    overflow: hidden;
+    @include flex-center;
+    margin-bottom: $spacing-s;      // Space below image
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+  }
+
+  &__content {
+    width: 100%;
+    padding: 0 $spacing-s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: $spacing-s;
+    
+    & .product-subcategory__name {
+      font-family: $font-family-heading;
+      font-size: $font-size-large;
+      color: $color-text-dark;
+      margin-bottom: $spacing-xxs;
+      @include respond(md) { font-size: $font-size-base; }
+      @include respond(sm) { font-size: $font-size-base; margin-bottom: $spacing-xs; }
+    }
+    & .product-subcategory__description {
+      font-family: $font-family-body;
+      font-size: $font-size-small;
+      color: $color-text-body;
+      line-height: $line-height-base;
+      margin-bottom: $spacing-s;
+      @include respond(md) { font-size: 1.3rem; margin-bottom: $spacing-xs; }
+      @include respond(sm) { font-size: 1.3rem; margin-bottom: $spacing-s; }
+    }
+  }
+
+  &__content button,
+  &__content .sub-category-button {
+    width: 10rem;       // fixed width
+    margin: 0 auto;     // center beneath content
+  }
+
+  &-empty {
+    text-align: center;
+    padding: $spacing-xl;
+    font-family: $font-family-body;
+    font-size: $font-size-base;
+    color: $color-gray-medium;
+  }
+}

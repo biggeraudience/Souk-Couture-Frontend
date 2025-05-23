@@ -1,11 +1,8 @@
 import React, { useState } from 'react';
 import Button from '../common/Button';
-// You'll need a way to get an icon, e.g., Font Awesome or inline SVG
-// For now, I'll use a placeholder text icon.
-// import { FaBookmark, FaRegBookmark } from 'react-icons/fa'; // Example if using react-icons
 
 const ProductCard = ({ product }) => {
-  const [isBookmarked, setIsBookmarked] = useState(false); // Example state for bookmark
+  const [isBookmarked, setIsBookmarked] = useState(false);
 
   const handleBookmarkToggle = () => {
     setIsBookmarked(!isBookmarked);
@@ -39,8 +36,17 @@ const ProductCard = ({ product }) => {
             onClick={handleBookmarkToggle}
             aria-label={isBookmarked ? 'Remove from bookmarks' : 'Add to bookmarks'}
           >
-            {/* Placeholder for icon. Replace with actual icon component */}
-            {isBookmarked ? '❤️' : '🤍'} {/* Example: filled heart vs. empty heart */}
+            {/* REPLACE THIS SVG WITH YOUR ACTUAL SVG CODE */}
+            <svg
+              className="bookmark-icon"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="currentColor" // This will be controlled by CSS
+              width="24px"
+              height="24px"
+            >
+              <path d="M17 3H7c-1.1 0-2 .9-2 2v16l7-3 7 3V5c0-1.1-.9-2-2-2zm0 15l-5-2.18L7 18V5h10v13z" />
+            </svg>
           </button>
         </div>
         <p className="product-card__price">${(product.price || 0).toFixed(2)}</p>

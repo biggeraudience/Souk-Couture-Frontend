@@ -1,4 +1,3 @@
-// src/styles/base/_base.scss
 @import 'variables';
 @import 'mixins';
 
@@ -31,22 +30,21 @@ body {
 
 main {
   flex-grow: 1; // Allows main to push content down if it's longer than viewport
-  // --- UPDATED PADDING TO ACCOUNT FOR FIXED NAVBAR AND FIXED FOOTER ---
-  // Ensure these variables match the actual heights in _navbar.scss and _footer.scss
-  padding-top: $navbar-height-default;
-  padding-bottom: $footer-height-default;
+  padding-top: $navbar-height-default; // Keep this line!
+  
+  padding-bottom: 0; // Set to 0 or remove for now if you just want it to grow.
 
   @include respond(lg) {
     padding-top: $navbar-height-lg;
-    padding-bottom: $footer-height-default; // Match LG footer height (which is default)
+    padding-bottom: 0; // Adjust as desired
   }
   @include respond(md) {
     padding-top: $navbar-height-md;
-    padding-bottom: $footer-height-md; // Match MD footer height
+    padding-bottom: 0; // Adjust as desired
   }
   @include respond(sm) {
     padding-top: $navbar-height-sm;
-    padding-bottom: $footer-height-sm; // Match SM footer height
+    padding-bottom: 0; // Adjust as desired
   }
 }
 

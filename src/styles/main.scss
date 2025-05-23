@@ -12,11 +12,12 @@
 @import 'base/typography';
 
 // 3. Components (e.g., Button, Modal, Loader, Product Card, Forms)
-@import 'components/_buttons';
+@import 'components/_buttons'; // Ensure this is imported BEFORE _product-subcategory
 @import 'components/_modal';
 @import 'components/loader';
 @import 'components/form';
 @import 'components/product-card';
+@import 'components/_product-subcategory'; // Ensure this is imported AFTER _buttons
 
 // 4. Layouts (e.g., Header, Footer, Navbar)
 // @import 'layouts/header';

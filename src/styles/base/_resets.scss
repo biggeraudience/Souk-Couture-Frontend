@@ -1,3 +1,10 @@
+// src/styles/base/_resets.scss
+
+// Make sure these import paths are correct relative to THIS file's location.
+// Assuming 'config' is a sibling directory to 'base' inside 'styles'.
+@import '../config/variables'; // If _resets.scss uses any variables (like $font-family-body, $color-text-body, etc.)
+@import '../config/mixins';    // <--- ADD THIS LINE
+
 *,
 *::before,
 *::after {
@@ -21,7 +28,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
   // Apply custom scrollbar to body
-  @include custom-scrollbar;
+  @include custom-scrollbar; // This mixin is now available
 }
 
 // Basic element styles

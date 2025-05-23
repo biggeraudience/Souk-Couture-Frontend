@@ -1,0 +1,55 @@
+// src/styles/base/_layout-base.scss
+@import '../config/variables';
+@import '../config/mixins';
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; // Ensure body takes full viewport height
+}
+
+.site-container {
+  display: grid;
+  grid-template-rows: auto 1fr auto; /* Header (auto), Main (1fr), Footer (auto) */
+  min-height: 100vh; /* Ensure the grid container takes full viewport height */
+  overflow-x: hidden; /* Prevent horizontal scroll */
+}
+
+.site-header {
+  grid-area: 1 / 1 / 2 / 2; /* Place in the first row, first column */
+  position: fixed; /* Keep Navbar fixed at the top */
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: $z-index-high; /* Ensure it's above other content */
+}
+
+.site-main {
+  grid-area: 2 / 1 / 3 / 2; /* Place in the second row, first column */
+  flex-grow: 1; /* Allows main to push content down if it's longer than viewport */
+  // Padding to account for fixed Navbar and Footer
+  padding-top: $navbar-height-default;
+  padding-bottom: $footer-height-default;
+
+  @include respond(lg) {
+    padding-top: $navbar-height-lg;
+    padding-bottom: $footer-height-default; // Match LG footer height (which is default)
+  }
+  @include respond(md) {
+    padding-top: $navbar-height-md;
+    padding-bottom: $footer-height-md; // Match MD footer height
+  }
+  @include respond(sm) {
+    padding-top: $navbar-height-sm;
+    padding-bottom: $footer-height-sm; // Match SM footer height
+  }
+}
+
+.site-footer {
+  grid-area: 3 / 1 / 4 / 2; /* Place in the third row, first column */
+  position: fixed; /* Keep Footer fixed at the bottom */
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  z-index: $z-index-high; /* Ensure it's above other content */
+}

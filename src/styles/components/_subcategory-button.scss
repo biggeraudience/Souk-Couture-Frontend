@@ -1,0 +1,28 @@
+// src/styles/components/_subcategory-button.scss
+@import '../config/variables';
+@import '../config/mixins';
+
+.subcategory-btn {
+  @include button-base; // Inherit fundamental button styles
+
+  background-color: $color-button-default-bg; // Black background
+  color: $color-button-default-text; // White text/icons
+  border: 0.1rem solid $color-border-default; // Black border
+
+  // Hover state specific to this button
+  &:hover:not(:disabled) {
+    background-color: lighten($color-button-default-bg, 10%); // Slightly lighter black on hover
+    border-color: $color-accent-hover-emphasis; // F03500 border on hover
+  }
+
+  // --- SPECIFIC STYLES FOR THIS BUTTON ---
+  min-width: 4rem; // Reduced significantly
+  padding: $spacing-xxs $spacing-xs; // Very compact padding (0.4rem top/bottom, 0.8rem left/right)
+  font-size: $font-size-small; // Keeps text size consistent
+
+  @include respond(sm) {
+    min-width: unset; // Allow it to shrink on small screens
+    width: 70%; // Adjust width for small screens if needed, 70% of parent's width
+    padding: $spacing-xxs $spacing-xs; // Maintain compact padding
+  }
+}

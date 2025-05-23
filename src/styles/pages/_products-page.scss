@@ -1,0 +1,23 @@
+/* src/styles/pages/_products-page.scss */
+@import '../config/variables';
+@import '../config/mixins';
+
+.products-page {
+  padding: $spacing-xl $spacing-l;
+  max-width: $bp-xxl;
+  margin-top: 12rem;
+
+  &__title {
+    text-align: center;
+    margin-bottom: $spacing-l;
+    font-size: $font-size-h2;
+    color: $color-text-heading;
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(24rem, 1fr));
+    gap: $spacing-m;
+    justify-items: center;
+  }
+}

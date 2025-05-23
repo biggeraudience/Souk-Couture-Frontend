@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import LandingPage from './pages/LandingPage';
-import Navbar from './components/layout/Navbar'; // Import the Navbar component
-import Footer from './components/layout/Footer'; // Import the Footer component
+import GenderLandingPage from './pages/GenderLandingPage'; // Correct import for GenderLandingPage
+import Navbar from './components/layout/Navbar';
+import Footer from './components/layout/Footer';
+import ProductsPage from './pages/ProductsPage'; 
+
 
 function App() {
   const [backendMessage, setBackendMessage] = useState('');
@@ -35,23 +38,19 @@ function App() {
   }, []);
 
   return (
-    <> {/* Use a React Fragment to wrap multiple top-level elements */}
-      <Navbar /> {/* The Navbar will now appear at the top of every page */}
-
-      <Routes>
-        {/* Render the LandingPage component when the path is exactly '/' */}
-        <Route path="/" element={<LandingPage />} />
-
-        {/* Placeholder routes for future navigation */}
-        <Route path="/register" element={<div>Register Page Placeholder</div>} />
-        <Route path="/menslandingpage" element={<div>Men's Landing Page Placeholder</div>} />
-        <Route path="/womenslandingpage" element={<div>Women's Landing Page Placeholder</div>} />
-
-        {/* You can add a 404 Not Found page here later */}
-        <Route path="*" element={<div>404: Not Found</div>} />
-      </Routes>
-
-      <Footer /> {/* The Footer will now appear at the bottom of every page */}
+    <>
+      <Navbar />
+      <main>
+        <Routes>
+          <Route path="/" element={<LandingPage />} />
+          <Route path="/menslandingpage" element={<GenderLandingPage gender="men" />} />
+          <Route path="/womenslandingpage" element={<GenderLandingPage gender="women" />} />
+          <Route path="/products" element={<ProductsPage />} /> {/* Add this line */}
+          <Route path="/register" element={<div>Register Page Placeholder</div>} />
+          <Route path="*" element={<div>404: Not Found</div>} />
+        </Routes>
+      </main>
+      <Footer />
     </>
   );
 }

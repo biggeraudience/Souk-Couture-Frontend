@@ -1,54 +1,44 @@
-// src/styles/base/_typography.scss
-@import '../config/variables'; // Make sure this is imported
-
-html {
-  font-size: 62.5%; // Sets 1rem to 10px, useful for consistent sizing
-  // Apply your heading font to the root, as it's a prominent font
-  font-family: $font-family-heading; // This will apply 'Outfit' as the primary font
-  line-height: $line-height-base; // Inherit base line height
-  font-weight: $font-weight-regular; // Set a default font weight if needed
-  color: $color-text-body; // Apply a default text color
-  -webkit-font-smoothing: antialiased; // For better font rendering on WebKit browsers
-  -moz-osx-font-smoothing: grayscale; // For better font rendering on Firefox
-}
-
-body {
-  margin: 0; // Ensure no default body margin from index.css
-  // If you want body text to be Overpass Mono by default, explicitly set it here
-  font-family: $font-family-body; // This will apply 'Overpass Mono' to body
-  display: flex; // Keep your flexbox layout if you need it
-  place-items: center; // Keep your centering if you need it
-  min-width: 320px; // Keep your min-width
-  min-height: 100vh; // Keep your min-height
-}
-
 h1, h2, h3, h4, h5, h6 {
-  font-family: $font-family-heading; // Ensure headings use 'Outfit'
+  font-family: $font-family-heading; // Outfit for headings
   color: $color-text-heading;
   line-height: $line-height-heading;
-  // Use specific font weights from Outfit if needed, e.g., $font-weight-bold
+  margin-bottom: $spacing-s;
+}
+
+h1 { font-size: $font-size-h1; }
+h2 { font-size: $font-size-h2; }
+h3 { font-size: $font-size-h3; }
+h4 { font-size: $font-size-h4; }
+h5 { font-size: $font-size-h5; }
+h6 { font-size: $font-size-h6; }
+
+p {
+  font-family: $font-family-body; // Overpass Mono for paragraphs
+  margin-bottom: $spacing-s;
+  &:last-child { margin-bottom: 0; }
+}
+
+// Specific styles for product names, errors, etc.
+.text-product-name, .text-error-message {
+  font-family: $font-family-body; // Ensure Overpass Mono
+}
+
+.text-logo {
+  font-family: $font-family-logo; // Oxanium for logo
   font-weight: $font-weight-bold;
+  // Add specific size/color for logo here as needed
 }
 
-button {
-  // The 'font-family: inherit;' in index.css means it inherits from parent.
-  // We need to explicitly tell buttons to use 'Outfit' if that's your design.
-  font-family: $font-family-heading; // Apply 'Outfit' to buttons
-  border-radius: 8px; // Keep existing styles
-  border: 1px solid transparent; // Keep existing styles
-  padding: 0.6em 1.2em; // Keep existing styles
-  font-size: 1em; // Keep existing styles
-  font-weight: 500; // Keep existing styles
-  background-color: #1a1a1a; // Keep existing styles
-  cursor: pointer; // Keep existing styles
-  transition: border-color 0.25s; // Keep existing styles
+small {
+  font-size: $font-size-small;
+  color: $color-text-light;
 }
 
-// Ensure other elements also get the intended fonts if they are not children of body
-// For example, if 'a' (links) are not directly inside body or need a specific font:
-a {
-  font-family: $font-family-heading; // Or $font-family-body, depending on design
-  font-weight: 500; // Keep existing styles
-  color: #646cff; // Keep existing styles
-  text-decoration: inherit; // Keep existing styles
-}
+// Standard text utility classes (keep these)
+.text-center { text-align: center; }
+.text-left { text-align: left; }
+.text-right { text-align: right; }
+.text-muted { color: $color-gray-medium; } // Using a neutral gray
+.text-primary { color: $color-primary; }
+.text-success { color: $color-success; }
+.text-error { color: $color-error; }

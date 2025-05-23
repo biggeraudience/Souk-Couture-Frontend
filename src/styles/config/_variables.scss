@@ -6,6 +6,16 @@ $bp-lg: 992px; // Large devices (e.g., desktops)
 $bp-xl: 1200px; // Extra Large devices (e.g., large desktops)
 $bp-xxl: 1400px; // Double Extra Large (e.g., wide screens)
 
+// Map of named breakpoints for media queries
+$breakpoints: (
+  xs: $bp-xs,
+  sm: $bp-sm,
+  md: $bp-md,
+  lg: $bp-lg,
+  xl: $bp-xl,
+  xxl: $bp-xxl
+);
+
 // --- COLORS ---
 // Brand Specific
 $color-background-primary: #FFFFF0;
@@ -112,3 +122,16 @@ $z-index-medium: 100;
 $z-index-high: 1000;
 $z-index-modal: 2000;
 $z-index-loader: 3000;
+
+// --- LAYOUT ---
+// Navbar Heights
+$navbar-height-default: 8rem; // Default height for desktop
+$navbar-height-lg: 7rem;      // Example for large screens
+$navbar-height-md: 6rem;      // Example for medium screens
+$navbar-height-sm: 5rem;      // Example for small screens
+
+// Footer Heights (Approximate, as footers can be dynamic. Adjust as needed)
+$footer-height-default: 10rem; // Default height for desktop
+$footer-height-lg: 9rem;
+$footer-height-md: 8rem;
+$footer-height-sm: 7rem;

@@ -1,0 +1,36 @@
+// src/styles/pages/_gender-landing-page.scss
+
+// Make sure these import paths are correct relative to THIS file's location.
+// Assuming 'config' is a sibling directory to 'pages' inside 'styles'.
+@import '../config/variables';
+@import '../config/mixins';    // <--- THIS LINE IS CRUCIAL AND MUST BE PRESENT
+
+.gender-landing-page {
+  margin-top: 12rem;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  // This gap is likely for the main sections of the page,
+  // not for the carousel items themselves.
+  gap: $spacing-xl; // Default gap for larger screens
+
+  // Responsive adjustments for the page layout
+  @include respond(xl) { // This is the line that was causing the error
+    gap: $spacing-xl;
+  }
+  @include respond(lg) {
+    gap: $spacing-l;
+  }
+  @include respond(md) {
+    padding: $spacing-m 0;
+    gap: $spacing-l;
+  }
+  @include respond(sm) {
+    padding: $spacing-s 0;
+    gap: $spacing-m;
+  }
+  @include respond(xs) {
+    padding: $spacing-xs 0;
+    gap: $spacing-s;
+  }
+}

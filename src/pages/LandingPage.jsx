@@ -1,8 +1,8 @@
-// src/components/layout/LandingPage.jsx
+// src/pages/LandingPage.jsx
 
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import Navbar from "../components/layout/Navbar";
+// import Navbar from "../components/layout/Navbar"; // REMOVE THIS LINE
 import Button from "../components/common/Button";
 import "../styles/pages/_landing-page.scss";
 
@@ -33,17 +33,17 @@ const LandingPage = () => {
 
   return (
     <>
-      <Navbar />
+      {/* <Navbar /> */} {/* REMOVE THIS LINE */}
       <main className="landing-page">
         <section className="gender-section">
-          {genders.map(({ img, alt, route, label, overlayText }, idx) => ( // Destructure overlayText
+          {genders.map(({ img, alt, route, label, overlayText }, idx) => (
             <div key={idx} className={`gender-box ${label.toLowerCase()}-box`}>
               <img src={img} alt={alt} className="gender-img" />
 
               <div className="overlay-container">
                 <div className="gender-content">
                   <p className="gender-overlay-text">
-                    {overlayText} {/* Use the new overlayText */}
+                    {overlayText}
                   </p>
                 </div>
                 <div className="gender-button">
