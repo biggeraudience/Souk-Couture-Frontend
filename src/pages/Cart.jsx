@@ -1,179 +1,144 @@
-import React from "react"; // No need for useState if no local state like activeTab
-import "../styles/pages/_cart.scss";
-import { useNavigate } from "react-router-dom";
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
+import '../styles/pages/_cart.scss';
 
 const Cart = ({ cartItems, favorites, updateQuantity, removeItem, addItemToCart, removeFavorite, clearAllItems, total }) => {
+  const navigate = useNavigate();
+
+  const handleQuantityChange = (item, newQuantity) => {
+    updateQuantity(item.id, item.selectedSize, item.selectedColors, newQuantity);
+  };
+
+  const handleRemoveItem = (idToRemove) => {
+    removeItem(idToRemove);
+  };
+
+  const handleClearCart = () => {
+    if (window.confirm('Are you sure you want to clear your entire cart?')) {
+      clearAllItems();
+    }
+  };
+
+  const handleCheckout = () => {
+    alert('Proceeding to checkout! (This is a placeholder action)');
+    // In a real application, you would navigate to a checkout page
+    // navigate('/checkout');
+  };
+
+  const handleAddToFavoritesAndCart = (favItem) => {
+    // Add to cart logic (assuming default size/color if not specified, or prompt user)
+    addItemToCart({
+      id: favItem.id,
+      name: favItem.name,
+      images: favItem.images,
+      price: favItem.price,
+      selectedSize: favItem.sizes?.[0] || 'M', // Default or prompt
+      selectedColors: favItem.colors?.[0] ? [favItem.colors[0]] : ['Black'], // Default or prompt
+      quantity: 1,
+      isBespoke: false,
+    });
+    alert(`${favItem.name} added to cart from favorites!`);
+  };
 
   return (
-    <>
-      {/* Navbar and Footer are now handled in App.jsx */}
-      <div className="cart-page">
-        <div className="cart-container">
-          {/* Directly display the bag section */}
-          <div className="bag-section">
-            <div className="empty-bag">
-              {cartItems.length === 0 ? (
-                <p>Your bag is empty.</p>
-              ) : (
-                <>
-                  <p>Your Items</p>
-                  <button
-                    className="clear-all-btn"
-                    onClick={clearAllItems}
-                  >
-                    Clear All
-                  </button>
-                </>
-              )}
-            </div>
-            <div className="products-grid">
-              {cartItems.map((item) => (
-                <div
-                  key={`${item.id}-${item.selectedSize}-${(item.selectedColors || []).join(",")}`}
-                  className="product-card"
-                >
-                  <img
-                    src={item.images?.[0] || "https://via.placeholder.com/150?text=NoImage"}
-                    alt={item.name}
-                  />
-                  <div className="product-name">
-                    {item.isBespoke && (
-                      <span className="bespoke-icon" title="Custom Bespoke Order">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          height="24px"
-                          viewBox="0 -960 960 960"
-                          width="24px"
-                          fill="#000"
-                        >
-                          <path d="m240-522-40 22q-14 8-30 4t-24-18L66-654q-8-14-4-30t18-24l230-132h70q9 0 14.5 5.5T400-820v20q0 33 23.5 56.5T480-720q33 0 56.5-23.5T560-800v-20q0-9 5.5-14.5T580-840h70l230 132q14 8 18 24t-4 30l-80 140q-8 14-23.5 17.5T760-501l-40-20v361q0 17-11.5 28.5T680-120H280q-17 0-28.5-11.5T240-160v-362Z" />
-                        </svg>
-                      </span>
-                    )}
-                    <span>{item.name}</span>
+    <section className="cart-page">
+      <h1 className="cart-page__title">Your Shopping Cart</h1>
+      {cartItems.length === 0 ? (
+        <div className="cart-page__empty">
+          <p>Your cart is currently empty.</p>
+          <button className="btn btn-primary" onClick={() => navigate('/products')}>
+            Start Shopping
+          </button>
+        </div>
+      ) : (
+        <div className="cart-page__content">
+          <div className="cart-page__items">
+            {cartItems.map((item) => (
+              <div key={`${item.id}-${item.selectedSize}-${item.selectedColors.join('-')}`} className="cart-item">
+                <img src={item.images?.[0] || 'https://via.placeholder.com/100'} alt={item.name} className="cart-item__image" />
+                <div className="cart-item__details">
+                  <h3 className="cart-item__name">{item.name}</h3>
+                  <p className="cart-item__options">
+                    Size: <strong>{item.selectedSize}</strong> | Color: <strong>{item.selectedColors.join(', ')}</strong>
+                  </p>
+                  <p className="cart-item__price">${item.price.toFixed(2)}</p>
+                  <div className="cart-item__quantity-control">
                     <button
-                      className="remove-btn"
-                      onClick={() => removeItem(item.id)}
+                      className="quantity-btn"
+                      onClick={() => handleQuantityChange(item, item.quantity - 1)}
+                      disabled={item.quantity <= 1}
                     >
-                      X
+                      -
+                    </button>
+                    <input
+                      type="number"
+                      value={item.quantity}
+                      onChange={(e) => handleQuantityChange(item, e.target.value)}
+                      min="1"
+                      className="quantity-input"
+                      aria-label={`Quantity for ${item.name}`}
+                    />
+                    <button className="quantity-btn" onClick={() => handleQuantityChange(item, item.quantity + 1)}>
+                      +
                     </button>
                   </div>
-                  <div className="product-details">
-                    {item.selectedColors && item.selectedColors.length > 0 ? (
-                      <span>Color: {item.selectedColors.join(", ")}</span>
-                    ) : (
-                      <span>No color selected</span>
-                    )}
-                    {item.selectedSize && <span>Size: {item.selectedSize}</span>}
-                    <div className="quantity-selector">
-                      <button
-                        className="decrement-btn"
-                        onClick={() =>
-                          updateQuantity(
-                            item.id,
-                            item.selectedSize,
-                            item.selectedColors,
-                            item.quantity - 1
-                          )
-                        }
-                      >
-                        -
-                      </button>
-                      <input
-                        type="number"
-                        min="1"
-                        value={item.quantity}
-                        onChange={(e) =>
-                          updateQuantity(
-                            item.id,
-                            item.selectedSize,
-                            item.selectedColors,
-                            e.target.value
-                          )
-                        }
-                      />
-                      <button
-                        className="increment-btn"
-                        onClick={() =>
-                          updateQuantity(
-                            item.id,
-                            item.selectedSize,
-                            item.selectedColors,
-                            item.quantity + 1
-                          )
-                        }
-                      >
-                        +
-                      </button>
-                    </div>
-                    <span>${(item.price * item.quantity).toFixed(2)}</span>
-                  </div>
                 </div>
-              ))}
-            </div>
-
-
-            <div className="pay-section">
-              <p className="terms">
-                {cartItems.length > 0
-                  ? "*By continuing, I declare that I have read and accept the Purchase Conditions and understand Haya Fashion LLC Privacy and Cookie Policy."
-                  : "Read T&C"}
-              </p>
-              <div className="total">
-                <span>Total: ${total.toFixed(2)}</span>
-                <button
-                  className="pay-btn"
-                  onClick={() => navigate("/checkout")}
-                  disabled={cartItems.length === 0} // Disable if cart is empty
-                >
-                  PAY
+                <button className="cart-item__remove-btn" onClick={() => handleRemoveItem(item.id)} aria-label={`Remove ${item.name} from cart`}>
+                  &times;
                 </button>
               </div>
-            </div>
+            ))}
           </div>
 
-          {/* Favorites Section - You might want to move this to a separate page or a different part of the cart */}
-          <div className="favorites-section">
-            <h3>Your Favorites</h3>
-            {favorites.length === 0 ? (
-              <div className="empty-favorites">
-                <p>No Favorites Yet</p>
-              </div>
-            ) : (
-              <div className="products-grid favorites-grid">
-                {favorites.map((item) => (
-                  <div key={item.id} className="favorite-card">
-                    <img
-                      src={item.images && item.images.length > 0 ? item.images[0] : "https://via.placeholder.com/150?text=NoImage"}
-                      alt={item.name}
-                    />
-                    <div className="favorite-details">
-                      <span>{item.name}</span>
-                      <span>Price: ${item.price.toFixed(2)}</span>
-                      <button
-                        className="buy-btn"
-                        onClick={() => {
-                          addItemToCart({ ...item, quantity: 1, selectedSize: item.selectedSize || null, selectedColors: item.selectedColors || [] });
-                          removeFavorite(item.id);
-                        }}
-                      >
-                        Add to Cart
-                      </button>
-                      <button
-                        className="remove-fav-btn"
-                        onClick={() => removeFavorite(item.id)}
-                      >
-                        Remove
-                      </button>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            )}
+          <div className="cart-page__summary">
+            <h2 className="cart-page__summary-title">Order Summary</h2>
+            <div className="cart-page__summary-row">
+              <span>Subtotal:</span>
+              <span>${total.toFixed(2)}</span>
+            </div>
+            <div className="cart-page__summary-row">
+              <span>Shipping:</span>
+              <span>Calculated at checkout</span>
+            </div>
+            <div className="cart-page__summary-row cart-page__summary-total">
+              <span>Total:</span>
+              <span>${total.toFixed(2)}</span>
+            </div>
+            <button className="btn btn-primary btn--full-width" onClick={handleCheckout}>
+              Proceed to Checkout
+            </button>
+            <button className="btn btn-secondary btn--full-width mt-s" onClick={handleClearCart}>
+              Clear Cart
+            </button>
           </div>
         </div>
-      </div>
-    </>
+      )}
+
+      {favorites.length > 0 && (
+        <>
+          <h2 className="cart-page__favorites-title">Your Bookmarked Items</h2>
+          <div className="cart-page__favorites">
+            {favorites.map((fav) => (
+              <div key={fav.id} className="favorite-item">
+                <img src={fav.images?.[0] || 'https://via.placeholder.com/80'} alt={fav.name} className="favorite-item__image" />
+                <div className="favorite-item__details">
+                  <h4 className="favorite-item__name">{fav.name}</h4>
+                  <p className="favorite-item__price">${fav.price.toFixed(2)}</p>
+                  <div className="favorite-item__actions">
+                    <button className="btn btn-primary btn--small" onClick={() => handleAddToFavoritesAndCart(fav)}>
+                      Add to Cart
+                    </button>
+                    <button className="btn btn-text-danger btn--small" onClick={() => removeFavorite(fav.id)}>
+                      Remove
+                    </button>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </>
+      )}
+    </section>
   );
 };
 
