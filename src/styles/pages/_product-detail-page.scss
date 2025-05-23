@@ -1,0 +1,393 @@
+// src/styles/pages/_product-detail-page.scss
+@import '../config/variables';
+@import '../config/mixins'; // Assuming you have a mixins file for responsive breakpoints and button bases
+
+.product-detail-page {
+  display: flex;
+  flex-direction: column;
+  max-width: $bp-xl; // Max width for the whole page container
+  margin: 4rem auto; // Center the page with some top/bottom margin
+  padding: $spacing-l;
+  background-color: $color-background-primary;
+  border-radius: $border-radius-default;
+  box-shadow: $shadow-elevation-medium; // Example shadow
+  font-family: $font-family-body;
+  color: $color-text-body;
+  gap: $spacing-xl; // Gap between image/details and reviews section
+
+  // Responsive adjustments for smaller screens
+  @include respond(md) {
+    padding: $spacing-m;
+    margin: 2rem auto;
+    gap: $spacing-l;
+  }
+
+  @include respond(sm) {
+    padding: $spacing-s;
+    margin: 1rem auto;
+    gap: $spacing-m;
+  }
+
+  // Flex container for image gallery and details section
+  > .product-detail-page__image-gallery,
+  > .product-detail-page__details {
+    flex: 1; // Allow these sections to grow
+  }
+
+  // Layout for larger screens (side-by-side)
+  @include respond(lg) {
+    flex-direction: row; // Arrange image and details side-by-side
+    align-items: flex-start; // Align items to the top
+    gap: $spacing-l; // Gap between image and details
+  }
+
+  // Loading, error, and no data states
+  &--loading,
+  &--error,
+  &--no-data {
+    text-align: center;
+    padding: $spacing-xl;
+    font-size: $font-size-h5;
+    font-weight: $font-weight-medium;
+    color: $color-text-dark;
+    min-height: 50vh; // Ensure it takes up some space
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: $color-background-light;
+    border-radius: $border-radius-default;
+    box-shadow: $shadow-elevation-small;
+    margin: 4rem auto;
+    max-width: $bp-lg;
+  }
+
+  &--error {
+    color: $color-error;
+    background-color: lighten($color-error, 40%);
+  }
+
+  &__image-gallery {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: $spacing-s;
+    background-color: $color-background-light;
+    border-radius: $border-radius-default;
+    box-shadow: $shadow-elevation-small;
+
+    .product-detail-page__main-image {
+      width: 100%;
+      max-width: 50rem; // Max width for the image itself
+      height: auto;
+      object-fit: contain; // Ensure image fits without cropping
+      border-radius: $border-radius-default;
+      margin-bottom: $spacing-s;
+    }
+
+    // Add styling for thumbnail images if you implement them
+    .product-detail-page__thumbnails {
+      display: flex;
+      gap: $spacing-xs;
+      img {
+        width: 8rem;
+        height: 8rem;
+        object-fit: cover;
+        border-radius: $border-radius-default;
+        border: 0.1rem solid $color-border-default;
+        cursor: pointer;
+        &:hover {
+          border-color: $color-accent-primary;
+        }
+      }
+    }
+  }
+
+  &__details {
+    display: flex;
+    flex-direction: column;
+    padding: $spacing-s;
+    background-color: $color-background-primary;
+    border-radius: $border-radius-default;
+    box-shadow: $shadow-elevation-small;
+    flex-grow: 1; // Allow details section to fill available space
+
+    .product-detail-page__name {
+      font-family: $font-family-heading;
+      font-size: $font-size-h2;
+      color: $color-text-heading;
+      margin-bottom: $spacing-xs;
+
+      @include respond(md) {
+        font-size: $font-size-h3;
+      }
+      @include respond(sm) {
+        font-size: $font-size-h4;
+      }
+    }
+
+    .product-detail-page__price {
+      font-family: $font-family-display;
+      font-size: $font-size-h3;
+      font-weight: $font-weight-bold;
+      color: $color-accent-primary; // Vibrant color for price
+      margin-bottom: $spacing-m;
+
+      @include respond(md) {
+        font-size: $font-size-h4;
+      }
+      @include respond(sm) {
+        font-size: $font-size-h5;
+      }
+    }
+
+    .product-detail-page__description {
+      font-family: $font-family-body;
+      font-size: $font-size-base;
+      line-height: $line-height-base;
+      color: $color-text-body;
+      margin-bottom: $spacing-l;
+    }
+  }
+
+  &__options {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-m;
+    margin-bottom: $spacing-l;
+  }
+
+  &__option-group {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-xs;
+  }
+
+  &__option-label {
+    font-family: $font-family-heading;
+    font-size: $font-size-base;
+    font-weight: $font-weight-medium;
+    color: $color-text-dark;
+  }
+
+  &__size-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $spacing-s;
+
+    .btn {
+      @include button-base; // Inherit base button styles from mixins
+      padding: $spacing-xxs $spacing-s;
+      min-width: 6rem;
+      border-radius: $border-radius-default;
+      background-color: $color-button-inactive-bg;
+      color: $color-button-inactive-text;
+      border: 0.1rem solid $color-border-default;
+
+      &--active {
+        background-color: $color-accent-primary;
+        color: $color-white;
+        border-color: $color-accent-primary;
+        box-shadow: $shadow-elevation-small;
+      }
+    }
+  }
+
+  &__color-options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $spacing-s;
+  }
+
+  &__color-swatch {
+    width: 4rem;
+    height: 4rem;
+    border-radius: $border-radius-round;
+    border: 0.2rem solid $color-border-default;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: transform $transition-speed-fast $transition-ease, border-color $transition-speed-fast $transition-ease;
+    box-shadow: $shadow-elevation-xs;
+
+    &:hover {
+      transform: scale(1.1);
+    }
+
+    &--active {
+      border-color: $color-accent-primary;
+      box-shadow: 0 0 0 0.3rem lighten($color-accent-primary, 20%); // Ring effect
+    }
+
+    .product-detail-page__check-icon {
+      width: 2.4rem;
+      height: 2.4rem;
+      color: $color-white; // Default for dark backgrounds
+      filter: drop-shadow(0 0 0.2rem rgba(0,0,0,0.5)); // Subtle shadow for visibility
+      // Adjust checkmark color for light swatches if needed
+      &[fill="currentColor"] {
+        // This is a placeholder, actual color adjustment might need JS or more specific SCSS
+      }
+    }
+  }
+
+  &__quantity-selector {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-xs;
+  }
+
+  &__quantity-controls {
+    display: flex;
+    align-items: center;
+    gap: $spacing-s;
+  }
+
+  &__quantity-btn {
+    @include button-base;
+    width: 4rem;
+    height: 4rem;
+    border-radius: $border-radius-round;
+    background-color: $color-background-light;
+    border: 0.1rem solid $color-border-default;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: $color-text-dark;
+
+    .product-detail-page__quantity-icon {
+      width: 2rem;
+      height: 2rem;
+    }
+  }
+
+  &__quantity-input {
+    width: 8rem;
+    padding: $spacing-xs;
+    border: 0.1rem solid $color-border-default;
+    border-radius: $border-radius-default;
+    background-color: $color-background-primary;
+    color: $color-text-dark;
+    font-family: $font-family-body;
+    font-size: $font-size-base;
+    text-align: center;
+    -moz-appearance: textfield; // Hide arrows on Firefox
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button {
+      -webkit-appearance: none; // Hide arrows on Chrome/Safari
+      margin: 0;
+    }
+  }
+
+  &__add-to-cart-btn {
+    @include button-base;
+    width: 100%;
+    padding: $spacing-s $spacing-m;
+    font-size: $font-size-h6;
+    font-weight: $font-weight-bold;
+    background-color: $color-accent-primary;
+    color: $color-white;
+    border: none;
+    border-radius: $border-radius-default;
+    box-shadow: $shadow-elevation-medium;
+    margin-top: $spacing-m;
+
+    &:hover {
+      background-color: darken($color-accent-primary, 10%);
+      box-shadow: $shadow-elevation-large;
+    }
+
+    &:disabled {
+      background-color: $color-gray-light;
+      cursor: not-allowed;
+      box-shadow: none;
+    }
+  }
+
+  &__message {
+    padding: $spacing-s;
+    border-radius: $border-radius-default;
+    text-align: center;
+    margin-top: $spacing-m;
+    font-weight: $font-weight-medium;
+    animation: fade-in 0.5s ease-out forwards; // Apply fade-in animation
+
+    &--success {
+      background-color: lighten($color-success, 30%);
+      color: $color-success;
+      border: 0.1rem solid $color-success;
+    }
+  }
+
+  // Reviews Section
+  &__reviews {
+    width: 100%;
+    padding: $spacing-l;
+    background-color: $color-background-light;
+    border-radius: $border-radius-default;
+    box-shadow: $shadow-elevation-small;
+    margin-top: $spacing-l; // Space from the main product section
+
+    @include respond(md) {
+      padding: $spacing-m;
+    }
+  }
+
+  &__reviews-heading {
+    font-family: $font-family-heading;
+    font-size: $font-size-h4;
+    color: $color-text-heading;
+    margin-bottom: $spacing-m;
+  }
+
+  &__review-list {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-m;
+  }
+
+  &__review-item {
+    background-color: $color-background-primary;
+    padding: $spacing-s;
+    border-radius: $border-radius-default;
+    border: 0.1rem solid $color-border-light;
+    box-shadow: $shadow-elevation-xs;
+  }
+
+  &__review-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: $spacing-xs;
+  }
+
+  &__review-author {
+    font-weight: $font-weight-semibold;
+    color: $color-text-dark;
+    margin-right: $spacing-s;
+  }
+
+  &__review-rating {
+    color: $color-star-rating; // Yellow for stars
+    font-size: $font-size-base;
+  }
+
+  &__review-comment {
+    font-size: $font-size-small;
+    color: $color-text-body;
+    line-height: $line-height-base;
+    font-style: italic;
+  }
+}
+
+// Keyframe for fade-in animation
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

@@ -12,10 +12,11 @@
   "dependencies": {
     "@hookform/resolvers": "^5.0.1",
     "@reduxjs/toolkit": "^2.8.2",
-    "prop-types": "^15.8.1",        
+    "lucide-react": "^0.511.0",
+    "prop-types": "^15.8.1",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
-    "react-helmet-async": "^2.0.5", 
+    "react-helmet-async": "^2.0.5",
     "react-hook-form": "^7.56.4",
     "react-redux": "^9.2.0",
     "react-router-dom": "^7.6.0",
@@ -35,7 +36,7 @@
     "prettier": "^3.5.3",
     "vite": "^6.3.5"
   },
-  "overrides": {                        
+  "overrides": {
     "react-helmet-async": {
       "react": "$react",
       "react-dom": "$react-dom"
