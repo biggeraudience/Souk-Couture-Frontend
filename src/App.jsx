@@ -1,5 +1,6 @@
+// src/App.jsx
 import React, { useState, useEffect } from 'react';
-import { Routes, Route, useNavigate } from 'react-router-dom'; // Import useNavigate
+import { Routes, Route, useNavigate } from 'react-router-dom';
 import LandingPage from './pages/LandingPage';
 import GenderLandingPage from './pages/GenderLandingPage';
 import ProductDetailPage from './pages/ProductDetailPage';
@@ -8,14 +9,15 @@ import Footer from './components/layout/Footer';
 import ProductsPage from './pages/ProductsPage';
 import Sidebar from './components/layout/Sidebar';
 import Cart from './pages/Cart';
+import CheckoutPage from './pages/CheckoutPage'; // Import the new CheckoutPage
 
 function App() {
   const [backendMessage, setBackendMessage] = useState('');
   const [error, setError] = useState('');
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  const [cartItems, setCartItems] = useState([]); // State to hold cart items
-  const [favorites, setFavorites] = useState([]); // State to hold favorite items
-  const navigate = useNavigate(); // Initialize useNavigate
+  const [cartItems, setCartItems] = useState([]);
+  const [favorites, setFavorites] = useState([]);
+  const navigate = useNavigate();
 
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
@@ -32,7 +34,6 @@ function App() {
     };
   }, [isSidebarOpen]);
 
-  // Backend connection logic (kept as is from your original code)
   useEffect(() => {
     const backendUrl = import.meta.env.VITE_BACKEND_URL;
     if (backendUrl) {
@@ -58,7 +59,6 @@ function App() {
     }
   }, []);
 
-  // Cart Management Functions (centralized here)
   const addItemToCart = (itemToAdd) => {
     setCartItems((prevItems) => {
       const existingItemIndex = prevItems.findIndex(
@@ -119,7 +119,6 @@ function App() {
 
   const totalCartValue = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
 
-  // Function to navigate to cart on bag icon click
   const handleBagIconClick = () => {
     navigate('/cart');
   };
@@ -129,8 +128,8 @@ function App() {
       <Navbar
         isSidebarOpen={isSidebarOpen}
         toggleSidebar={toggleSidebar}
-        cartItemCount={cartItems.length} // Pass cart item count to Navbar
-        onBagIconClick={handleBagIconClick} // Pass the click handler
+        cartItemCount={cartItems.length}
+        onBagIconClick={handleBagIconClick}
       />
 
       <Sidebar
@@ -144,7 +143,6 @@ function App() {
           <Route path="/menslandingpage" element={<GenderLandingPage gender="men" />} />
           <Route path="/womenslandingpage" element={<GenderLandingPage gender="women" />} />
           <Route path="/products" element={<ProductsPage />} />
-          {/* Pass cart-related props to Cart component */}
           <Route
             path="/cart"
             element={
@@ -160,7 +158,17 @@ function App() {
               />
             }
           />
-          {/* Pass addItemToCart and addFavorite to ProductDetailPage */}
+          {/* Add the new CheckoutPage route */}
+          <Route
+            path="/checkout"
+            element={
+              <CheckoutPage
+                cartItems={cartItems}
+                total={totalCartValue}
+                clearAllItems={clearAllCartItems}
+              />
+            }
+          />
           <Route
             path="/products/:productId"
             element={
@@ -168,11 +176,12 @@ function App() {
                 addItemToCart={addItemToCart}
                 addFavorite={addFavorite}
                 removeFavorite={removeFavorite}
-                isFavorited={(productId) => favorites.some(fav => fav.id === productId)} // Pass a check for favorited status
+                isFavorited={(productId) => favorites.some(fav => fav.id === productId)}
               />
             }
           />
           <Route path="/register" element={<div>Register Page Placeholder</div>} />
+          <Route path="/order-confirmation" element={<div>Order Confirmation Page!</div>} /> {/* Simple confirmation page */}
           <Route path="*" element={<div>404: Not Found</div>} />
         </Routes>
       </main>

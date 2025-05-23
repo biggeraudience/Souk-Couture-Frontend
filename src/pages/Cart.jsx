@@ -20,9 +20,13 @@ const Cart = ({ cartItems, favorites, updateQuantity, removeItem, addItemToCart,
   };
 
   const handleCheckout = () => {
-    alert('Proceeding to checkout! (This is a placeholder action)');
-    // In a real application, you would navigate to a checkout page
-    // navigate('/checkout');
+    // Check if the cart is empty before navigating to checkout
+    if (cartItems.length === 0) {
+      alert("Your cart is empty. Please add items before proceeding to checkout.");
+      return; // Stop the function here
+    }
+    // Navigate to the checkout page
+    navigate('/checkout');
   };
 
   const handleAddToFavoritesAndCart = (favItem) => {
