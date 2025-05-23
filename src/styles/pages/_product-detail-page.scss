@@ -1,234 +1,174 @@
+// src/styles/pages/_product-detail-page.scss
+
 @import '../config/variables';
 @import '../config/mixins';
 
-.product-detail-page {
+.product-detail {
+  margin-top: 12rem;
   display: flex;
   flex-direction: column;
-  padding: $spacing-xl;
+  padding: $spacing-l $spacing-s;
   background-color: $color-background-landing; // White background
-  border: 0.1rem solid $color-border-default; // Black border
-  margin: $spacing-xl auto; // Center the page with top/bottom margin
-  max-width: $bp-xl; // Max width similar to a large desktop
-  gap: $spacing-l;
 
   @include respond(md) {
-    flex-direction: column;
-    padding: $spacing-l;
-    margin: $spacing-l $spacing-m; // Adjust margins for smaller screens
-    gap: $spacing-m;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
+    padding: $spacing-xl $spacing-l;
+    gap: $spacing-xl; // Space between image and details
   }
 
-  @include respond(sm) {
-    padding: $spacing-m;
-    margin: $spacing-m $spacing-s;
-    gap: $spacing-s;
+  @include respond(lg) {
+    padding: $spacing-xxl $spacing-xl;
   }
 
   &__image-gallery {
     flex: 1;
-    border: 0.1rem solid $color-border-default;
-    padding: $spacing-s;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center; // Vertically center content if image is smaller
+    max-width: 100%;
+    margin-bottom: $spacing-l;
+    border: 0.1rem solid $color-border-default; // Black border
+    border-radius: $border-radius-medium;
+    overflow: hidden; // Ensures image respects border-radius
 
-    .product-detail-page__main-image {
-      max-width: 100%;
-      height: auto;
-      display: block;
-      object-fit: contain; // Ensure image fits without cropping
-      margin-bottom: $spacing-s;
+    @include respond(md) {
+      max-width: 50rem; // Max width for image column on larger screens
+      margin-bottom: 0;
     }
 
-    .product-detail-page__thumbnails {
-      display: flex;
-      gap: $spacing-xs;
-      // Add styling for thumbnail images here if you add them
-      img {
-        width: 8rem;
-        height: 8rem;
-        object-fit: cover;
-        border: 0.1rem solid $color-gray-light;
-        cursor: pointer;
-        &:hover {
-          border-color: $color-accent-hover-emphasis;
-        }
-      }
+    img {
+      width: 100%;
+      height: auto;
+      display: block;
+      object-fit: cover; // Ensures image covers the area without distortion
     }
   }
 
   &__details {
     flex: 1;
-    display: flex;
-    flex-direction: column;
-    padding: $spacing-s;
-    border: 0.1rem solid $color-border-default;
-    background-color: $color-gray-lightest; // A slightly off-white background
+    max-width: 100%;
 
-    h1.product-detail-page__name {
-      font-family: $font-family-heading;
-      font-size: $font-size-h2;
-      color: $color-text-heading;
-      margin-bottom: $spacing-s;
-
-      @include respond(md) {
-        font-size: $font-size-h3;
-      }
-      @include respond(sm) {
-        font-size: $font-size-h4;
-      }
-    }
-
-    p.product-detail-page__price {
-      font-family: $font-family-display; // Using display for price as it's prominent
-      font-size: $font-size-h3;
-      font-weight: $font-weight-bold;
-      color: $color-hero-background; // Orange for emphasis
-      margin-bottom: $spacing-s;
-
-      @include respond(md) {
-        font-size: $font-size-h4;
-      }
-      @include respond(sm) {
-        font-size: $font-size-h5;
-      }
-    }
-
-    p.product-detail-page__description {
-      font-family: $font-family-body;
-      font-size: $font-size-base;
-      line-height: $line-height-base;
-      color: $color-text-body;
-      margin-bottom: $spacing-l;
+    @include respond(md) {
+      max-width: 45rem; // Max width for details column
     }
   }
 
-  &__options {
-    display: flex;
-    flex-direction: column;
-    gap: $spacing-m;
+  &__name {
+    font-family: $font-family-heading;
+    font-size: $font-size-h2;
+    color: $color-text-heading;
+    margin-bottom: $spacing-s;
+
+    @include respond(md) {
+      font-size: $font-size-h1;
+    }
+  }
+
+  &__price {
+    font-family: $font-family-body;
+    font-size: $font-size-h3;
+    font-weight: $font-weight-bold;
+    color: $color-primary; // Highlight price with primary color
+    margin-bottom: $spacing-m;
+  }
+
+  &__description {
+    font-family: $font-family-body;
+    font-size: $font-size-base;
+    color: $color-text-body;
+    line-height: $line-height-base;
     margin-bottom: $spacing-l;
   }
 
-  &__option-group {
+  &__options {
+    margin-bottom: $spacing-l;
+
+    &-group {
+      margin-bottom: $spacing-s;
+
+      label {
+        display: block;
+        font-family: $font-family-heading;
+        font-size: $font-size-base;
+        font-weight: $font-weight-medium;
+        margin-bottom: $spacing-xs;
+        color: $color-text-dark;
+      }
+    }
+
+    &-selector {
+      display: flex;
+      gap: $spacing-xs; // Space between option buttons
+
+      .option-btn {
+        @include button-base; // Use your existing button base mixin
+        background-color: $color-white; // White background for options
+        color: $color-text-dark; // Black text
+        border: 0.1rem solid $color-border-default; // Black border
+        min-width: 4.8rem; // Fixed width for size/color buttons
+        min-height: 4.8rem; // Fixed height
+        @include flex-center; // Center content in buttons
+
+        &:hover:not(.option-btn--active):not(:disabled) {
+          background-color: $color-gray-lightest; // Light gray hover
+        }
+
+        &--active {
+          background-color: $color-active-state; // Light green for active option
+          color: $color-text-dark;
+          border-color: $color-border-default;
+          &:hover:not(:disabled) {
+            background-color: darken($color-active-state, 10%);
+          }
+        }
+      }
+    }
+  }
+
+  &__actions {
     display: flex;
     flex-direction: column;
-    gap: $spacing-xs;
-  }
+    gap: $spacing-s; // Space between buttons
 
-  &__option-label {
-    font-family: $font-family-heading;
-    font-size: $font-size-base;
-    font-weight: $font-weight-medium;
-    color: $color-text-dark;
-  }
-
-  &__size-buttons {
-    display: flex;
-    flex-wrap: wrap;
-    gap: $spacing-xs;
+    @include respond(sm) {
+      flex-direction: row;
+      flex-wrap: wrap; // Allow buttons to wrap on smaller screens
+    }
 
     .btn {
-      @include button-base; // Inherit base button styles
-      font-size: $font-size-small;
-      padding: $spacing-xxs $spacing-s;
-      min-width: 4.8rem; // Ensure buttons have a minimum width
-      text-align: center;
-      
-      &--active {
+      flex: 1; // Allow buttons to grow and fill space
+      min-width: 15rem; // Ensure buttons are not too small
+    }
+
+    .btn-add-to-cart {
+      @extend .btn;
+      background-color: $color-button-default-bg; // Black
+      color: $color-button-default-text; // White
+
+      &:hover:not(:disabled) {
+        background-color: lighten($color-button-default-bg, 10%);
+        border-color: $color-accent-hover-emphasis;
+      }
+    }
+
+    .btn-bookmark {
+      @extend .btn;
+      background-color: $color-white;
+      color: $color-text-dark;
+      border: 0.1rem solid $color-border-default;
+
+      &:hover:not(:disabled) {
+        background-color: $color-gray-lightest;
+        border-color: $color-accent-hover-emphasis;
+      }
+
+      &--bookmarked {
         background-color: $color-active-state;
         color: $color-text-dark;
         border-color: $color-border-default;
-      }
-      &--inactive {
-        background-color: $color-button-inactive-bg;
-        color: $color-button-inactive-text;
-        border-color: $color-border-default;
+        &:hover:not(:disabled) {
+          background-color: darken($color-active-state, 10%);
+        }
       }
     }
-  }
-
-  &__color-options {
-    display: flex;
-    gap: $spacing-s;
-  }
-
-  &__color-swatch {
-    width: 3.2rem;
-    height: 3.2rem;
-    border-radius: $border-radius-round;
-    border: 0.1rem solid $color-border-default;
-    cursor: pointer;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    transition: transform $transition-speed-fast $transition-ease;
-
-    &:hover {
-      transform: scale(1.1);
-    }
-
-    // Specific colors (adjust as needed based on your product colors)
-    &--black { background-color: $color-black; }
-    &--grey { background-color: $color-gray-medium; }
-    &--navy { background-color: #000080; } // Example, define in variables if consistent
-    &--blue { background-color: #0000FF; }
-    &--light-blue { background-color: #ADD8E6; }
-    &--white { background-color: $color-white; border-color: $color-gray-dark; } // White swatch needs visible border
-    &--green { background-color: $color-success; } // Example, use a specific green if needed
-
-    .product-detail-page__check-icon {
-      color: $color-text-dark; // Checkmark visible on light backgrounds
-      width: 1.8rem;
-      height: 1.8rem;
-      &[fill="currentColor"] {
-        filter: invert(100%); // Make checkmark white on dark backgrounds
-      }
-    }
-  }
-
-  &__quantity-selector {
-    display: flex;
-    flex-direction: column;
-    gap: $spacing-xs;
-
-    .product-detail-page__quantity-input {
-      width: 8rem;
-      padding: $spacing-xs;
-      border: 0.1rem solid $color-border-default;
-      background-color: $color-background-primary;
-      color: $color-text-dark;
-      font-family: $font-family-body;
-      font-size: $font-size-base;
-      text-align: center;
-    }
-  }
-
-  &__add-to-cart-btn {
-    width: 100%;
-    // Inherits .btn .btn--large styles from _buttons.scss
-    margin-top: $spacing-m; // Add some space above the button
-  }
-
-  .loader, .error-message {
-    text-align: center;
-    padding: $spacing-l;
-    font-family: $font-family-body;
-    font-size: $font-size-base;
-    color: $color-text-dark;
-  }
-
-  .error-message {
-    color: $color-error;
-  }
-}
-
-// Layout for larger screens: Side-by-side
-@include respond(lg) {
-  .product-detail-page {
-    flex-direction: row;
-    align-items: flex-start; // Align items to the top
-    justify-content: center; 
   }
 }

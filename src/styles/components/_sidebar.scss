@@ -1,6 +1,6 @@
 // src/styles/components/_sidebar.scss
 @import '../../styles/config/variables';
-@import '../../styles/config/mixins';
+@import '../../styles/config/mixins'; // Make sure this imports your respond mixin
 
 .sidebar {
   position: fixed;
@@ -19,8 +19,8 @@
 
   // Hide the main sidebar scrollbar
   overflow-y: hidden; // Hide the vertical scrollbar
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;  /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
   &::-webkit-scrollbar {
     display: none; /* Chrome, Safari, Opera */
   }
@@ -36,10 +36,15 @@
     flex-direction: row;
     flex-grow: 1;
     align-items: stretch;
-    padding: $spacing-s $spacing-m 0 $spacing-m;
+    padding: $spacing-s $spacing-m 0 $spacing-m; // Default padding for larger screens
     position: relative;
     min-height: 100%;
     box-sizing: border-box;
+
+    // Adjust padding for smaller screens
+    @include respond(phone) { // Applies to screens UP TO $bp-phone (576px)
+      padding: $spacing-xs $spacing-xxs 0 $spacing-xxs; // Smaller overall padding for fixed widths
+    }
   }
 
   &__header {
@@ -53,6 +58,12 @@
     background-color: inherit;
     padding-bottom: $spacing-m;
     box-sizing: border-box;
+
+    // Adjust header positioning for smaller screens
+    @include respond(phone) {
+      left: $spacing-xxs; // Match new content padding
+      padding-bottom: $spacing-s;
+    }
   }
 
   &__close-btn {
@@ -63,21 +74,27 @@
     border: none;
     cursor: pointer;
     font-family: $font-family-display;
-    // --- INCREASE FONT SIZE FOR 'CLOSE' TEXT ---
-    font-size: $font-size-large; // Changed from $font-size-base
-    // ------------------------------------------
+    font-size: $font-size-large;
     color: $color-text-dark;
     text-transform: uppercase;
-    // --- INCREASE PADDING FOR THE BUTTON AREA ---
-    padding: $spacing-xs; // Changed from $spacing-xxs
-    // ------------------------------------------
+    padding: $spacing-xs;
+
+    // Adjust close button for smaller screens
+    @include respond(phone) {
+      font-size: 0.5rem; // Should now apply correctly
+      padding: $spacing-xxs;
+    }
 
     .sidebar__icon--close {
-      // --- INCREASE ICON SIZE ---
-      width: 2.8rem; // Changed from 1.8rem
-      height: 2.8rem; // Changed from 1.8rem
-      // ------------------------
+      width: 2.8rem;
+      height: 2.8rem;
       transition: transform 0.3s ease;
+
+      // Adjust close icon for smaller screens
+      @include respond(phone) {
+        width: 1rem; // Should now apply correctly
+        height: 1rem; // Should now apply correctly
+      }
     }
 
     &:hover {
@@ -89,22 +106,32 @@
     }
   }
 
-  &__wrapper {
+  &__wrapper { // This is your LEFT section
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    min-width: 20rem;
+    width: 70px; // Default min-width for larger screens
     flex-shrink: 0;
-    padding-left: 0;
+    padding: 1;
     box-sizing: border-box;
     padding-top: $spacing-xxl;
-    flex-grow: 1;
+    flex-grow: 1; // Allows it to grow on larger screens if needed
     overflow-y: auto;
     -ms-overflow-style: none;
     scrollbar-width: none;
     &::-webkit-scrollbar {
       display: none;
     }
+
+    // --- SMALL SCREEN ADJUSTMENTS FOR LEFT SECTION (FIXED WIDTH) ---
+    @include respond(phone) { // Applies to screens UP TO $bp-phone (576px)
+      width: 8rem; // Fixed width for the left section
+      flex-grow: 0;
+      flex-shrink: 0;
+      padding-right: $spacing-xxs;
+      padding-top: $spacing-xl;
+    }
+    // ------------------------------------------------------------------
   }
 
   &__nav-section,
@@ -114,11 +141,17 @@
     list-style: none;
     margin: 0;
     padding: 0 $spacing-m 0 0;
-    text-align: left;
+
+    @include respond(phone) {
+      padding-right: $spacing-xxs;
+    }
   }
 
   &__nav-section {
     margin-bottom: $spacing-xl;
+    @include respond(phone) {
+      margin-bottom: $spacing-m;
+    }
 
     .sidebar__nav-item {
       margin-bottom: $spacing-xxs;
@@ -129,6 +162,10 @@
   &__action-section {
     margin-top: $spacing-xl;
     margin-bottom: $spacing-xl;
+    @include respond(phone) {
+      margin-top: $spacing-m;
+      margin-bottom: $spacing-m;
+    }
 
     li {
       display: flex;
@@ -136,6 +173,9 @@
       align-items: center;
       margin-bottom: $spacing-xxs;
       padding: $spacing-xs 0;
+      @include respond(phone) {
+        padding: $spacing-xxs 0;
+      }
     }
 
     .sidebar__action-link {
@@ -146,6 +186,10 @@
       font-size: $font-size-large;
       transition: color 0.2s ease-in-out;
       text-transform: uppercase;
+
+      @include respond(phone) {
+        font-size: 0.55rem; // Should now apply correctly
+      }
     }
 
     .sidebar__action-icon-wrapper {
@@ -156,6 +200,12 @@
       align-items: center;
       margin-left: $spacing-s;
       flex-shrink: 0;
+
+      @include respond(phone) {
+        width: 0.7rem; // Should now apply correctly
+        height: 0.7rem; // Should now apply correctly
+        margin-left: $spacing-xxs;
+      }
     }
 
     .sidebar__icon {
@@ -177,6 +227,9 @@
 
   &__settings-section {
     margin: 0;
+    @include respond(phone) {
+      margin-top: $spacing-m;
+    }
     li {
       margin-bottom: $spacing-xxs;
       display: flex;
@@ -199,12 +252,23 @@
     gap: $spacing-s;
     flex-grow: 1;
 
+    @include respond(phone) {
+      font-size: 0.55rem; // Should now apply correctly
+      gap: $spacing-xxs;
+      padding: $spacing-xxs 0;
+    }
+
     .sidebar__icon {
       width: 2rem;
       height: 2rem;
       transition: fill 0.2s ease-in-out;
       transform: translateY(-0.05em);
       margin-left: auto;
+
+      @include respond(phone) {
+        width: 0.7rem; // Should now apply correctly
+        height: 0.7rem; // Should now apply correctly
+      }
     }
 
     &:hover .sidebar__icon {
@@ -223,10 +287,20 @@
     display: flex;
     align-items: center;
 
+    @include respond(phone) {
+      font-size: 0.55rem; // Should now apply correctly
+      gap: $spacing-xxs;
+    }
+
     .sidebar__icon--dropdown {
       margin-left: auto;
       transform: translateY(-0.05em);
       transition: transform 0.3s ease-in-out;
+
+      @include respond(phone) {
+        width: 0.7rem; // Should now apply correctly
+        height: 0.7rem; // Should now apply correctly
+      }
     }
   }
 
@@ -251,7 +325,10 @@
     list-style: none;
     margin: 0;
     padding: $spacing-xs 0 $spacing-s $spacing-l;
-    width: 100%;
+
+    @include respond(phone) {
+      padding: $spacing-xxs 0 $spacing-xs $spacing-xs;
+    }
 
     li {
       margin-bottom: $spacing-xxs;
@@ -267,8 +344,8 @@
       transition: color 0.2s ease-in-out;
       text-transform: capitalize;
 
-      &:hover {
-        color: $color-accent-hover;
+      @include respond(phone) {
+        font-size: 0.45rem; // Should now apply correctly
       }
     }
   }
@@ -285,9 +362,15 @@
     padding-top: $spacing-m;
     width: 100%;
     padding-left: 0;
+
+    @include respond(phone) {
+      font-size: 0.6rem; // Should now apply correctly
+      padding-top: $spacing-s;
+      letter-spacing: 0.02rem;
+    }
   }
 
-  &__right-section {
+  &__right-section { // This is your RIGHT section
     flex-grow: 1;
     align-self: stretch;
     padding: $spacing-s $spacing-m;
@@ -321,6 +404,26 @@
 
     &::-webkit-scrollbar-track {
       background-color: transparent;
+    }
+
+    // --- SMALL SCREEN ADJUSTMENTS FOR RIGHT SECTION (FIXED, WIDER) ---
+    @include respond(phone) { // Applies to screens UP TO $bp-phone (576px)
+      width: 16rem; // This remains your fixed width for the right section
+      flex-grow: 0;
+      flex-shrink: 0;
+      margin-left: $spacing-xs;
+      padding: $spacing-xs;
+      padding-top: $spacing-xl;
+      
+      h3 {
+        font-size: 0.8rem;
+        margin-bottom: $spacing-xs;
+      }
+      p {
+        font-size: 0.65rem;
+        line-height: 1.2;
+        margin-bottom: $spacing-s;
+      }
     }
   }
 }

@@ -8,7 +8,7 @@ $bp-lg: 992px; // Large devices (e.g., desktops)
 $bp-xl: 1200px; // Extra Large devices (e.g., large desktops)
 $bp-xxl: 1400px; // Double Extra Large (e.g., wide screens)
 
-// Define the $breakpoints map
+// Define the $breakpoints map for use with the respond mixin
 $breakpoints: (
   xs: $bp-xs,
   sm: $bp-sm,
@@ -16,67 +16,62 @@ $breakpoints: (
   lg: $bp-lg,
   xl: $bp-xl,
   xxl: $bp-xxl
-); 
+);
 
 // --- COLORS ---
 // Brand Specific
 $color-background-primary: #FFFFF0;
 $color-background-landing: #FFFFFF;
 $color-hero-background: #FE5829;
-$color-background-light: #F8F8F8;
+$color-background-light: #F8F8F8; // Added from your resets snippet
+
 // Primary Color
-$color-primary: #007bff; // Or choose a specific primary color for your brand if you have one.
+$color-primary: #007bff;
 
 $color-border-default: #000000;
 $color-accent-hover-emphasis: #F03500;
-
-// ADD THIS LINE
-$color-accent-hover: #FE5829; // You can adjust this color to your desired hover accent color.
-                              // For example, you could use $color-hero-background if it's suitable.
-
+$color-accent-hover: #FE5829;
 
 // State Management Colors
-$color-active-state: #CDEDA2; // Light green for selected/active states (e.g., bookmark checked, active button)
+$color-active-state: #CDEDA2;
 
 // Button Colors
-$color-button-inactive-bg: #262626; // Dark grey for inactive buttons
-$color-button-inactive-text: #FFFFFF; // White text/icons for inactive buttons
-$color-button-default-bg: #000000; // Black default for buttons
-$color-button-default-text: #FFFFFF; // White text/icons for default buttons
+$color-button-inactive-bg: #262626;
+$color-button-inactive-text: #FFFFFF;
+$color-button-default-bg: #000000;
+$color-button-default-text: #FFFFFF;
 
 // Text Colors
-$color-black: #000000; // Explicitly define black for other uses
-$color-white: #FFFFFF; // Explicitly define white for other uses
+$color-black: #000000;
+$color-white: #FFFFFF;
 
 // Grey Palette
 $color-gray-lightest: #F8F8F8;
 $color-gray-light: #E0E0E0;
 $color-gray-medium: #A0A0A0;
-$color-gray-dark: #505050; // The color value for $color-text-body
-
+$color-gray-dark: #505050;
 
 $color-text-body: $color-gray-dark;
-$color-text-heading: #000000; // Using explicit black for heading
+$color-text-heading: $color-black;
 $color-text-dark: #000000;
-$color-text-light: $color-gray-medium; // Used in _typography.scss for small text
-$color-text-dark-light: mix($color-text-dark, $color-white, 20%); // NEW: Define a slightly lighter dark color
-// You can adjust the percentage (20%) to make it lighter or darker as needed.
-// Alternatively, you could use a specific hex value if you have one in mind, e.g., #333333.
+$color-text-light: $color-gray-medium;
+$color-text-dark-light: mix($color-text-dark, $color-white, 20%);
 
-// Status Colors (standard)
+// Status Colors
 $color-success: #28a745;
 $color-error: #dc3545;
 $color-warning: #ffc107;
 
 // --- TYPOGRAPHY ---
 // Font Families
-$font-family-heading: 'Outfit', sans-serif; // For buttons, headings, subheadings
-$font-family-body: 'Overpass Mono', monospace; // For content, product names, errors
-$font-family-logo: 'Oxanium', cursive; // For website logo label "Souk Couture"
-$font-family-display: 'Outfit', sans-serif; // Assuming you meant to use Outfit for display text. If not, define a new one.
+$font-family-heading: 'Outfit', sans-serif;
+$font-family-body: 'Overpass Mono', monospace;
+$font-family-logo: 'Oxanium', cursive;
+$font-family-display: 'Outfit', sans-serif;
+$font-family-base: $font-family-body; // Added based on your _resets.scss snippet
 
 // Base Font Size (setting 1rem to 10px for easier calculation)
-$font-size-base: 1.6rem; // Default for body text (16px)
+$font-size-base: 1.6rem;
 
 // Heading Sizes
 $font-size-h1: 4.8rem;
@@ -89,9 +84,8 @@ $font-size-h6: 1.6rem;
 // Other Text Sizes
 $font-size-large: 1.8rem;
 $font-size-small: 1.4rem;
-// ADD THESE NEW FONT SIZES
-$font-size-xs: 1.2rem; // Extra small font size (12px)
-$font-size-xxs: 1.0rem; // Double extra small font size (10px)
+$font-size-xs: 1.2rem;
+$font-size-xxs: 1.0rem;
 
 // Line Heights
 $line-height-base: 1.6;
@@ -104,24 +98,25 @@ $font-weight-medium: 500;
 $font-weight-bold: 700;
 
 // --- SPACING (based on an 8px grid) ---
-$spacing-xxs: 0.4rem; // 4px
-$spacing-xs: 0.8rem; // 8px
-$spacing-s: 1.6rem; // 16px
-$spacing-m: 2.4rem; // 24px
-$spacing-l: 3.2rem; // 32px
-$spacing-xl: 4.8rem; // 48px
-$spacing-xxl: 6.4rem; // 64px
+$spacing-xxs: 0.4rem;
+$spacing-xs: 0.8rem;
+$spacing-s: 1.6rem;
+$spacing-m: 2.4rem;
+$spacing-l: 3.2rem;
+$spacing-xl: 4.8rem;
+$spacing-xxl: 6.4rem;
 
 // --- BORDERS & SHADOWS ---
 $border-radius-small: 0.4rem;
 $border-radius-medium: 0.8rem;
 $border-radius-large: 1.2rem;
 $border-radius-round: 50%;
+$border-radius-default: $border-radius-small;
 
 $shadow-light: 0 0.5rem 1rem rgba(0, 0, 0, 0.075);
 $shadow-medium: 0 1rem 2rem rgba(0, 0, 0, 0.15);
 $shadow-dark: 0 1.5rem 3rem rgba(0, 0, 0, 0.2);
-$border-radius-default: $border-radius-small;
+
 // --- TRANSITIONS ---
 $transition-speed-fast: 0.15s;
 $transition-speed-normal: 0.3s;
@@ -131,20 +126,20 @@ $transition-ease: ease-in-out;
 // --- Z-INDEX ---
 $z-index-low: 10;
 $z-index-medium: 100;
-$z-index-sidebar: 1000;
 $z-index-high: 1000;
+$z-index-sidebar: 1000;
 $z-index-modal: 2000;
 $z-index-loader: 3000;
 
 // --- LAYOUT ---
 // Navbar Heights
-$navbar-height-default: 8rem; // Default height for desktop
-$navbar-height-lg: 7rem; // Example for large screens
-$navbar-height-md: 6rem; // Example for medium screens
-$navbar-height-sm: 5rem; // Example for small screens
+$navbar-height-default: 8rem;
+$navbar-height-lg: 7rem;
+$navbar-height-md: 6rem;
+$navbar-height-sm: 5rem;
 
-// Footer Heights (Approximate, as footers can be dynamic. Adjust as needed)
-$footer-height-default: 10rem; // Default height for desktop
+// Footer Heights
+$footer-height-default: 10rem;
 $footer-height-lg: 9rem;
 $footer-height-md: 8rem;
 $footer-height-sm: 7rem;

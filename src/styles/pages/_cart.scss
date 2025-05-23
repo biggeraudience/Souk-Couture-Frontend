@@ -1,0 +1,290 @@
+@import url('https://fonts.googleapis.com/css2?family=Overpass+Mono:wght@300..700&display=swap');
+
+:root {
+  /* Global typography variables (if these should be globally available you can keep them outside
+       Otherwise, move them inside .cart-page if you want to use them only on the cart page) */
+  --m3-ui-family: 'Overpass Mono', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-size-default: 16px;
+  --font-weight-default: 400;
+  --line-height-default: 24px;
+  --letter-spacing-default: normal;
+}
+
+.cart-page {
+  // Removed: background-image, background-size, background-position, min-height
+  // Removed: position: relative; (unless needed for other child positioning)
+  width: 100%; // Keep width
+  display: flex;
+  flex-direction: column;
+  // Ensure the page takes at least the full viewport height without a background image
+  min-height: calc(100vh - var(--navbar-height, 0px) - var(--footer-height, 0px)); // Adjust as needed
+  font-family: 'Overpass Mono';
+
+  .bespoke-icon {
+    display: inline-block;
+    margin-right: 5px;
+    vertical-align: middle;
+  }
+
+  .cart-container {
+    margin-top: 300px;
+    margin-bottom: 200px;
+    padding: 10px;
+    border: 2px solid black;
+    background: #fe5829;
+    // Removed: position: relative; z-index: 1; (unless needed for other child positioning)
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .tabs {
+    display: flex;
+    gap: 5px;
+    margin-bottom: 10px;
+    justify-content: flex-start;
+    width: 100%;
+    font-family: 'Overpass Mono';
+
+    .tab {
+      background: black;
+      color: white;
+      padding: 5px 10px;
+      font-size: 15px;
+      border: none;
+      cursor: pointer;
+      font-family: 'Overpass Mono';
+
+      &.active {
+        border-bottom: 2px solid white;
+        background-color: #fe5829;
+        color: white;
+      }
+
+      &:hover {
+        background-color: #e24f22;
+        color: white;
+      }
+    }
+  }
+
+  /* Bag and Favorites Sections */
+  .bag-section,
+  .favorites-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 1200px;
+    position: relative;
+
+    .products-grid {
+      display: grid;
+      gap: 10px;
+      grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+      width: 100%;
+      margin-bottom: 20px;
+      justify-items: center;
+
+      .product-card {
+        border: 2px solid black;
+        padding: 10px;
+        text-align: center;
+        background: white;
+
+        img {
+          max-width: 100%;
+          height: 150px;
+          object-fit: contain;
+          border: 1px solid #000;
+        }
+
+        .product-name,
+        .favorite-details {
+          margin-top: 5px;
+          position: relative;
+          border: 1px solid black;
+          padding: 5px;
+          font-size: 14px;
+          font-weight: bold;
+          color: black !important;
+
+          .remove-btn {
+            position: absolute;
+            top: 3px;
+            right: 5px;
+            border: 1px solid black;
+            background: white;
+            color: black;
+            cursor: pointer;
+            font-size: 12px;
+            padding: 3px 5px;
+
+            &:hover {
+              background: red;
+              color: black;
+            }
+          }
+        }
+
+        .product-details {
+          margin-top: 5px;
+          display: flex;
+          gap: 10px;
+          padding: 5px;
+          border: 1px solid black;
+          background: #fff;
+          justify-content: space-between;
+          font-size: 12.5px;
+          line-height: 1.2;
+          font-weight: bold;
+          color: black;
+
+          input {
+            width: 20px;
+            text-align: center;
+            border: 1px solid black;
+            height: 16px;
+            font-size: 12px;
+          }
+        }
+
+        .buy-btn {
+          background: #fe5829;
+          color: black;
+          border: 1px solid black;
+          cursor: pointer;
+        }
+      }
+    }
+
+    .pay-section {
+      width: 100%;
+      max-width: 1200px;
+      padding: 8px;
+      border: 2px solid black;
+      background: white;
+      margin-top: auto;
+      flex-shrink: 0;
+      display: flex;
+      flex-direction: column;
+
+      .terms {
+        font-size: 12px;
+        margin-bottom: 10px;
+      }
+
+      .total {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-weight: bold;
+        font-size: 16px;
+
+        .pay-btn {
+          background: green;
+          color: white;
+          padding: 5px 10px;
+          border: 2px solid black;
+          cursor: pointer;
+          height: 30px;
+          width: 100px;
+          font-family: 'Overpass Mono';
+        }
+
+        .pay-btn:hover {
+          background: rgb(2, 71, 2);
+        }
+      }
+    }
+  }
+
+  .favorites-grid {
+    grid-template-columns: repeat(4, 1fr);
+
+    .favorite-card {
+      img {
+        max-width: 100%;
+      }
+    }
+  }
+
+  .empty-bag {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    position: relative;
+    top: -37px;
+    right: -608px; // This might be problematic for responsiveness
+    background-color: #000;
+    height: 20px;
+    padding: 4px;
+
+    &:hover {
+      border: 1px solid #fffff0;
+      cursor: pointer;
+    }
+
+    p {
+      font-size: 14px;
+      font-weight: bold;
+      color: #fff;
+    }
+  }
+
+  .clear-all-btn {
+    margin-left: 10px;
+    color: red;
+    border: none;
+    font-size: 13px;
+    padding: 3px 5px;
+    background-color: #000;
+    cursor: pointer;
+    align-items: center;
+
+    &:hover {
+      color: darkred;
+    }
+  }
+
+  .quantity-selector {
+    display: flex;
+  }
+
+  .increment-btn,
+  .decrement-btn {
+    background-color: #fffff0;
+    position: relative;
+    top: 0px;
+    cursor: pointer;
+    height: 20px;
+    width: 18px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid black;
+    color: black;
+  }
+
+  @media (min-width: 786px) {
+    .products-grid {
+      display: grid;
+      gap: 10px;
+      grid-template-columns: repeat(4, minmax(100px, 1fr));
+      width: 100%;
+      margin-bottom: 20px;
+      justify-items: center;
+    }
+
+    .product-card {
+      border: 2px solid black;
+      padding: 10px;
+      text-align: center;
+      background: white;
+      width: 100%;
+      max-width: 300px;
+    }
+  }
+}
