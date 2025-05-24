@@ -25,7 +25,7 @@ const Cart = ({ cartItems, favorites, updateQuantity, removeItem, addItemToCart,
       alert("Your cart is empty. Please add items before proceeding to checkout.");
       return; // Stop the function here
     }
-    // Navigate to the checkout page
+    
     navigate('/checkout');
   };
 
