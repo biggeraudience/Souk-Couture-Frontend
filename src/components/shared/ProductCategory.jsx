@@ -18,7 +18,7 @@ import imgWomensFabrics from '../../assets/images/27204dembroideredcotton_800x.w
 import imgMensClothing from '../../assets/images/d6234e07-e00e-438c-9aa2-9ad2c47001f4_removalai_preview.png'; // Example, replace with actual men's images
 import imgMensShoes from '../../assets/images/5ccf5bf3-0674-49a8-a4d9-f0d6a7738d25_removalai_preview.png'; // Example
 import imgMensAccessories from '../../assets/images/0df32245-9335-4572-857c-b5937711a3b8_removalai_preview.png'; // Example
-import imgMensWatches from '../../assets/images/3ebb9060-3f21-45c3-960f-c0286bccdc54_removalai_preview.png'; // Example
+import imgMensCaps from '../../assets/images/f592318e-7a49-4a8b-a59b-f783504ba962_removalai_preview.png'; // Example
 import imgMensBags from '../../assets/images/888d0df2-df37-4b37-a12d-eb05f11c78d8_removalai_preview.png'; // Example
 import imgMensFragrances from '../../assets/images/2bd44ebb-5b11-411d-896b-f1af087dd194_removalai_preview.png'; // Example
 
@@ -28,13 +28,13 @@ const categoriesData = {
     { name: 'Clothing', image: imgMensClothing },
     { name: 'Shoes', image: imgMensShoes },
     { name: 'Accessories', image: imgMensAccessories },
-    { name: 'Watches', image: imgMensWatches },
+    { name: 'Caps', image: imgMensCaps },
     { name: 'Bags', image: imgMensBags },
     { name: 'Fragrances', image: imgMensFragrances },
   ],
   women: [
     { name: 'Clothing', image: imgWomensClothing },
-    { name: 'Handbags', image: imgWomensBags },
+    { name: 'Bags', image: imgWomensBags },
     { name: 'Shoes', image: imgWomensShoes },
     { name: 'Perfumes', image: imgWomensPerfumes },
     { name: 'Accessories', image: imgWomensAccessories },

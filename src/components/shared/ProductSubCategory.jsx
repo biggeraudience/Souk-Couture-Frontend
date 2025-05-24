@@ -21,13 +21,13 @@ import imgWoodyPerfumesMen from '../../assets/images/2bd44ebb-5b11-411d-896b-f1a
 import imgCufflinksMen from '../../assets/images/aa620d38-3ec4-4660-a98e-93a0b41c3387_removalai_preview.png';
 import imgWatchesMen from '../../assets/images/3ebb9060-3f21-45c3-960f-c0286bccdc54_removalai_preview.png';
 
-import imgTraditionalCapsMen from '../../assets/images/3ebb9060-3f21-45c3-960f-c0286bccdc54_removalai_preview.png';
-import imgModernCapsMen from '../../assets/images/3ebb9060-3f21-45c3-960f-c0286bccdc54_removalai_preview.png';
+import imgTraditionalCapsMen from '../../assets/images/f592318e-7a49-4a8b-a59b-f783504ba962_removalai_preview.png';
+import imgModernCapsMen from '../../assets/images/images__6_-removebg-preview.png';
 import imgPlainFabricsMen from '../../assets/images/27399cpurewoolzegna_800x.jpg';
 import imgPatternFabricsMen from '../../assets/images/20934d_800x.jpg';
 
 import imgMensFormalWatches from '../../assets/images/54a971d8-9ba5-4e83-9fdc-e3420271f255_removalai_preview.png';
-import imgMensSportWatches from '../../assets/images/3ebb9060-3f21-45c3-960f-c0286bccdc54_removalai_preview.png';
+import imgMensSportWatches from '../../assets/images/images__6_-removebg-preview.png';
 
 import imgMensFreshFragrances from '../../assets/images/71d89d79-cf4c-402a-891a-296c5d49078a_removalai_preview.png';
 import imgMensIntenseFragrances from '../../assets/images/2bd44ebb-5b11-411d-896b-f1af087dd194_removalai_preview.png';
@@ -71,13 +71,10 @@ const subcategoriesData = {
       { id: 'men-fragrances-intense', name: 'Intense & Evening', image: imgMensIntenseFragrances, description: 'Deep, complex fragrances perfect for special occasions.' },
     ],
     Accessories: [
-      { id: 'men-accessories-cufflinks', name: 'Cufflinks', image: imgCufflinksMen, description: 'Distinctive designs in sterling silver and enamel.' },
-      { id: 'men-accessories-watches-sub', name: 'Accessory Watches', image: imgWatchesMen, description: 'Smaller watches within accessories.' },
+      { id: 'men-accessories-cufflinks', name: 'Casual Caps', image: imgCufflinksMen, description: 'Distinctive designs in sterling silver and enamel.' },
+      { id: 'men-accessories-watches-sub', name: 'Formal Caps', image: imgWatchesMen, description: 'Smaller watches within accessories.' },
     ],
-    Watches: [
-      { id: 'men-watches-formal', name: 'Formal Watches', image: imgMensFormalWatches, description: 'Classic and elegant timepieces for sophisticated occasions.' },
-      { id: 'men-watches-sport', name: 'Sport Watches', image: imgMensSportWatches, description: 'Durable and feature-rich watches for the active man.' },
-    ],
+  
     Caps: [
       { id: 'men-caps-traditional', name: 'Traditional Caps', image: imgTraditionalCapsMen, description: 'Classic embroidered designs.' },
       { id: 'men-caps-modern', name: 'Modern Caps', image: imgModernCapsMen, description: 'Sleek silhouettes in contemporary fabrics.' },
@@ -92,7 +89,7 @@ const subcategoriesData = {
       { id: 'women-clothing-formal', name: 'Formal Abayas', image: imgFormalWomens, description: 'Flowing abayas in luxe crepe and silk blends, featuring modern cuts and delicate embellishments.' },
       { id: 'women-clothing-casual', name: 'Casual Abayas', image: imgCasualWomens, description: 'Comfortable yet elegant abayas in vibrant prints and rich solids, perfect for leisure and special occasions.' },
     ],
-    Handbags: [
+    Bags: [
       { id: 'women-handbags-tote', name: 'Tote Bags', image: imgHandbagToteWomens, description: 'Spacious and versatile tote bags.' },
       { id: 'women-handbags-clutches', name: 'Clutches', image: imgHandbagClutchWomens, description: 'Elegant clutches for evening wear.' },
     ],
