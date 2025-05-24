@@ -7,6 +7,58 @@
   background-color: $color-white;
   border-radius: $border-radius-medium;
   @include shadow(light);
+ 
+
+  &__nav-icons {
+    display: flex;
+    justify-content: space-around; // Distribute items evenly
+    align-items: center;
+    margin-bottom: $spacing-xl; // Space below the navigation icons
+    padding: $spacing-s 0;
+    border-bottom: 0.1rem solid $color-gray-light; // Subtle separator
+    flex-wrap: wrap; // Allow items to wrap on smaller screens
+    gap: $spacing-m; // Gap between wrapped items
+
+    .nav-icon-item {
+      @include flex-col-center; // Align icon and text vertically
+      gap: $spacing-xxs; // Small gap between icon and text
+      cursor: pointer;
+      padding: $spacing-s;
+      border-radius: $border-radius-small;
+      transition: background-color $transition-speed-fast ease-in-out, transform $transition-speed-fast ease-in-out;
+      text-align: center;
+      min-width: 8rem; // Ensure a minimum width for each item
+
+      .icon {
+        font-size: $font-size-h3; // Adjust icon size
+        color: $color-primary; // Use a brand color for icons
+        display: block; // Ensures icon takes its own line
+      }
+
+      .text {
+        font-size: $font-size-small; // Adjust text size
+        color: $color-text-body;
+        white-space: nowrap; // Prevent text from wrapping
+      }
+
+      &:hover {
+        background-color: $color-gray-lightest; // Subtle hover background
+        transform: translateY(-0.2rem); // Slight lift effect
+        .icon {
+          color: $color-primary-dark; // Darken icon on hover
+        }
+      }
+    }
+
+    @include respond(sm) { // Adjust for small screens
+      justify-content: flex-start; // Align to start on small screens
+      padding: $spacing-s;
+      .nav-icon-item {
+        padding: $spacing-xs;
+        min-width: unset; // Remove min-width on small screens
+      }
+    }
+  }
 
   &__title {
     font-size: $font-size-h2;

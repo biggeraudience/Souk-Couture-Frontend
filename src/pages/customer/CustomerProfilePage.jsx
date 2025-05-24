@@ -1,7 +1,11 @@
+// src/pages/customer/CustomerProfilePage.jsx
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate
 import '../../styles/pages/customer/_customer-profile.scss';
 
 const CustomerProfilePage = () => {
+  const navigate = useNavigate(); // Initialize useNavigate hook
+
   // Mock user data (replace with actual data fetched from backend)
   const [userData, setUserData] = useState({
     firstName: 'Jane',
@@ -70,8 +74,37 @@ const CustomerProfilePage = () => {
     }
   };
 
+  // New function to handle icon clicks for navigation
+  const handleNavigationClick = (path) => {
+    navigate(`/customer/${path}`);
+  };
+
   return (
     <div className="customer-profile-page">
+      {/* New: Navigation Icons at the top */}
+      <div className="customer-profile-page__nav-icons">
+        <div className="nav-icon-item" onClick={() => handleNavigationClick('profile')}>
+          <span className="icon">👤</span> {/* Profile Icon */}
+          <span className="text">Profile</span>
+        </div>
+        <div className="nav-icon-item" onClick={() => handleNavigationClick('orders')}>
+          <span className="icon">📦</span> {/* Orders Icon */}
+          <span className="text">Orders</span>
+        </div>
+        <div className="nav-icon-item" onClick={() => handleNavigationClick('favorites')}>
+          <span className="icon">❤️</span> {/* Favorites Icon */}
+          <span className="text">Favorites</span>
+        </div>
+        <div className="nav-icon-item" onClick={() => handleNavigationClick('addresses')}>
+          <span className="icon">🏠</span> {/* Address Book Icon */}
+          <span className="text">Addresses</span>
+        </div>
+        <div className="nav-icon-item" onClick={() => handleNavigationClick('messages')}>
+          <span className="icon">✉️</span> {/* Messages Icon */}
+          <span className="text">Messages</span>
+        </div>
+      </div>
+
       <h1 className="customer-profile-page__title">My Profile</h1>
 
       {message && <div className="customer-profile-page__message customer-profile-page__message--success">{message}</div>}
