@@ -1,5 +1,3 @@
-// src/styles/main.scss
-
 // Google Fonts Imports (MUST BE THE ABSOLUTE FIRST LINE)
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&family=Overpass+Mono:wght@300;400;500;700&family=Oxanium:wght@400;700&display=swap');
 
@@ -12,18 +10,26 @@
 @import 'base/typography';
 
 // 3. Components (e.g., Button, Modal, Loader, Product Card, Forms)
-@import 'components/_buttons'; // Ensure this is imported BEFORE _product-subcategory
+@import 'components/_buttons';
 @import 'components/_modal';
 @import 'components/loader';
 @import 'components/form';
 @import 'components/product-card';
-@import 'components/_product-subcategory'; // Ensure this is imported AFTER _buttons
+@import 'components/_product-subcategory';
+@import 'components/_sidebar'; // Ensure your original sidebar is imported
+@import 'components/_admin-sidebar'; // NEW: Admin sidebar styles
 
-// 4. Layouts (e.g., Header, Footer, Navbar)
+// 4. Layouts (e.g., Header, Footer, Navbar, Filter Bar)
 // @import 'layouts/header';
 // @import 'layouts/footer';
 @import 'layouts/navbar';
+@import 'layouts/_filter-bar';
+@import 'layouts/_admin-layout'; // NEW: Admin layout styles
 
 // 5. Pages (Specific page styles)
 @import 'pages/landing-page';
-@import 'pages/_product-detail-page'; 
+@import 'pages/_product-detail-page';
+@import 'pages/_products-page';
+@import 'pages/_auth'; // NEW: Auth pages styles
+@import 'pages/admin/_admin-dashboard'; // NEW: Admin Dashboard styles
+@import 'pages/admin/_admin-management'; // NEW: Admin Management pages styles

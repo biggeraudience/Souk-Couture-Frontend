@@ -5,7 +5,7 @@
 
 .checkout-page {
   padding: $spacing-l $spacing-m;
-  max-width: $bp-lg; // Max width for checkout forms
+  max-width: $bp-lg; // This max-width is for the overall page content
   margin: 0 auto;
   min-height: calc(100vh - $navbar-height-default - $footer-height-default);
   display: flex;
@@ -177,12 +177,20 @@
 
 .checkout-form {
   display: grid;
+  grid-template-columns: 1fr; /* Default to 1 column for small screens */
   gap: $spacing-m;
+  max-width: 60rem; /* New: Lock the maximum width of the form */
+  margin: 0 auto; /* New: Center the form within its container */
+
+  // For medium screens and up, use 2 columns
+  @include respond(md) {
+    grid-template-columns: repeat(2, 1fr);
+  }
 
   .form-group {
     display: flex;
     flex-direction: column;
-    margin-bottom: $spacing-xs; // Smaller margin for individual groups
+    margin-bottom: 0; // Let grid gap handle spacing
 
     label {
       font-size: $font-size-small;
@@ -218,12 +226,13 @@
   }
 
   .form-row {
+    grid-column: 1 / -1; /* Ensures form-row spans all columns in checkout-form */
     display: grid;
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr; /* Default to 1 column on extra small screens */
     gap: $spacing-m;
 
     @include respond(sm) {
-      grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr)); // Adjusted minmax for flexibility
     }
   }
 }
@@ -233,6 +242,11 @@
   justify-content: flex-end;
   gap: $spacing-s;
   margin-top: $spacing-l;
+  // Make checkout-actions also respect the max-width of the form
+  max-width: 60rem; /* Match the form's max-width */
+  margin-left: auto; /* Center with the form */
+  margin-right: auto; /* Center with the form */
+
 
   .btn {
     padding: $spacing-s $spacing-m;
@@ -269,6 +283,10 @@
   padding: $spacing-m;
   border-radius: $border-radius-medium;
   border: 0.1rem solid $color-gray-light;
+  max-width: 60rem; /* Match the form's max-width for consistency */
+  margin-left: auto;
+  margin-right: auto;
+
 
   h3 {
     font-size: $font-size-h5;
@@ -357,4 +375,54 @@
     padding-top: $spacing-s;
     border-top: 0.2rem solid $color-gray-medium;
   }
+}
+
+// These are general form styles, make sure they are applied
+.form-group {
+  margin-bottom: $spacing-m; // This margin is usually outside the grid gap control
+}
+
+.form-label {
+  display: block;
+  font-family: $font-family-heading; // Outfit
+  font-size: $font-size-small;
+  color: $color-text-dark;
+  margin-bottom: $spacing-xxs;
+}
+
+.form-input,
+.form-textarea,
+.form-select {
+  width: 100%; /* Important: ensure inputs fill their allocated grid cell */
+  padding: $spacing-xs $spacing-s;
+  font-family: $font-family-body; // Overpass Mono
+  font-size: $font-size-base;
+  color: $color-text-dark;
+  background-color: $color-white;
+  border: 0.1rem solid $color-border-default; // Black border
+  border-radius: $border-radius-small;
+  transition: border-color $transition-speed-fast ease-in-out, box-shadow $transition-speed-fast ease-in-out;
+
+  &:focus {
+    border-color: $color-accent-hover-emphasis; // F03500 on focus
+    outline: none;
+    box-shadow: 0 0 0 $spacing-xxs rgba($color-accent-hover-emphasis, 0.25); // Subtle glow
+  }
+
+  &::placeholder {
+    color: $color-gray-medium;
+    font-family: $font-family-body;
+  }
+}
+
+.form-textarea {
+  min-height: 8rem;
+  resize: vertical;
+}
+
+.form-error-message {
+  font-family: $font-family-body; // Overpass Mono
+  font-size: $font-size-small;
+  color: $color-error;
+  margin-top: $spacing-xxs;
 }

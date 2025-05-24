@@ -1,0 +1,89 @@
+// src/styles/layouts/_filter-bar.scss
+@import '../config/variables';
+@import '../config/mixins';
+
+.filter-bar {
+  display: flex;
+  justify-content: center; // Center the filter sections
+  align-items: center;
+  gap: $spacing-l; // Space between filter sections
+  padding: $spacing-m $spacing-l;
+  background-color: $color-background-light; // Light background for the filter bar
+  border-bottom: 0.1rem solid $color-gray-light; // Subtle border at the bottom
+  width: 100%;
+  flex-wrap: wrap; // Allow items to wrap on smaller screens
+  margin-top: 8rem !important;
+  // Add margin-top to push it down from the Navbar
+  margin-top: $navbar-height-default; // Ensure it starts below the navbar
+  position: relative; // Needed for z-index if overlapping anything
+  z-index: $z-index-low; // Keep it below Navbar and Sidebar
+
+  @include respond(lg) {
+    margin-top: $navbar-height-lg;
+    gap: $spacing-m;
+    padding: $spacing-s $spacing-m;
+  }
+
+  @include respond(md) {
+    margin-top: $navbar-height-md;
+    gap: $spacing-m;
+    padding: $spacing-s $spacing-m;
+  }
+
+  @include respond(sm) {
+    margin-top: $navbar-height-sm;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: $spacing-s;
+    padding: $spacing-s $spacing-s;
+  }
+
+  &__section {
+    display: flex;
+    align-items: center;
+    gap: $spacing-xs; // Space between label and select
+  }
+
+  &__label {
+    font-size: $font-size-small;
+    color: $color-text-dark;
+    font-weight: $font-weight-medium;
+
+    @include respond(sm) {
+      font-size: $font-size-xs;
+    }
+  }
+
+  &__select {
+    padding: $spacing-xs $spacing-s;
+    border: 0.1rem solid $color-gray-medium;
+    border-radius: $border-radius-small;
+    background-color: $color-white;
+    font-size: $font-size-small;
+    color: $color-text-body;
+    cursor: pointer;
+    transition: border-color $transition-speed-fast $transition-ease,
+                box-shadow $transition-speed-fast $transition-ease;
+    -webkit-appearance: none; // Remove default dropdown arrow for custom styling
+    -moz-appearance: none;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='%23000000'%3E%3Cpath fill-rule='evenodd' d='M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z' clip-rule='evenodd' /%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right $spacing-xs center;
+    background-size: 1.2rem; // Size of the custom arrow
+
+    &:hover {
+      border-color: $color-primary;
+    }
+
+    &:focus {
+      outline: none;
+      border-color: $color-primary;
+      box-shadow: 0 0 0 0.2rem rgba($color-primary, 0.25);
+    }
+
+    @include respond(sm) {
+      width: 100%; // Full width on small screens
+    }
+  }
+}

@@ -1,0 +1,56 @@
+@import '../config/variables';
+@import '../config/mixins';
+
+.auth-page {
+  @include flex-center; // Center content vertically and horizontally
+  min-height: calc(100vh - #{$navbar-height-default} - #{$footer-height-default}); // Fill available space
+  background-color: $color-background-light; // Light background for auth pages
+  padding: $spacing-l; // Add some padding
+  flex-direction: column; // Stack elements vertically if needed
+  margin-top: 8rem; // Push content down a bit
+
+  .auth-card {
+    background-color: $color-white;
+    padding: $spacing-xl;
+    border-radius: $border-radius-medium;
+    box-shadow: $shadow-medium;
+    width: 100%;
+    max-width: 45rem; // Max width for the card
+    text-align: center;
+
+    h2 {
+      font-size: $font-size-h3;
+      color: $color-text-heading;
+      margin-bottom: $spacing-l;
+    }
+
+    .auth-card__description {
+      font-size: $font-size-base;
+      color: $color-text-body;
+      margin-bottom: $spacing-l;
+    }
+
+    .form-group {
+      text-align: left; // Align form labels/inputs to the left
+    }
+
+    .btn-full-width {
+      width: 100%;
+      margin-top: $spacing-m; // Space above the button
+    }
+
+    .auth-card__link-text {
+      margin-top: $spacing-m;
+      font-size: $font-size-small;
+      color: $color-text-body;
+
+      a {
+        color: $color-primary;
+        font-weight: $font-weight-medium;
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+}

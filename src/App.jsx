@@ -1,6 +1,5 @@
-// src/App.jsx
 import React, { useState, useEffect } from 'react';
-import { Routes, Route, useNavigate } from 'react-router-dom';
+import { Routes, Route, useNavigate } from 'react-router-dom'; // Import useNavigate
 import LandingPage from './pages/LandingPage';
 import GenderLandingPage from './pages/GenderLandingPage';
 import ProductDetailPage from './pages/ProductDetailPage';
@@ -9,7 +8,22 @@ import Footer from './components/layout/Footer';
 import ProductsPage from './pages/ProductsPage';
 import Sidebar from './components/layout/Sidebar';
 import Cart from './pages/Cart';
-import CheckoutPage from './pages/CheckoutPage'; // Import the new CheckoutPage
+import CheckoutPage from './pages/CheckoutPage';
+import FilterBar from './components/layout/FilterBar';
+
+// NEW ADMIN IMPORTS
+import LoginPage from './pages/auth/LoginPage';
+import RegisterPage from './pages/auth/RegisterPage';
+import ForgotPasswordPage from './pages/auth/ForgotPasswordPage';
+import AdminLayout from './components/admin/AdminLayout'; // The new admin layout wrapper
+import AdminDashboardPage from './pages/admin/AdminDashboardPage';
+import ProductManagementPage from './pages/admin/ProductManagementPage';
+import UserManagementPage from './pages/admin/UserManagementPage';
+import OrderManagementPage from './pages/admin/OrderManagementPage';
+import AdsPromoManagementPage from './pages/admin/AdsPromoManagementPage';
+import MessageManagementPage from './pages/admin/MessageManagementPage';
+import DataVisualizationPage from './pages/admin/DataVisualizationPage';
+
 
 function App() {
   const [backendMessage, setBackendMessage] = useState('');
@@ -17,7 +31,14 @@ function App() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [cartItems, setCartItems] = useState([]);
   const [favorites, setFavorites] = useState([]);
-  const navigate = useNavigate();
+  const navigate = useNavigate(); // Initialize useNavigate
+
+  // State for global filters
+  const [globalFilters, setGlobalFilters] = useState({
+    category: 'All',
+    priceRange: 'All',
+    sort: 'None',
+  });
 
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
@@ -123,6 +144,11 @@ function App() {
     navigate('/cart');
   };
 
+  // Function to update filters from FilterBar
+  const handleFilterChange = (newFilters) => {
+    setGlobalFilters(newFilters);
+  };
+
   return (
     <>
       <Navbar
@@ -132,17 +158,25 @@ function App() {
         onBagIconClick={handleBagIconClick}
       />
 
+      {/* The main sidebar is always rendered but its open state is controlled by prop */}
       <Sidebar
         isOpen={isSidebarOpen}
         toggleSidebar={toggleSidebar}
       />
 
+      {/* Conditionally render FilterBar based on the route (unchanged) */}
+      <Routes>
+        <Route path="/products" element={<FilterBar onFilterChange={handleFilterChange} />} />
+        <Route path="/products/:productId" element={null} />
+      </Routes>
+
       <main>
         <Routes>
+          {/* Public/Customer Routes */}
           <Route path="/" element={<LandingPage />} />
           <Route path="/menslandingpage" element={<GenderLandingPage gender="men" />} />
           <Route path="/womenslandingpage" element={<GenderLandingPage gender="women" />} />
-          <Route path="/products" element={<ProductsPage />} />
+          <Route path="/products" element={<ProductsPage filters={globalFilters} />} />
           <Route
             path="/cart"
             element={
@@ -158,7 +192,6 @@ function App() {
               />
             }
           />
-          {/* Add the new CheckoutPage route */}
           <Route
             path="/checkout"
             element={
@@ -180,8 +213,27 @@ function App() {
               />
             }
           />
-          <Route path="/register" element={<div>Register Page Placeholder</div>} />
-          <Route path="/order-confirmation" element={<div>Order Confirmation Page!</div>} /> {/* Simple confirmation page */}
+
+          {/* Authentication Routes */}
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/register" element={<RegisterPage />} />
+          <Route path="/forgot-password" element={<ForgotPasswordPage />} />
+
+          {/* Admin Routes - Wrapped by AdminLayout */}
+          {/* In a real app, this would be protected by an AdminRoute component */}
+          <Route path="/admin" element={<AdminLayout />}>
+            <Route index element={<AdminDashboardPage />} /> {/* Default admin route */}
+            <Route path="dashboard" element={<AdminDashboardPage />} />
+            <Route path="products" element={<ProductManagementPage />} />
+            <Route path="users" element={<UserManagementPage />} />
+            <Route path="orders" element={<OrderManagementPage />} />
+            <Route path="ads-promo" element={<AdsPromoManagementPage />} />
+            <Route path="messages" element={<MessageManagementPage />} />
+            <Route path="data-viz" element={<DataVisualizationPage />} />
+          </Route>
+
+          {/* Fallback Routes */}
+          <Route path="/order-confirmation" element={<div>Order Confirmation Page!</div>} />
           <Route path="*" element={<div>404: Not Found</div>} />
         </Routes>
       </main>

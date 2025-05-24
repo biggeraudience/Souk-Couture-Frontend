@@ -1,0 +1,102 @@
+@import '../config/variables';
+@import '../config/mixins';
+
+// New Variable for Admin Sidebar Widths
+$admin-sidebar-width-desktop: 25rem; // 250px
+$admin-sidebar-width-tablet: 20rem;  // 200px
+$admin-sidebar-width-mobile: 22rem;  // For overlay on mobile
+
+.admin-sidebar {
+  width: $admin-sidebar-width-desktop;
+  background-color: $color-button-default-bg; // Dark background
+  color: $color-white;
+  padding: $spacing-l $spacing-s;
+  box-shadow: $shadow-medium;
+  position: fixed; // Fixed position so it's always visible
+  top: 0;
+  left: 0;
+  bottom: 0;
+  z-index: $z-index-sidebar; // Ensure it's above other elements
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; // Push header/footer to top/bottom
+  overflow-y: auto; // Allow sidebar content to scroll if too long
+  @include custom-scrollbar;
+
+  @include respond(md) {
+    width: $admin-sidebar-width-tablet;
+    padding: $spacing-m $spacing-xs;
+  }
+
+  @include respond(sm) {
+    width: $admin-sidebar-width-mobile;
+    transform: translateX(-100%); // Hide by default on small screens
+    transition: transform $transition-speed-normal $transition-ease;
+    &--open { // Class to toggle open on small screens
+      transform: translateX(0);
+    }
+  }
+
+  .admin-sidebar__header {
+    text-align: center;
+    margin-bottom: $spacing-l;
+    padding-bottom: $spacing-s;
+    border-bottom: 0.1rem solid rgba($color-white, 0.1); // Subtle separator
+
+    .admin-sidebar__logo {
+      font-family: $font-family-logo;
+      font-size: $font-size-h4;
+      color: $color-hero-background; // Orange accent for logo
+      line-height: 1.1;
+      margin-bottom: 0;
+    }
+  }
+
+  .admin-sidebar__nav {
+    flex-grow: 1; // Allows nav list to take up available space
+    margin-bottom: $spacing-l;
+
+    .admin-sidebar__list {
+      li {
+        margin-bottom: $spacing-xs;
+      }
+    }
+
+    .admin-sidebar__link {
+      @include flex-center; // Centers icon and text
+      justify-content: flex-start; // Align to start
+      gap: $spacing-s; // Space between icon and text
+      color: $color-white;
+      padding: $spacing-s $spacing-m;
+      border-radius: $border-radius-small;
+      transition: background-color $transition-speed-fast ease;
+      font-size: $font-size-base;
+      font-family: $font-family-heading; // Consistent with headings
+
+      &:hover {
+        background-color: lighten($color-button-default-bg, 10%); // Lighter black on hover
+      }
+
+      &.active, // For NavLink active styling
+      &--active { // For manual active styling
+        background-color: $color-accent-hover-emphasis; // Bright accent when active
+        color: $color-white;
+        .admin-sidebar__icon {
+          color: $color-white; // Ensure icon color also changes
+        }
+      }
+
+      .admin-sidebar__icon {
+        color: $color-gray-light; // Default icon color
+        font-size: $font-size-h4; // Adjust icon size
+        flex-shrink: 0; // Prevent icon from shrinking
+      }
+    }
+  }
+
+  .admin-sidebar__footer {
+    text-align: center;
+    font-size: $font-size-small;
+    color: $color-gray-medium;
+  }
+}

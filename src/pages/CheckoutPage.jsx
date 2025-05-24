@@ -1,3 +1,4 @@
+// src/pages/CheckoutPage.jsx
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../styles/pages/_checkout-page.scss';
@@ -137,7 +138,8 @@ const CheckoutPage = ({ cartItems, total, clearAllItems }) => {
       {currentStep === 1 && (
         <div className="checkout-step">
           <h2 className="checkout-step__title">1. Customer Information & Delivery</h2>
-          <form className="checkout-form">
+          {/* ADD THIS CLASS: checkout-form--customer-info */}
+          <form className="checkout-form checkout-form--customer-info">
             <div className="form-group">
               <label htmlFor="fullName">Full Name</label>
               <input
@@ -252,7 +254,7 @@ const CheckoutPage = ({ cartItems, total, clearAllItems }) => {
       {currentStep === 2 && (
         <div className="checkout-step">
           <h2 className="checkout-step__title">2. Payment Information</h2>
-          <form className="checkout-form">
+          <form className="checkout-form"> {/* This form remains with the default checkout-form styles */}
             <div className="form-group">
               <label htmlFor="cardNumber">Card Number</label>
               <input

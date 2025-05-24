@@ -1,0 +1,50 @@
+@import '../config/variables';
+@import '../config/mixins';
+
+.admin-layout {
+  display: flex;
+  min-height: 100vh; // Ensure it takes full viewport height
+
+  .admin-layout__content {
+    flex-grow: 1; // Allows content to take remaining space
+    display: flex;
+    flex-direction: column;
+    padding-left: $admin-sidebar-width-desktop; // Offset for fixed sidebar
+    background-color: $color-background-light; // Light background for admin area
+
+    @include respond(md) {
+      padding-left: $admin-sidebar-width-tablet;
+    }
+    @include respond(sm) {
+      padding-left: 0; // Sidebar might overlay on small screens
+    }
+  }
+
+  .admin-layout__header {
+    background-color: $color-white;
+    padding: $spacing-s $spacing-l;
+    border-bottom: 0.1rem solid $color-gray-light;
+    box-shadow: $shadow-light;
+    z-index: $z-index-medium; // Above other content
+    display: flex;
+    align-items: center;
+    justify-content: space-between; // Space out title and potential user info/logout
+
+    h2 {
+      margin-bottom: 0; // Remove default margin-bottom
+      color: $color-text-heading;
+      font-size: $font-size-h4;
+    }
+  }
+
+  .admin-layout__main {
+    padding: $spacing-l;
+    flex-grow: 1; // Allows main content to fill available space
+    overflow-y: auto; // Enable scrolling for main content if it overflows
+    @include custom-scrollbar; // Apply custom scrollbar
+
+    @include respond(sm) {
+      padding: $spacing-m;
+    }
+  }
+}

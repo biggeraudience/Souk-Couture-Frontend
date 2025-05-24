@@ -1,0 +1,71 @@
+@import '../../config/variables';
+@import '../../config/mixins';
+
+.admin-management-page {
+  h1 {
+    font-size: $font-size-h2;
+    margin-bottom: $spacing-l;
+    color: $color-text-heading;
+  }
+
+  p {
+    font-size: $font-size-base;
+    color: $color-text-body;
+    margin-bottom: $spacing-l;
+  }
+
+  .btn {
+    margin-bottom: $spacing-m; // Space below buttons for actions
+  }
+
+  .management-table-container {
+    background-color: $color-white;
+    padding: $spacing-l;
+    border-radius: $border-radius-medium;
+    box-shadow: $shadow-light;
+    overflow-x: auto; // Enable horizontal scroll for tables on small screens
+    border: 0.1rem solid $color-gray-light;
+    @include custom-scrollbar;
+
+    table {
+      width: 100%;
+      border-collapse: collapse; // Removes space between cells
+      font-size: $font-size-base;
+      min-width: 60rem; // Ensure table doesn't get too small on narrow screens
+
+      th, td {
+        padding: $spacing-s $spacing-m;
+        border-bottom: 0.1rem solid $color-gray-light;
+        text-align: left;
+        &:first-child {
+          padding-left: 0; // Remove padding for first column
+        }
+        &:last-child {
+          padding-right: 0; // Remove padding for last column
+        }
+      }
+
+      th {
+        background-color: $color-gray-lightest;
+        font-weight: $font-weight-medium;
+        color: $color-text-dark;
+        text-transform: uppercase;
+        font-size: $font-size-small;
+      }
+
+      td {
+        color: $color-text-body;
+        // Styles for buttons within table cells
+        .btn {
+          margin: 0 $spacing-xxs; // Small margin between action buttons
+          &:first-child { margin-left: 0; }
+          &:last-child { margin-right: 0; }
+        }
+      }
+
+      tbody tr:last-child td {
+        border-bottom: none; // No border for the last row
+      }
+    }
+  }
+}

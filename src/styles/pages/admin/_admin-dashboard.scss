@@ -1,0 +1,100 @@
+@import '../../config/variables';
+@import '../../config/mixins';
+
+.admin-dashboard-page {
+  h1 {
+    font-size: $font-size-h2;
+    margin-bottom: $spacing-l;
+    color: $color-text-heading;
+  }
+
+  p {
+    font-size: $font-size-base;
+    color: $color-text-body;
+    margin-bottom: $spacing-l;
+  }
+
+  .dashboard-summary-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr)); // Responsive grid
+    gap: $spacing-l; // Space between cards
+    margin-bottom: $spacing-xl;
+
+    .dashboard-card {
+      background-color: $color-white;
+      padding: $spacing-l;
+      border-radius: $border-radius-medium;
+      box-shadow: $shadow-light;
+      text-align: center;
+      border: 0.1rem solid $color-gray-light;
+
+      h3 {
+        font-size: $font-size-h5;
+        color: $color-text-dark;
+        margin-bottom: $spacing-s;
+      }
+
+      p {
+        font-size: $font-size-h3; // Larger for metrics
+        font-weight: $font-weight-bold;
+        color: $color-primary; // Highlight primary metric
+        margin-bottom: 0;
+      }
+    }
+  }
+
+  .dashboard-recent-activity {
+    background-color: $color-white;
+    padding: $spacing-l;
+    border-radius: $border-radius-medium;
+    box-shadow: $shadow-light;
+    border: 0.1rem solid $color-gray-light;
+
+    h3 {
+      font-size: $font-size-h4;
+      margin-bottom: $spacing-m;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+
+      li {
+        padding: $spacing-s 0;
+        border-bottom: 0.1rem solid $color-gray-lightest;
+        font-size: $font-size-base;
+        color: $color-text-body;
+
+        &:last-child {
+          border-bottom: none;
+        }
+      }
+    }
+  }
+
+  .data-viz-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
+    gap: $spacing-l;
+    margin-top: $spacing-xl;
+
+    .chart-placeholder {
+      background-color: $color-white;
+      padding: $spacing-l;
+      border-radius: $border-radius-medium;
+      box-shadow: $shadow-light;
+      border: 0.1rem solid $color-gray-light;
+      text-align: center;
+
+      h3 {
+        font-size: $font-size-h5;
+        margin-bottom: $spacing-s;
+      }
+      p {
+        font-size: $font-size-small;
+        color: $color-gray-medium;
+        margin-bottom: $spacing-m;
+      }
+    }
+  }
+}

@@ -1,17 +1,28 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom'; // Import Link
 import PropTypes from 'prop-types';
 import '../../styles/components/_sidebar.scss';
 
-const Sidebar = ({ isOpen, toggleSidebar }) => {
+const Sidebar = ({ isOpen, toggleSidebar }) => { // Remove navigateTo prop
   const [openDropdown, setOpenDropdown] = useState(null);
 
   const handleDropdownToggle = (id) => {
     setOpenDropdown(openDropdown === id ? null : id);
   };
 
+  // Helper function to determine the 'to' path for Link components
+  const getPath = (action) => {
+    if (action === 'account') {
+      return '/register';
+    } else if (action === 'home') {
+      return '/'; // Assuming '/home' should navigate to the root
+    }
+    return `/${action}`;
+  };
+
   const DropdownArrowIcon = () => (
     <svg className="sidebar__icon sidebar__icon--dropdown" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24" fill="currentColor">
-      <path d="m321-80-71-71 329-329-329-329 71-71 400 400L321-80Z"/>
+      <path d="m321-80-71-71 329-329-329-329 71-71 400 400L321-80Z" />
     </svg>
   );
 
@@ -47,45 +58,51 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
             <span>CLOSE</span>
           </button>
         </div>
+
         <div className="sidebar__wrapper">
           <ul className="sidebar__nav-section">
-            {['men', 'women', 'clothing', 'shoes', 'bags', 'accessories', 'fabrics', 'veils', 'caps'].map((category) => (
-              <li key={category} className={`sidebar__nav-item ${openDropdown === category ? 'sidebar__nav-item--open' : ''}`}>
-                {categoriesWithoutDropdown.includes(category) ? (
-                  <a href={`#${category}`} className="sidebar__nav-link">
-                    <span>{category.toUpperCase()}</span>
-                  </a>
-                ) : (
-                  <button
-                    className="sidebar__nav-link sidebar__nav-link--dropdown"
-                    onClick={() => handleDropdownToggle(category)}
-                    aria-expanded={openDropdown === category}
-                    aria-controls={`${category}-dropdown`}
-                  >
-                    <span>{category.toUpperCase()}</span>
-                    <DropdownArrowIcon />
-                  </button>
-                )}
-                {!categoriesWithoutDropdown.includes(category) && (
-                  <div id={`${category}-dropdown`} className="sidebar__dropdown-content">
-                    {openDropdown === category && <Subcategories />}
-                  </div>
-                )}
+            {['men', 'women', 'clothing', 'shoes', 'bags', 'accessories', 'fabrics', 'veils', 'caps'].map(cat => (
+              <li key={cat} className={`sidebar__nav-item ${openDropdown === cat ? 'sidebar__nav-item--open' : ''}`}>
+                {['men', 'women'].includes(cat)
+                  ? ( // Use Link for 'men' and 'women' categories if they also navigate
+                    <Link to={`/${cat}slandingpage`} className="sidebar__nav-link" onClick={toggleSidebar}>
+                      <span>{cat.toUpperCase()}</span>
+                    </Link>
+                  )
+                  : (
+                    <>
+                      <button
+                        className="sidebar__nav-link sidebar__nav-link--dropdown"
+                        onClick={() => handleDropdownToggle(cat)}
+                        aria-expanded={openDropdown === cat}
+                        aria-controls={`${cat}-dropdown`}
+                      >
+                        <span>{cat.toUpperCase()}</span>
+                        <DropdownArrowIcon />
+                      </button>
+                      {openDropdown === cat && <div className="sidebar__dropdown-content"><Subcategories /></div>}
+                    </>
+                  )
+                }
               </li>
             ))}
           </ul>
 
           <ul className="sidebar__action-section">
-            {['home', 'account', 'bag', 'favorite', 'feed', 'track'].map((action) => (
+            {['home', 'account', 'bag', 'favorite', 'feed', 'track'].map(action => (
               <li key={action}>
-                <a href={`#${action}`} className="sidebar__action-link">
+                <Link
+                  to={getPath(action)} // Use getPath to determine the 'to' prop
+                  className="sidebar__action-link"
+                  onClick={toggleSidebar} // Close sidebar when any action link is clicked
+                >
                   <span>{action.toUpperCase()}</span>
-                </a>
-                <div className="sidebar__action-icon-wrapper">
-                  <svg className="sidebar__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-                    {actionIcons[action]}
-                  </svg>
-                </div>
+                  <div className="sidebar__action-icon-wrapper">
+                    <svg className="sidebar__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                      {actionIcons[action]}
+                    </svg>
+                  </div>
+                </Link>
               </li>
             ))}
           </ul>
@@ -136,7 +153,6 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
           <div className="sidebar__brand">SOUK COUTURE</div>
         </div>
         <div className="sidebar__right-section">
-          {/* Added more content here to demonstrate scrolling */}
           <h3>Welcome to the Right Section!</h3>
           <p>This area can hold various dynamic content, advertisements, or quick links. It's now designed to be a distinct, scrollable container within your sidebar.</p>
           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
@@ -154,6 +170,7 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
 Sidebar.propTypes = {
   isOpen: PropTypes.bool.isRequired,
   toggleSidebar: PropTypes.func.isRequired,
+  // navigateTo prop is no longer needed if using Link for actions
 };
 
 export default Sidebar;
