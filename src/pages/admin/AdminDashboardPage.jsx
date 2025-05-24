@@ -1,9 +1,50 @@
+// src/pages/admin/AdminDashboardPage.jsx
 import React from 'react';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate
 import '../../styles/pages/admin/_admin-dashboard.scss'; // New SCSS for dashboard
 
 const AdminDashboardPage = () => {
+  const navigate = useNavigate(); // Initialize useNavigate hook
+
+  // New function to handle icon clicks for navigation
+  const handleNavigationClick = (path) => {
+    navigate(`/admin/${path}`);
+  };
+
   return (
     <div className="admin-dashboard-page">
+      {/* New: Navigation Icons at the top */}
+      <div className="admin-dashboard-page__nav-icons">
+        <div className="nav-icon-item" onClick={() => handleNavigationClick('dashboard')}>
+          <span className="icon">📊</span> {/* Dashboard Icon */}
+          <span className="text">Dashboard</span>
+        </div>
+        <div className="nav-icon-item" onClick={() => handleNavigationClick('products')}>
+          <span className="icon">📦</span> {/* Products Icon */}
+          <span className="text">Products</span>
+        </div>
+        <div className="nav-icon-item" onClick={() => handleNavigationClick('users')}>
+          <span className="icon">👥</span> {/* Users Icon */}
+          <span className="text">Users</span>
+        </div>
+        <div className="nav-icon-item" onClick={() => handleNavigationClick('orders')}>
+          <span className="icon">📋</span> {/* Orders Icon */}
+          <span className="text">Orders</span>
+        </div>
+        <div className="nav-icon-item" onClick={() => handleNavigationClick('messages')}>
+          <span className="icon">✉️</span> {/* Messages Icon */}
+          <span className="text">Messages</span>
+        </div>
+        <div className="nav-icon-item" onClick={() => handleNavigationClick('ads-promo')}>
+          <span className="icon">📣</span> {/* Ads/Promo Icon */}
+          <span className="text">Ads/Promo</span>
+        </div>
+        <div className="nav-icon-item" onClick={() => handleNavigationClick('data-viz')}>
+          <span className="icon">📈</span> {/* Data Viz Icon */}
+          <span className="text">Data Viz</span>
+        </div>
+      </div>
+
       <h1>Admin Dashboard</h1>
       <p>Welcome to your administration panel!</p>
 

@@ -7,6 +7,7 @@
   background-color: $color-white;
   border-radius: $border-radius-medium;
   @include shadow(light);
+  margin-top:12rem;
  
 
   &__nav-icons {
