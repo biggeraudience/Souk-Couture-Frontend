@@ -1,4 +1,7 @@
+// src/pages/auth/RegisterPage.jsx
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate
+import axiosInstance from '../../utils/axiosInstance'; // Import your Axios instance
 import '../../styles/pages/_auth.scss';
 
 const RegisterPage = () => {
@@ -6,16 +9,38 @@ const RegisterPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [error, setError] = useState(''); // State for handling errors
+  const navigate = useNavigate(); // Initialize useNavigate
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    setError(''); // Clear previous errors
+
     if (password !== confirmPassword) {
-      alert('Passwords do not match!');
+      setError('Passwords do not match!');
       return;
     }
-    console.log('Register attempt:', { name, email, password });
-    // TODO: Implement actual registration logic
-    alert('Registration functionality to be implemented!');
+
+    try {
+      const response = await axiosInstance.post('/api/auth/register', {
+        name,
+        email,
+        password,
+      });
+
+      // Assuming your backend sends back a success message or user data
+      console.log('Registration successful:', response.data);
+
+      // TODO: Similar to login, handle token/user data storage
+      
+      // Redirect to the admin dashboard after successful registration
+      navigate('/admin/dashboard');
+
+    } catch (err) {
+      console.error('Registration error:', err);
+      // Display a user-friendly error message
+      setError(err.response?.data?.message || 'Registration failed. Please try again.');
+    }
   };
 
   return (
@@ -23,6 +48,7 @@ const RegisterPage = () => {
       <div className="auth-card">
         <h2>Register</h2>
         <form onSubmit={handleSubmit}>
+          {error && <p className="error-message">{error}</p>} {/* Display error message */}
           <div className="form-group">
             <label htmlFor="name" className="form-label">Name</label>
             <input

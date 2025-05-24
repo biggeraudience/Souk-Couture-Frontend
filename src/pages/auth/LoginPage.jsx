@@ -1,15 +1,40 @@
+// src/pages/auth/LoginPage.jsx
 import React, { useState } from 'react';
-import '../../styles/pages/_auth.scss'; // New SCSS for auth pages
+import { useNavigate } from 'react-router-dom'; // Import useNavigate
+import axiosInstance from '../../utils/axiosInstance'; // Import your Axios instance
+import '../../styles/pages/_auth.scss';
 
 const LoginPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState(''); // State for handling errors
+  const navigate = useNavigate(); // Initialize useNavigate
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Login attempt:', { email, password });
-    // TODO: Implement actual login logic (e.g., dispatching Redux action, API call)
-    alert('Login functionality to be implemented!');
+    setError(''); // Clear previous errors
+
+    try {
+      const response = await axiosInstance.post('/api/auth/login', {
+        email,
+        password,
+      });
+
+      // Assuming your backend sends back a success message or user data on successful login
+      console.log('Login successful:', response.data);
+
+      // TODO: In a real application, you would store authentication tokens (e.g., JWT)
+      // and/or user roles in localStorage, sessionStorage, or a global state management system (Redux, Context API).
+      // For this example, we're simply redirecting.
+      
+      // Redirect to the admin dashboard
+      navigate('/admin/dashboard');
+
+    } catch (err) {
+      console.error('Login error:', err);
+      // Display a user-friendly error message
+      setError(err.response?.data?.message || 'Login failed. Please check your credentials.');
+    }
   };
 
   return (
@@ -17,6 +42,7 @@ const LoginPage = () => {
       <div className="auth-card">
         <h2>Login</h2>
         <form onSubmit={handleSubmit}>
+          {error && <p className="error-message">{error}</p>} {/* Display error message */}
           <div className="form-group">
             <label htmlFor="email" className="form-label">Email Address</label>
             <input
