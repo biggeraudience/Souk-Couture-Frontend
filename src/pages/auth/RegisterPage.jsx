@@ -1,7 +1,7 @@
 // src/pages/auth/RegisterPage.jsx
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom'; // Import useNavigate
-import axiosInstance from '../../utils/axiosInstance'; // Import your Axios instance
+import React, { useState, useEffect } from 'react'; // Import useEffect
+import { useNavigate, useLocation, Link } from 'react-router-dom'; // Import useLocation, Link
+import axiosInstance from '../../utils/axiosInstance';
 import '../../styles/pages/_auth.scss';
 
 const RegisterPage = () => {
@@ -9,12 +9,31 @@ const RegisterPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-  const [error, setError] = useState(''); // State for handling errors
-  const navigate = useNavigate(); // Initialize useNavigate
+  const [error, setError] = useState('');
+  const navigate = useNavigate();
+  const location = useLocation(); // Get current location object
+
+  // Determine if this is an admin registration flow
+  const isAdminFlow = location.pathname.includes('/admin-portal/register');
+
+  // Dynamically set page title and API endpoint
+  const pageTitle = isAdminFlow ? 'Admin Registration' : 'Register';
+  const apiEndpoint = isAdminFlow ? '/api/auth/admin-portal-register' : '/api/auth/register';
+  const successRedirectPath = isAdminFlow ? '/admin/dashboard' : '/login'; // Redirect admin to dashboard, customer to login
+
+  // Clear form on path change (e.g., if user navigates between /register and /admin-portal/register)
+  useEffect(() => {
+    setName('');
+    setEmail('');
+    setPassword('');
+    setConfirmPassword('');
+    setError('');
+  }, [location.pathname]);
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError(''); // Clear previous errors
+    setError('');
 
     if (password !== confirmPassword) {
       setError('Passwords do not match!');
@@ -22,33 +41,30 @@ const RegisterPage = () => {
     }
 
     try {
-      const response = await axiosInstance.post('/api/auth/register', {
+      const response = await axiosInstance.post(apiEndpoint, {
         name,
         email,
         password,
       });
 
-      // Assuming your backend sends back a success message or user data
-      console.log('Registration successful:', response.data);
+      console.log(`${pageTitle} successful:`, response.data);
 
-      // TODO: Similar to login, handle token/user data storage
-      
-      // Redirect to the admin dashboard after successful registration
-      navigate('/admin/dashboard');
+      // TODO: Handle token/user data storage (e.g., in Context/Redux)
+      // For now, redirect.
+      navigate(successRedirectPath);
 
     } catch (err) {
-      console.error('Registration error:', err);
-      // Display a user-friendly error message
-      setError(err.response?.data?.message || 'Registration failed. Please try again.');
+      console.error(`${pageTitle} error:`, err);
+      setError(err.response?.data?.message || `${pageTitle} failed. Please try again.`);
     }
   };
 
   return (
     <div className="auth-page">
       <div className="auth-card">
-        <h2>Register</h2>
+        <h2>{pageTitle}</h2>
         <form onSubmit={handleSubmit}>
-          {error && <p className="error-message">{error}</p>} {/* Display error message */}
+          {error && <p className="error-message">{error}</p>}
           <div className="form-group">
             <label htmlFor="name" className="form-label">Name</label>
             <input
@@ -97,11 +113,18 @@ const RegisterPage = () => {
               required
             />
           </div>
-          <button type="submit" className="btn btn-primary btn-full-width">Register</button>
+          <button type="submit" className="btn btn-primary btn-full-width">{pageTitle}</button>
         </form>
-        <p className="auth-card__link-text">
-          Already have an account? <a href="/login">Login</a>
-        </p>
+        {/* Conditional links based on flow */}
+        {isAdminFlow ? (
+          <p className="auth-card__link-text">
+            Already registered? <Link to="/admin-portal/login">Admin Login</Link>
+          </p>
+        ) : (
+          <p className="auth-card__link-text">
+            Already have an account? <Link to="/login">Login</Link>
+          </p>
+        )}
       </div>
     </div>
   );

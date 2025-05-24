@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Routes, Route, useNavigate } from 'react-router-dom'; // Import useNavigate
+import { Routes, Route, useNavigate } from 'react-router-dom';
 import LandingPage from './pages/LandingPage';
 import GenderLandingPage from './pages/GenderLandingPage';
 import ProductDetailPage from './pages/ProductDetailPage';
@@ -11,11 +11,13 @@ import Cart from './pages/Cart';
 import CheckoutPage from './pages/CheckoutPage';
 import FilterBar from './components/layout/FilterBar';
 
-// NEW ADMIN IMPORTS
+// Auth Imports
 import LoginPage from './pages/auth/LoginPage';
 import RegisterPage from './pages/auth/RegisterPage';
 import ForgotPasswordPage from './pages/auth/ForgotPasswordPage';
-import AdminLayout from './components/admin/AdminLayout'; // The new admin layout wrapper
+
+// Admin Imports
+import AdminLayout from './components/admin/AdminLayout';
 import AdminDashboardPage from './pages/admin/AdminDashboardPage';
 import ProductManagementPage from './pages/admin/ProductManagementPage';
 import UserManagementPage from './pages/admin/UserManagementPage';
@@ -31,7 +33,7 @@ function App() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [cartItems, setCartItems] = useState([]);
   const [favorites, setFavorites] = useState([]);
-  const navigate = useNavigate(); // Initialize useNavigate
+  const navigate = useNavigate();
 
   // State for global filters
   const [globalFilters, setGlobalFilters] = useState({
@@ -164,7 +166,7 @@ function App() {
         toggleSidebar={toggleSidebar}
       />
 
-      {/* Conditionally render FilterBar based on the route (unchanged) */}
+      {/* Conditionally render FilterBar based on the route */}
       <Routes>
         <Route path="/products" element={<FilterBar onFilterChange={handleFilterChange} />} />
         <Route path="/products/:productId" element={null} />
@@ -214,15 +216,22 @@ function App() {
             }
           />
 
-          {/* Authentication Routes */}
+          {/* Regular Authentication Routes for Customers */}
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/forgot-password" element={<ForgotPasswordPage />} />
 
+          {/* Secret Admin Portal Authentication Routes */}
+          {/* These routes point to the same auth components, but the components will detect the "/admin-portal/" path */}
+          <Route path="/admin-portal/login" element={<LoginPage />} />
+          <Route path="/admin-portal/register" element={<RegisterPage />} />
+          <Route path="/admin-portal/forgot-password" element={<ForgotPasswordPage />} />
+
+
           {/* Admin Routes - Wrapped by AdminLayout */}
-          {/* In a real app, this would be protected by an AdminRoute component */}
+          {/* In a real app, these would typically be protected by an AdminRoute component or similar */}
           <Route path="/admin" element={<AdminLayout />}>
-            <Route index element={<AdminDashboardPage />} /> {/* Default admin route */}
+            <Route index element={<AdminDashboardPage />} /> {/* Default admin route: /admin */}
             <Route path="dashboard" element={<AdminDashboardPage />} />
             <Route path="products" element={<ProductManagementPage />} />
             <Route path="users" element={<UserManagementPage />} />
