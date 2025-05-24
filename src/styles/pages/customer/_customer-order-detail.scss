@@ -1,0 +1,196 @@
+// src/styles/pages/customer/_customer-order-detail.scss
+@import '../../config/variables';
+@import '../../config/mixins';
+
+.customer-order-detail-page {
+  padding: $spacing-m;
+  background-color: $color-white;
+  border-radius: $border-radius-medium;
+  @include shadow(light);
+
+  &__header {
+    display: flex;
+    align-items: center;
+    gap: $spacing-s;
+    margin-bottom: $spacing-l;
+    flex-wrap: wrap; // Allow wrapping on small screens
+
+    .btn {
+      margin-right: $spacing-s;
+      font-size: $font-size-small;
+    }
+  }
+
+  &__title {
+    font-size: $font-size-h2;
+    color: $color-text-heading;
+    margin-bottom: 0;
+    flex-grow: 1; // Allows title to take available space
+  }
+
+  &__summary {
+    background-color: $color-background-light;
+    border: 0.1rem solid $color-gray-light;
+    border-radius: $border-radius-small;
+    padding: $spacing-m;
+    margin-bottom: $spacing-xl;
+
+    p {
+      font-size: $font-size-base;
+      color: $color-text-body;
+      margin-bottom: $spacing-xs;
+      &:last-child {
+        margin-bottom: 0;
+      }
+      strong {
+        color: $color-text-dark;
+      }
+    }
+
+    .status-badge {
+      font-size: $font-size-small;
+      font-weight: $font-weight-medium;
+      padding: $spacing-xxs $spacing-s;
+      border-radius: $border-radius-small;
+      color: $color-white;
+      display: inline-block;
+
+      &--delivered { background-color: $color-success; }
+      &--processing { background-color: $color-warning; color: $color-text-dark; }
+      &--cancelled { background-color: $color-error; }
+      &--shipped { background-color: $color-primary; }
+    }
+  }
+
+  &__sections {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(28rem, 1fr));
+    gap: $spacing-xl;
+    margin-bottom: $spacing-xl;
+
+    @include respond(sm) {
+      grid-template-columns: 1fr;
+      gap: $spacing-l;
+    }
+  }
+
+  &__section {
+    padding: $spacing-m;
+    border: 0.1rem solid $color-gray-light;
+    border-radius: $border-radius-medium;
+    background-color: $color-white;
+    @include shadow(light);
+
+    &--full-width {
+      grid-column: 1 / -1; // Span all columns
+    }
+  }
+
+  &__section-title {
+    font-size: $font-size-h3;
+    color: $color-text-heading;
+    margin-bottom: $spacing-m;
+    border-bottom: 0.1rem solid $color-gray-light;
+    padding-bottom: $spacing-xs;
+  }
+
+  address {
+    font-style: normal;
+    font-size: $font-size-base;
+    line-height: $line-height-base;
+    color: $color-text-body;
+  }
+
+  &__items-list {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-s;
+  }
+
+  &__item {
+    display: flex;
+    align-items: center;
+    gap: $spacing-s;
+    padding: $spacing-s;
+    border: 0.1rem solid $color-gray-lightest;
+    border-radius: $border-radius-small;
+    background-color: $color-gray-lightest;
+
+    &-image {
+      width: 8rem;
+      height: 8rem;
+      object-fit: cover;
+      border-radius: $border-radius-small;
+      border: 0.1rem solid $color-gray-light;
+    }
+
+    &-info {
+      flex-grow: 1;
+    }
+
+    &-name {
+      font-family: $font-family-heading;
+      font-size: $font-size-base;
+      color: $color-text-dark;
+      font-weight: $font-weight-medium;
+      margin-bottom: $spacing-xxs;
+    }
+
+    &-details {
+      font-size: $font-size-small;
+      color: $color-text-light;
+    }
+
+    &-price {
+      font-family: $font-family-heading;
+      font-size: $font-size-large;
+      font-weight: $font-weight-bold;
+      color: $color-accent-hover-emphasis; // Use accent color for price
+      margin-left: auto; // Push to the right
+    }
+  }
+
+  &__totals {
+    background-color: $color-background-light;
+    border: 0.1rem solid $color-gray-light;
+    border-radius: $border-radius-medium;
+    padding: $spacing-m;
+    margin-top: $spacing-xl;
+    max-width: 35rem; // Keep totals section compact
+    margin-left: auto; // Align to the right
+    text-align: right;
+
+    p {
+      display: flex;
+      justify-content: space-between;
+      font-size: $font-size-base;
+      color: $color-text-body;
+      margin-bottom: $spacing-xs;
+      span {
+        font-weight: $font-weight-medium;
+        color: $color-text-dark;
+      }
+    }
+
+    &__grand-total {
+      font-size: $font-size-large;
+      font-weight: $font-weight-bold;
+      color: $color-accent-hover-emphasis;
+      border-top: 0.1rem solid $color-border-default;
+      padding-top: $spacing-s;
+      margin-top: $spacing-s;
+    }
+  }
+
+  &__actions {
+    display: flex;
+    justify-content: center;
+    gap: $spacing-s;
+    margin-top: $spacing-xl;
+    flex-wrap: wrap; // Allow buttons to wrap
+    .btn {
+      min-width: 18rem;
+      font-size: $font-size-base;
+    }
+  }
+}

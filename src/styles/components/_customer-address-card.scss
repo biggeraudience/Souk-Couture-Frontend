@@ -1,0 +1,66 @@
+// src/styles/components/_customer-address-card.scss
+@import '../config/variables';
+@import '../config/mixins';
+
+.customer-address-card {
+  background-color: $color-white;
+  border: 0.1rem solid $color-border-default;
+  border-radius: $border-radius-medium;
+  padding: $spacing-m;
+  @include shadow(light);
+  display: flex;
+  flex-direction: column;
+  position: relative; // For default badge positioning
+
+  &--default {
+    border-color: $color-active-state; // Highlight default address
+    background-color: lighten($color-active-state, 20%);
+  }
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: $spacing-xs;
+  }
+
+  &__name {
+    font-family: $font-family-heading;
+    font-size: $font-size-h5;
+    color: $color-text-heading;
+    margin-bottom: 0;
+  }
+
+  &__default-badge {
+    background-color: $color-active-state;
+    color: $color-text-dark;
+    font-size: $font-size-xs;
+    font-weight: $font-weight-bold;
+    padding: $spacing-xxs $spacing-s;
+    border-radius: $border-radius-small;
+    border: 0.1rem solid $color-border-default;
+  }
+
+  &__details {
+    font-style: normal;
+    font-size: $font-size-base;
+    color: $color-text-body;
+    line-height: $line-height-base;
+    margin-bottom: $spacing-m;
+    flex-grow: 1; // Allows details to push actions to bottom
+  }
+
+  &__actions {
+    display: flex;
+    gap: $spacing-s;
+    flex-wrap: wrap; // Allow buttons to wrap
+    margin-top: $spacing-s;
+    padding-top: $spacing-s;
+    border-top: 0.1rem dashed $color-gray-light;
+
+    .btn {
+      font-size: $font-size-small;
+      padding: $spacing-xs $spacing-s;
+    }
+  }
+}

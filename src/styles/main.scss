@@ -16,20 +16,29 @@
 @import 'components/form';
 @import 'components/product-card';
 @import 'components/_product-subcategory';
-@import 'components/_sidebar'; // Ensure your original sidebar is imported
-@import 'components/_admin-sidebar'; // NEW: Admin sidebar styles
+@import 'components/_sidebar';
+@import 'components/_admin-sidebar';
+@import 'components/_customer-message-card';
+@import 'components/_customer-order-card';
+@import 'components/_customer-address-card';
 
 // 4. Layouts (e.g., Header, Footer, Navbar, Filter Bar)
-// @import 'layouts/header';
-// @import 'layouts/footer';
 @import 'layouts/navbar';
 @import 'layouts/_filter-bar';
-@import 'layouts/_admin-layout'; // NEW: Admin layout styles
+@import 'layouts/_admin-layout';
+@import './layouts/_customer-dashboard-layout'; // CORRECTED PATH HERE!
 
 // 5. Pages (Specific page styles)
 @import 'pages/landing-page';
 @import 'pages/_product-detail-page';
 @import 'pages/_products-page';
-@import 'pages/_auth'; // NEW: Auth pages styles
-@import 'pages/admin/_admin-dashboard'; // NEW: Admin Dashboard styles
-@import 'pages/admin/_admin-management'; // NEW: Admin Management pages styles
+@import 'pages/_auth';
+@import 'pages/admin/_admin-dashboard';
+@import 'pages/admin/_admin-management';
+@import 'pages/customer/_customer-dashboard';
+@import 'pages/customer/_customer-messages';
+@import 'pages/customer/_customer-profile';
+@import 'pages/customer/_customer-orders';
+@import 'pages/customer/_customer-order-detail';
+@import 'pages/customer/_customer-favorites';
+@import 'pages/customer/_customer-address-book';

@@ -1,0 +1,81 @@
+// src/styles/components/_customer-message-card.scss
+@import '../config/variables';
+@import '../config/mixins';
+
+.customer-message-card {
+  background-color: $color-white;
+  border: 0.1rem solid $color-gray-light;
+  border-radius: $border-radius-small;
+  padding: $spacing-s;
+  margin-bottom: $spacing-xs;
+  cursor: pointer;
+  transition: background-color $transition-speed-fast ease-in-out, border-color $transition-speed-fast ease-in-out;
+  display: flex;
+  flex-direction: column;
+
+  &:hover {
+    background-color: $color-gray-lightest;
+    border-color: $color-border-default;
+  }
+
+  &.unread {
+    background-color: lighten($color-active-state, 20%); // Slightly lighter green
+    border-color: $color-active-state;
+    font-weight: $font-weight-medium;
+
+    .customer-message-card__subject {
+      font-weight: $font-weight-bold;
+    }
+  }
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: $spacing-xxs;
+  }
+
+  &__subject {
+    font-family: $font-family-heading;
+    font-size: $font-size-base;
+    color: $color-text-heading;
+    flex-grow: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  &__date {
+    font-size: $font-size-small;
+    color: $color-text-light;
+    margin-left: $spacing-s;
+  }
+
+  &__snippet {
+    font-family: $font-family-body;
+    font-size: $font-size-small;
+    color: $color-text-body;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-bottom: $spacing-xxs;
+  }
+
+  &__status {
+    font-size: $font-size-xs;
+    padding: $spacing-xxs $spacing-xs;
+    border-radius: $border-radius-small;
+    color: $color-white;
+    display: inline-block;
+
+    &--open {
+      background-color: $color-warning;
+    }
+    &--closed {
+      background-color: $color-success;
+    }
+    &--awaiting-reply {
+      background-color: $color-error;
+    }
+  }
+}

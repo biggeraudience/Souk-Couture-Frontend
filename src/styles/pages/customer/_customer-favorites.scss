@@ -1,0 +1,39 @@
+// src/styles/pages/customer/_customer-favorites.scss
+@import '../../config/variables';
+@import '../../config/mixins';
+
+.customer-favorites-page {
+  padding: $spacing-m;
+  background-color: $color-white;
+  border-radius: $border-radius-medium;
+  @include shadow(light);
+
+  &__title {
+    font-size: $font-size-h2;
+    color: $color-text-heading;
+    margin-bottom: $spacing-l;
+    text-align: center;
+  }
+
+  &__empty-message {
+    text-align: center;
+    padding: $spacing-xl;
+    color: $color-text-light;
+    font-size: $font-size-base;
+
+    a {
+      font-weight: $font-weight-medium;
+      text-decoration: underline;
+    }
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr)); // Responsive grid for product cards
+    gap: $spacing-m;
+
+    @include respond(sm) {
+      grid-template-columns: 1fr; // Single column on small screens
+    }
+  }
+}

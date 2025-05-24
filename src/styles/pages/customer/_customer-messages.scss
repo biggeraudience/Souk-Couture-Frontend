@@ -1,0 +1,138 @@
+// src/styles/pages/customer/_customer-messages.scss
+@import '../../config/variables';
+@import '../../config/mixins';
+
+.customer-messages-page {
+  padding: $spacing-m;
+  background-color: $color-white;
+  border-radius: $border-radius-medium;
+  @include shadow(light);
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: $spacing-l;
+
+    h1 {
+      font-size: $font-size-h2;
+      color: $color-text-heading;
+      margin-bottom: 0;
+    }
+  }
+
+  &__content {
+    display: flex;
+    gap: $spacing-m;
+
+    @include respond(md) {
+      flex-direction: column; // Stack on medium and smaller screens
+    }
+  }
+
+  &__inbox {
+    flex: 1; // Takes up equal space as detail view
+    border: 0.1rem solid $color-gray-light;
+    border-radius: $border-radius-small;
+    background-color: $color-background-light; // Slightly different background
+    padding: $spacing-s;
+    max-height: 60rem; // Fixed height for scrollable inbox
+    overflow-y: auto; // Enable scrolling
+
+    @include custom-scrollbar; // Apply custom scrollbar mixin
+
+    @include respond(md) {
+      max-height: 30rem; // Shorter on mobile
+    }
+
+    h2 {
+      font-size: $font-size-h3;
+      color: $color-text-heading;
+      margin-bottom: $spacing-s;
+    }
+
+    &--empty {
+      text-align: center;
+      padding: $spacing-xl;
+      color: $color-text-light;
+      font-size: $font-size-base;
+    }
+  }
+
+  &__detail-view {
+    flex: 2; // Takes up more space for detail view
+    border: 0.1rem solid $color-gray-light;
+    border-radius: $border-radius-small;
+    padding: $spacing-m;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; // Push form to bottom
+
+    @include respond(md) {
+      flex: 1; // Take equal space when stacked
+      margin-top: $spacing-m; // Add space between stacked sections
+    }
+
+    h2 {
+      font-size: $font-size-h3;
+      color: $color-text-heading;
+      margin-bottom: $spacing-s;
+    }
+
+    &-conversation {
+      flex-grow: 1;
+      overflow-y: auto;
+      margin-bottom: $spacing-m;
+      padding-right: $spacing-xs; // For scrollbar
+      @include custom-scrollbar;
+
+      .message-bubble {
+        background-color: $color-gray-lightest;
+        border: 0.1rem solid $color-gray-light;
+        border-radius: $border-radius-medium;
+        padding: $spacing-s;
+        margin-bottom: $spacing-s;
+        max-width: 80%; // Limit bubble width
+
+        &--customer {
+          align-self: flex-end; // Right align for customer messages
+          background-color: lighten($color-active-state, 15%);
+          border-color: $color-active-state;
+        }
+
+        &--admin {
+          align-self: flex-start; // Left align for admin messages
+          background-color: $color-white;
+          border-color: $color-border-default;
+        }
+
+        p {
+          font-size: $font-size-base;
+          color: $color-text-body;
+          margin-bottom: $spacing-xxs;
+        }
+
+        small {
+          display: block;
+          text-align: right;
+          color: $color-text-light;
+          font-size: $font-size-small;
+        }
+      }
+    }
+
+    &-form {
+      .form-group {
+        margin-bottom: $spacing-s;
+      }
+    }
+  }
+
+  &__new-message-button {
+    margin-top: $spacing-m;
+    width: 100%; // Make it full width on mobile
+    @include respond(md) {
+      margin-top: $spacing-l;
+    }
+  }
+}

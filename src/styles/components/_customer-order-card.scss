@@ -1,0 +1,114 @@
+// src/styles/components/_customer-order-card.scss
+@import '../config/variables';
+@import '../config/mixins';
+
+.customer-order-card {
+  background-color: $color-white;
+  border: 0.1rem solid $color-border-default;
+  border-radius: $border-radius-medium;
+  padding: $spacing-s $spacing-m;
+  margin-bottom: $spacing-m;
+  @include shadow(light);
+  display: flex;
+  flex-direction: column;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: $spacing-xs;
+    padding-bottom: $spacing-xs;
+    border-bottom: 0.1rem dashed $color-gray-light;
+  }
+
+  &__id {
+    font-family: $font-family-heading;
+    font-size: $font-size-h5;
+    color: $color-text-heading;
+    margin-bottom: 0;
+  }
+
+  &__status {
+    font-size: $font-size-small;
+    font-weight: $font-weight-medium;
+    padding: $spacing-xxs $spacing-s;
+    border-radius: $border-radius-small;
+    color: $color-white;
+
+    &--delivered {
+      background-color: $color-success;
+    }
+    &--processing {
+      background-color: $color-warning;
+      color: $color-text-dark; // Warning text might need dark color
+    }
+    &--cancelled {
+      background-color: $color-error;
+    }
+    &--shipped {
+      background-color: $color-primary; // Using primary for shipped
+    }
+  }
+
+  &__details {
+    margin-bottom: $spacing-s;
+    p {
+      font-size: $font-size-base;
+      color: $color-text-body;
+      margin-bottom: $spacing-xxs;
+    }
+    strong {
+      color: $color-text-dark;
+    }
+  }
+
+  &__items {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap; // Allow items to wrap
+    gap: $spacing-s;
+    margin-bottom: $spacing-m;
+  }
+
+  &__item-preview {
+    display: flex;
+    align-items: center;
+    gap: $spacing-xs;
+  }
+
+  &__item-image {
+    width: 5rem;
+    height: 5rem;
+    object-fit: cover;
+    border-radius: $border-radius-small;
+    border: 0.1rem solid $color-gray-light;
+  }
+
+  &__item-name {
+    font-size: $font-size-small;
+    color: $color-text-dark;
+  }
+
+  &__more-items {
+    font-size: $font-size-small;
+    color: $color-text-light;
+    margin-left: $spacing-xs;
+  }
+
+  &__actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: $spacing-s;
+    padding-top: $spacing-s;
+    border-top: 0.1rem dashed $color-gray-light;
+
+    .btn {
+      min-width: 10rem;
+      font-size: $font-size-small;
+    }
+  }
+}

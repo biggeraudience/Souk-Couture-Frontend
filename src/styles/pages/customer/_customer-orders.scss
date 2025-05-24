@@ -1,0 +1,35 @@
+// src/styles/pages/customer/_customer-orders.scss
+@import '../../config/variables';
+@import '../../config/mixins';
+
+.customer-orders-page {
+  padding: $spacing-m;
+  background-color: $color-white;
+  border-radius: $border-radius-medium;
+  @include shadow(light);
+
+  &__title {
+    font-size: $font-size-h2;
+    color: $color-text-heading;
+    margin-bottom: $spacing-l;
+    text-align: center;
+  }
+
+  &__empty-message {
+    text-align: center;
+    padding: $spacing-xl;
+    color: $color-text-light;
+    font-size: $font-size-base;
+  }
+
+  &__list {
+    display: grid;
+    gap: $spacing-m; // Gap between order cards
+    // Responsive grid for order cards
+    grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
+
+    @include respond(sm) {
+      grid-template-columns: 1fr; // Single column on small screens
+    }
+  }
+}

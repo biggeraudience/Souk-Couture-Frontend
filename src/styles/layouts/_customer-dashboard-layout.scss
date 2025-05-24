@@ -1,0 +1,43 @@
+// src/styles/layouts/_customer-dashboard-layout.scss
+@import '../config/variables';
+@import '../config/mixins';
+
+.customer-dashboard-layout {
+  display: flex;
+  min-height: calc(100vh - #{$navbar-height} - #{$spacing-xl}); // Adjust for navbar and potential footer spacing
+  padding: $spacing-xl $spacing-m; // Top/bottom padding, side padding
+
+  @include respond(md) {
+    flex-direction: column; // Stack sidebar and content on medium screens and below
+    padding: $spacing-l $spacing-s;
+  }
+
+  &__sidebar {
+    flex: 0 0 25rem; // Fixed width for sidebar
+    margin-right: $spacing-xl;
+    background-color: $color-white;
+    border-radius: $border-radius-medium;
+    @include shadow(light);
+    padding: $spacing-m;
+
+    @include respond(md) {
+      flex: none; // Remove fixed width
+      width: 100%; // Full width on mobile
+      margin-right: 0;
+      margin-bottom: $spacing-xl; // Space between sidebar and content
+    }
+  }
+
+  &__content {
+    flex-grow: 1; // Main content area takes up remaining space
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-m; // Gap between sections within the content area
+
+    // Default styling for page containers within the content area
+    > div {
+      min-height: 50rem; // Ensure content areas have a minimum height
+      // You can remove this min-height if individual pages handle their own sizing
+    }
+  }
+}

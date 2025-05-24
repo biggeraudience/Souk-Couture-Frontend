@@ -1,0 +1,74 @@
+// src/styles/pages/customer/_customer-dashboard.scss
+@import '../../config/variables';
+@import '../../config/mixins';
+
+.customer-dashboard {
+  padding: $spacing-m;
+  background-color: $color-white; // Ensure white background for the page content itself
+  border-radius: $border-radius-medium;
+  @include shadow(light); // Add a subtle shadow
+
+  &__title {
+    font-size: $font-size-h2;
+    color: $color-text-heading;
+    margin-bottom: $spacing-s;
+  }
+
+  &__greeting {
+    font-size: $font-size-base;
+    color: $color-text-body;
+    margin-bottom: $spacing-l;
+  }
+
+  &__quick-links {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr)); // Responsive grid
+    gap: $spacing-m;
+    margin-bottom: $spacing-xl;
+
+    @include respond(sm) {
+      grid-template-columns: 1fr; // Single column on small screens
+    }
+  }
+
+  &__link-card {
+    @include flex-col-center; // Center content vertically and horizontally
+    text-align: center;
+    background-color: $color-background-light; // Light gray background for cards
+    padding: $spacing-l;
+    border: 0.1rem solid $color-border-default;
+    border-radius: $border-radius-medium;
+    transition: transform $transition-speed-fast ease-in-out, box-shadow $transition-speed-fast ease-in-out;
+    cursor: pointer;
+
+    h3 {
+      font-size: $font-size-h4;
+      color: $color-text-heading;
+      margin-bottom: $spacing-xs;
+      font-family: $font-family-heading;
+    }
+
+    p {
+      font-size: $font-size-small;
+      color: $color-text-light;
+    }
+
+    &:hover {
+      transform: translateY(-0.5rem); // Lift effect
+      @include shadow(medium); // More prominent shadow on hover
+      border-color: $color-accent-hover-emphasis;
+    }
+  }
+
+  &__section {
+    margin-top: $spacing-xl;
+    padding-top: $spacing-l;
+    border-top: 0.1rem solid $color-gray-light; // Subtle separator
+
+    &-title {
+      font-size: $font-size-h3;
+      color: $color-text-heading;
+      margin-bottom: $spacing-m;
+    }
+  }
+}

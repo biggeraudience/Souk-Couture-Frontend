@@ -25,7 +25,13 @@ import OrderManagementPage from './pages/admin/OrderManagementPage';
 import AdsPromoManagementPage from './pages/admin/AdsPromoManagementPage';
 import MessageManagementPage from './pages/admin/MessageManagementPage';
 import DataVisualizationPage from './pages/admin/DataVisualizationPage';
+import CustomerProfilePage from './pages/customer/CustomerProfilePage'; // Ensure this path is correct
+import CustomerOrdersPage from './pages/customer/CustomerOrdersPage'; // Ensure this path is correct
+import CustomerOrderDetailPage from './pages/customer/CustomerOrderDetailPage'; // Ensure this path is correct
+import CustomerFavoritesPage from './pages/customer/CustomerFavoritesPage'; // Ensure this path is correct
+import CustomerAddressBookPage from './pages/customer/CustomerAddressBookPage'; // Ensure this path is correct
 
+import CustomerMessagesPage from './pages/customer/CustomerMessagesPage'; // NEW
 
 function App() {
   const [backendMessage, setBackendMessage] = useState('');
@@ -227,6 +233,16 @@ function App() {
           <Route path="/admin-portal/register" element={<RegisterPage />} />
           <Route path="/admin-portal/forgot-password" element={<ForgotPasswordPage />} />
 
+
+            {/* Customer Dashboard Routes - Wrapped by CustomerLayout */}
+          <Route path="/customer" >
+            <Route path="profile" element={<CustomerProfilePage />} />
+            <Route path="orders" element={<CustomerOrdersPage />} />
+            <Route path="orders/:orderId" element={<CustomerOrderDetailPage />} />
+            <Route path="favorites" element={<CustomerFavoritesPage favorites={favorites} addItemToCart={addItemToCart} removeFavorite={removeFavorite} />} />
+            <Route path="addresses" element={<CustomerAddressBookPage />} />
+            <Route path="messages" element={<CustomerMessagesPage />} /> {/* NEW */}
+          </Route>
 
           {/* Admin Routes - Wrapped by AdminLayout */}
           {/* In a real app, these would typically be protected by an AdminRoute component or similar */}

@@ -1,0 +1,85 @@
+// src/styles/pages/customer/_customer-profile.scss
+@import '../../config/variables';
+@import '../../config/mixins';
+
+.customer-profile-page {
+  padding: $spacing-m;
+  background-color: $color-white;
+  border-radius: $border-radius-medium;
+  @include shadow(light);
+
+  &__title {
+    font-size: $font-size-h2;
+    color: $color-text-heading;
+    margin-bottom: $spacing-l;
+    text-align: center;
+  }
+
+  &__message {
+    padding: $spacing-s;
+    margin-bottom: $spacing-m;
+    border-radius: $border-radius-small;
+    font-size: $font-size-base;
+    text-align: center;
+
+    &--success {
+      background-color: lighten($color-success, 40%);
+      color: darken($color-success, 20%);
+      border: 0.1rem solid $color-success;
+    }
+
+    &--error {
+      background-color: lighten($color-error, 40%);
+      color: darken($color-error, 20%);
+      border: 0.1rem solid $color-error;
+    }
+  }
+
+  &__form {
+    max-width: 60rem; // Limit form width for better readability
+    margin: 0 auto;
+    padding: $spacing-l;
+    border: 0.1rem solid $color-gray-light;
+    border-radius: $border-radius-medium;
+    background-color: $color-background-light;
+
+    .form-group {
+      margin-bottom: $spacing-m;
+    }
+
+    .form-label {
+      font-size: $font-size-small;
+      color: $color-text-dark;
+      margin-bottom: $spacing-xxs;
+    }
+
+    .form-input,
+    .form-select {
+      width: 100%;
+      padding: $spacing-s;
+      font-size: $font-size-base;
+      border: 0.1rem solid $color-border-default;
+      border-radius: $border-radius-small;
+      background-color: $color-white;
+
+      &:disabled {
+        background-color: $color-gray-lightest;
+        color: $color-gray-medium;
+        cursor: not-allowed;
+      }
+    }
+  }
+
+  &__actions {
+    display: flex;
+    justify-content: center;
+    gap: $spacing-s;
+    margin-top: $spacing-l;
+
+    .btn {
+      min-width: 12rem;
+      padding: $spacing-s $spacing-m;
+      font-size: $font-size-base;
+    }
+  }
+}
